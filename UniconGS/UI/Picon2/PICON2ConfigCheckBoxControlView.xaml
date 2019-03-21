@@ -1,0 +1,672 @@
+﻿<UserControl x:Class="UniconGS.UI.Picon2.PICON2ConfigCheckBoxControlView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="1" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="2"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="2" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="3"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="3" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="4"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="4" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="5"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="5" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="6"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="6" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="7"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="7" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="8"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="8" />
+
+
+
+
+
+
+
+        <!--  Первый модуль  -->
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Модуль 1" />
+        <CheckBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[0], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[1], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="1"
+            Grid.Column="3"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[2], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="1"
+            Grid.Column="4"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[3], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="1"
+            Grid.Column="5"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[4], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="1"
+            Grid.Column="6"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[5], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="1"
+            Grid.Column="7"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[6], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="1"
+            Grid.Column="8"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[7], Mode=TwoWay}" />
+
+
+
+
+
+        <!--  Второй модуль  -->
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Модуль 2" />
+
+
+
+        <CheckBox
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[8], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="2"
+            Grid.Column="2"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[9], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="2"
+            Grid.Column="3"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[10], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="2"
+            Grid.Column="4"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[11], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="2"
+            Grid.Column="5"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[12], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="2"
+            Grid.Column="6"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[13], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="2"
+            Grid.Column="7"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[14], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="2"
+            Grid.Column="8"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[15], Mode=TwoWay}" />
+
+
+
+
+        <!--  Третий модуль  -->
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="0"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Модуль 3" />
+
+
+
+        <CheckBox
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[16], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="3"
+            Grid.Column="2"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[17], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="3"
+            Grid.Column="3"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[18], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="3"
+            Grid.Column="4"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[19], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="3"
+            Grid.Column="5"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[20], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="3"
+            Grid.Column="6"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[21], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="3"
+            Grid.Column="7"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[22], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="3"
+            Grid.Column="8"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[23], Mode=TwoWay}" />
+
+
+
+
+
+        <!--  Четвертый модуль  -->
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="0"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Модуль 4" />
+
+
+
+        <CheckBox
+            Grid.Row="4"
+            Grid.Column="1"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[24], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="4"
+            Grid.Column="2"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[25], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="4"
+            Grid.Column="3"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[26], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="4"
+            Grid.Column="4"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[27], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="4"
+            Grid.Column="5"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[28], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="4"
+            Grid.Column="6"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[29], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="4"
+            Grid.Column="7"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[30], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="4"
+            Grid.Column="8"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[31], Mode=TwoWay}" />
+
+
+
+
+
+
+
+        <!--  Пятый модуль  -->
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="0"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Модуль 5" />
+
+
+
+        <CheckBox
+            Grid.Row="5"
+            Grid.Column="1"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[32], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="5"
+            Grid.Column="2"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[33], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="5"
+            Grid.Column="3"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[34], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="5"
+            Grid.Column="4"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[35], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="5"
+            Grid.Column="5"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[36], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="5"
+            Grid.Column="6"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[37], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="5"
+            Grid.Column="7"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[38], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="5"
+            Grid.Column="8"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[39], Mode=TwoWay}" />
+
+
+
+
+        <!--  Шестой модуль  -->
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="0"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Модуль 6" />
+
+
+
+        <CheckBox
+            Grid.Row="6"
+            Grid.Column="1"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[40], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="6"
+            Grid.Column="2"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[41], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="6"
+            Grid.Column="3"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[42], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="6"
+            Grid.Column="4"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[43], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="6"
+            Grid.Column="5"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[44], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="6"
+            Grid.Column="6"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[45], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="6"
+            Grid.Column="7"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[46], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="6"
+            Grid.Column="8"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[47], Mode=TwoWay}" />
+
+
+
+
+
+
+
+
+        <!--  Седьмой модуль  -->
+        <TextBlock
+            Grid.Row="7"
+            Grid.Column="0"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Модуль 7" />
+
+
+
+        <CheckBox
+            Grid.Row="7"
+            Grid.Column="1"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[48], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="7"
+            Grid.Column="2"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[49], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="7"
+            Grid.Column="3"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[50], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="7"
+            Grid.Column="4"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[51], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="7"
+            Grid.Column="5"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[52], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="7"
+            Grid.Column="6"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[53], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="7"
+            Grid.Column="7"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[54], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="7"
+            Grid.Column="8"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[55], Mode=TwoWay}" />
+
+
+
+
+
+        <!--  Восьмой модуль  -->
+        <TextBlock
+            Grid.Row="8"
+            Grid.Column="0"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Модуль 8" />
+
+
+
+        <CheckBox
+            Grid.Row="8"
+            Grid.Column="1"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[56], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="8"
+            Grid.Column="2"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[57], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="8"
+            Grid.Column="3"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[58], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="8"
+            Grid.Column="4"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[59], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="8"
+            Grid.Column="5"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[60], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="8"
+            Grid.Column="6"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[61], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="8"
+            Grid.Column="7"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[62], Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="8"
+            Grid.Column="8"
+            Margin="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsChecked="{Binding CheckBoxResult[63], Mode=TwoWay}" />
+
+
+
+
+    </Grid>
+</UserControl>

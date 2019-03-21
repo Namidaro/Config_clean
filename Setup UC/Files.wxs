@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+	  <DirectoryRef Id="INSTALLFOLDER" FileSource="c:\#git\Configurator\UniconGS\bin\Debug\"> 
+
+	    <Component Id="ProductComponent" Guid="65F5390D-A2DF-4BB4-A7B3-BE1F5C1D99E4">
+	      <File Id='PicGSConfig' DiskId='1' Name='PicGSConfig.exe'/>
+	      <File Id='BEMN.Errorsdll' DiskId='1' Name='BEMN.Errors.dll'/>
+	      <File Id='PrismUnityWpfdll' DiskId='1' Name='Prism.Unity.Wpf.dll'/>
+	      <File Id='MicrosoftPracticesUnitydll' DiskId='1' Name='Microsoft.Practices.Unity.dll'/>
+	      <File Id='MicrosoftPracticesUnityRegistrationByConventiondll' DiskId='1' Name='Microsoft.Practices.Unity.RegistrationByConvention.dll'/>
+        <File Id='MahAppsMetrodll' DiskId='1' Name='MahApps.Metro.dll'/>
+	      <File Id='NModbus4dll' DiskId='1' Name='NModbus4.dll'/>
+	      <File Id='NModbus4Serialdll' DiskId='1' Name='NModbus4.Serial.dll'/>
+        <File Id ='AttachedCommandBehaviordll' DiskId ='1' Name ='AttachedCommandBehavior.dll'/>
+        
+
+        <File Id='MicrosoftPracticesUnityConfigurationdll' DiskId='1' Name='Microsoft.Practices.Unity.Configuration.dll'/>
+	      <File Id='PrismWpfdll' DiskId='1' Name='Prism.Wpf.dll'/>
+	      <File Id='SystemWindowsInteractivitydll' DiskId='1' Name='System.Windows.Interactivity.dll'/>
+	      <File Id='Prismdll' DiskId='1' Name='Prism.dll'/>
+	      <File Id='MicrosoftPracticesServiceLocationdll' DiskId='1' Name='Microsoft.Practices.ServiceLocation.dll'/>
+        <File Id='Minsk2chm' DiskId='1' Name='Minsk2.chm'/>
+
+        <File Id='InnovativeGeometryAngle' DiskId='1' Name='Innovative.Geometry.Angle.dll' />
+        <File Id='InnovativeSolarCalculator' DiskId='1' Name='Innovative.SolarCalculator.dll' />
+       
+	      <!--<File Id='PicGSConfigexeconfig' DiskId='1' Name='PicGSConfig.exe.config'/>-->
+	      <!--<File Id='PicGSConfigvshostexeconfig' DiskId='1' Name='PicGSConfig.vshost.exe.config'/>-->
+	    </Component>
+	  </DirectoryRef>
+
+
+	  
+	 
+
+  </Fragment>
+</Wix>

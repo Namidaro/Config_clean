@@ -1,0 +1,87 @@
+﻿<UserControl
+    x:Class="UniconGS.UI.Settings.ControllerSettings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="clr-namespace:UniconGS.Converters"
+    mc:Ignorable="d" Height ="Auto" Width ="Auto">
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converters:BooleanToVisibilityRevertConverter x:Key="BoolToVisibilityRevertConverter"/>
+        <converters:BooleanReverseConverter x:Key="BooleanReverceConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <GroupBox Header="Настройки устройства">
+            <Grid Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Height="70"
+                    VerticalAlignment="Bottom">
+                    <Button
+                        x:Name="uiOpenSettings"
+                        Width="155"
+                        Height="21"  Margin="1"
+                        Click="uiOpenSettings_Click"
+                        Content="Открыть"
+                        ToolTip="Открытие настроек устройства" />
+                    <Button
+                        x:Name="uiSaveSettings"
+                        Width="155"  Margin="1"
+                        Height="21"
+                        Click="uiSaveSettings_Click"
+                        Content="Сохранить"
+                        ToolTip="Сохранение настроек устройства" />
+                    <Button
+                        x:Name="uiReadAll"
+                        Height="21"
+                        Width="155"  Margin="1"
+                        Click="uiReadAll_Click"
+                        Content="Прочитать"
+                        ToolTip="Чтение конфигурации и графиков из устройства" />
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Height="70"
+                    Width="155"
+                    VerticalAlignment="Bottom">
+                    <Button
+                        x:Name="uiPLCReset"
+                        Height="21"
+                        Margin="1"
+                        Click="uiPLCReset_Click"
+                        Content="Сброс устройства"
+                        ToolTip="Сбросить устройство" />
+                    <Button
+                        Grid.Row="1"
+                        x:Name="uiSignature"
+                        Height="21"  Margin="1"
+                        Click="uiSignature_Click"
+                        Content="Сигнатура устройства"
+                        ToolTip="Получить сигнатуру устройства" 
+                        Visibility="{Binding IsPicon2, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <Button
+                        Grid.Row="1"
+                        x:Name="uiPicon2ModuleInfo"
+                        Height="21"  Margin="1"
+                        Click="uiPicon2ModuleInfo_Click"
+                        Content="Инф. по модулю связи"
+                        ToolTip="Получить информацию по модулю связи" 
+                        Visibility="{Binding IsPicon2, Converter={StaticResource BoolToVisibilityRevertConverter}}"/>
+                    <Button
+                        x:Name="uiWriteAll"
+                        Height="21"  Margin="1"
+                        Click="uiWriteAll_Click"
+                        Content="Записать"
+                        ToolTip="Запись конфигурации и графиков в устройствo" />
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

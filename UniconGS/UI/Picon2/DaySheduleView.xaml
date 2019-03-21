@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="UniconGS.UI.Picon2.DaySheduleView"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="GroupBoxTemplate" TargetType="GroupBox">
+            <Grid Margin="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Border
+                    Grid.Row="0"
+                    Background="#25A0DA"
+                    BorderBrush="#25A0DA"
+                    BorderThickness="1">
+                    <Label HorizontalAlignment="Center" Foreground="White">
+                        <ContentPresenter
+                            Margin="4"
+                            ContentSource="Header"
+                            RecognizesAccessKey="True" />
+                    </Label>
+                </Border>
+
+                <Border
+                    Grid.Row="1"
+                    BorderBrush="#25A0DA"
+                    BorderThickness="1,0,1,1">
+                    <ContentPresenter Margin="4" />
+                </Border>
+            </Grid>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <GroupBox Margin="3" Template="{StaticResource GroupBoxTemplate}">
+            <GroupBox.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsEconomy}" Value="true">
+                            <Setter Property="GroupBox.Header" Value="Экономия" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsEconomy}" Value="false">
+                            <Setter Property="GroupBox.Header" Value="{Binding DayNumber}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </GroupBox.Style>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="Включение" />
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="3"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    ItemStringFormat="00"
+                    ItemsSource="{Binding RangeHour}"
+                    SelectedItem="{Binding StartHour, Mode=TwoWay}" />
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="3"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    ItemStringFormat="00"
+                    ItemsSource="{Binding RangeMinute}"
+                    SelectedItem="{Binding StartMinute, Mode=TwoWay}" />
+
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="Отключение" />
+                <ComboBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="3"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    ItemStringFormat="00"
+                    ItemsSource="{Binding RangeHour}"
+                    SelectedItem="{Binding StopHour, Mode=TwoWay}" />
+                <ComboBox
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="3"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    ItemStringFormat="00"
+                    ItemsSource="{Binding RangeMinute}"
+                    SelectedItem="{Binding StopMinute, Mode=TwoWay}" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

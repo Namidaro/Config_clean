@@ -1,0 +1,107 @@
+﻿<Window
+    x:Class="UniconGS.DeviceSelection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="БЭМН Конфигуратор"
+    Width="980"
+    Height="635"
+    MinWidth="980"
+    MinHeight="635"
+    Icon="Images/Application.ico"
+    SnapsToDevicePixels="True"
+    WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Offset="0" Color="#FFC3BFBF" />
+            <GradientStop Offset="1" Color="#FFE2E2E2" />
+            <GradientStop Offset="0.016" Color="#FFC7C4C4" />
+            <GradientStop Offset="0.084" Color="#FFDADADA" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="92*" />
+            <ColumnDefinition Width="250*" />
+            <ColumnDefinition Width="250*" />
+            <ColumnDefinition Width="250*"/>
+            <ColumnDefinition Width="91*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="113*" />
+            <RowDefinition Height="78*" />
+            <RowDefinition Height="220*" />
+            <RowDefinition Height="201*" />
+
+        </Grid.RowDefinitions>
+        <Border
+            Grid.Row="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            BorderBrush="GhostWhite"
+            BorderThickness="100" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            FontSize="25"
+            RenderTransformOrigin="0.366,0.473"
+            Text="Выберите устройство:"
+            TextAlignment="Center  " />
+        <Button
+            x:Name="uiRunoSelection"
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="8,8,8,8"
+            VerticalContentAlignment="Center"
+            ToolTip="РУНО-3">
+            <Image
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="8,8,8,8"
+                RenderTransformOrigin="0.494,0.233"
+                Source="Images/R3.png" />
+        </Button>
+        <!--Margin="40.942,5,40.739,9.999"-->
+        <Button
+            x:Name="uiPiconGSSelection"
+            Grid.Row="2"
+            Grid.RowSpan="1"
+            Grid.Column="2"
+            Margin="8,8,8,8"
+            ToolTip="ПИКОН ГС-2" Grid.ColumnSpan="1">
+            <Image
+                Grid.Row="2"
+                Grid.Column="3"
+                Margin="8,8,8,8"
+                RenderTransformOrigin="0.494,0.233"
+                Source="Images/MLKGS.png"  />
+        </Button>
+        <!--<Button
+            x:Name="uiLuxometr"
+            ToolTip ="Люксометр"
+            Grid.Row="2"
+            Grid.Column="3"
+            Margin="5,12,10,8">
+            <Image
+                Grid.Row="2"
+                Grid.Column="3"
+                Margin="47.942,5,46.739,9.999"
+                RenderTransformOrigin="0.594,0.233"
+                Source="Images/luxmetr.png" />
+        </Button>-->
+        <Button
+            x:Name="uiPicon2Selection"
+            Grid.Row="2"
+            Grid.Column="3"
+            Margin="8,8,8,8"
+            ToolTip="ПИКОН2">
+        <Image
+            Grid.Row="2"
+            Grid.Column="3"
+            Margin="8,8,8,8"
+            RenderTransformOrigin="0.494,0.233"
+            Source="Images/picon2.png" />
+        </Button>
+    </Grid>
+</Window>
+

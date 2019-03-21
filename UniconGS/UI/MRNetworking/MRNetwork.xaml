@@ -1,0 +1,153 @@
+﻿<av:UserControl
+    x:Class="UniconGS.UI.MRNetworking.MRNetwork"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+    xmlns:local="clr-namespace:UniconGS.UI.MRNetworking"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:UniconGS.UI.MRNetworking.Model"
+    xmlns:resources="clr-namespace:UniconGS.UI.MRNetworking.Resources"
+    xmlns:ui="clr-namespace:UniconGS.UI"
+    xmlns:viewModel="clr-namespace:UniconGS.UI.MRNetworking.ViewModel"
+    xmlns:attachedCommandBehavior="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
+    Width="Auto"
+    Height="Auto"
+    mc:Ignorable="d">
+    <av:UserControl.Resources>
+        <ui:BoolToColorBrushConverter x:Key="BoolToColorBrushConverter" />
+        <resources:SplittingBitMarginConverter x:Key="SplittingBitMarginConverter" />
+
+    </av:UserControl.Resources>
+    <av:Grid>
+        <av:Grid.ColumnDefinitions>
+            <av:ColumnDefinition Width="289*" />
+            <av:ColumnDefinition Width="363*" />
+            <av:ColumnDefinition Width="326*" />
+            <av:ColumnDefinition Width="Auto" />
+        </av:Grid.ColumnDefinitions>
+        <av:DataGrid
+            Grid.Row="0"
+            av:Grid.ColumnSpan="3"
+            AutoGenerateColumns="False"
+            ItemsSource="{Binding ModbusMemoryEntityViewModels}"
+            SelectionChanged="DataGrid_SelectionChanged">
+            <av:DataGrid.Resources>
+                <av:ContextMenu x:Key="EntityContextMenu">
+                    <av:MenuItem
+                        Command="{Binding DataContext.EditEntityCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
+                        CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Mode=Self}}"
+                        Header="Изменить значение" />
+                </av:ContextMenu>
+            </av:DataGrid.Resources>
+            <av:DataGrid.RowStyle>
+                <av:Style TargetType="DataGridRow">
+                    <av:Setter Property="ContextMenu" Value="{StaticResource EntityContextMenu}"/>
+                    <Setter Property="attachedCommandBehavior:CommandBehavior.Event" Value="MouseDoubleClick"></Setter>
+                    <Setter Property="attachedCommandBehavior:CommandBehavior.Command" Value="{Binding DataContext.EditEntityCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
+                    <Setter Property="attachedCommandBehavior:CommandBehavior.CommandParameter" Value="{Binding DataContext, RelativeSource={RelativeSource Mode=Self}}"/>
+
+                </av:Style>
+            </av:DataGrid.RowStyle>
+            <av:DataGrid.Columns>
+
+                <av:DataGridTextColumn
+                    Binding="{Binding AdressDec}"
+                    CanUserSort="False"
+                    Header="Адрес (DЕС)"
+                    IsReadOnly="True" />
+                <av:DataGridTextColumn
+                    Binding="{Binding AdressHex}"
+                    CanUserSort="False"
+                    Header="Адрес (HEX)"
+                    IsReadOnly="True" />
+                <av:DataGridTemplateColumn Header="15 14 13 12 11  10  9   8         7   6   5   4    3   2   1   0" IsReadOnly="True">
+                    <av:DataGridTemplateColumn.CellTemplate>
+                        <av:DataTemplate DataType="viewModel:ModbusMemoryEntityViewModel">
+                            <av:ItemsControl ItemsSource="{Binding Bits}">
+                                <av:ItemsControl.ItemsPanel>
+                                    <av:ItemsPanelTemplate>
+                                        <av:StackPanel Orientation="Horizontal" />
+                                    </av:ItemsPanelTemplate>
+                                </av:ItemsControl.ItemsPanel>
+                                <av:ItemsControl.ItemTemplate>
+                                    <av:DataTemplate DataType="model:MemoryBitViewModel">
+                                        <av:Border
+                                            Width="15"
+                                            Height="15"
+                                            Margin="{Binding BitNumber, Converter={StaticResource SplittingBitMarginConverter}}"
+                                            Background="{Binding BoolValue, Converter={StaticResource BoolToColorBrushConverter}}" />
+                                    </av:DataTemplate>
+                                </av:ItemsControl.ItemTemplate>
+                            </av:ItemsControl>
+                        </av:DataTemplate>
+                    </av:DataGridTemplateColumn.CellTemplate>
+                </av:DataGridTemplateColumn>
+                <av:DataGridTextColumn
+                    Binding="{Binding DirectValueHex}"
+                    Header="Значение (HEX)"
+                    IsReadOnly="True" />
+                <av:DataGridTextColumn
+                    Binding="{Binding DirectValueDec}"
+                    Header="Значение (DEC)"
+                    IsReadOnly="True" />
+                <!--<av:DataGridTextColumn
+                    Binding="{Binding ModbusConversionParametersViewModel.MaximumOfUshortValue}"
+                    Header="Предел шкалы" />
+                <av:DataGridTextColumn
+                    Binding="{Binding ModbusConversionParametersViewModel.LimitOfValue}"
+                    Header="Предельное значение" />
+                <av:DataGridTextColumn
+                    Binding="{Binding ConvertedValue}"
+                    Header="Приведённое значение"
+                    IsReadOnly="True" />-->
+
+            </av:DataGrid.Columns>
+
+        </av:DataGrid>
+        <av:StackPanel av:Grid.Column="3">
+            <av:CheckBox
+                Margin="15"
+                Content="Обмены"
+                IsChecked="{Binding IsQueriesStarted}" 
+                />
+            <av:StackPanel DataContext="{Binding ModbusMemorySettingsViewModel}" Orientation="Vertical">
+                <av:UniformGrid Columns="2">
+                    <av:Label Margin="5" Content="Количество слов" />
+                    <av:ComboBox
+                        MinWidth="100"
+                        Margin="5"
+                        ItemsSource="{Binding NumberOfPointsCollection}"
+                        SelectedItem="{Binding NumberOfPoints}" />
+                    <av:Label Margin="5" Content="Базовый адрес(HEX)" />
+                    <av:TextBox
+                        MinWidth="100"
+                        Margin="5"
+                        Text="{Binding BaseAdressHex, UpdateSourceTrigger=PropertyChanged}" />
+                    <av:Label Margin="5" Content="Базовый адрес(DEC)" />
+                    <av:TextBox
+                        MinWidth="100"
+                        Margin="5"
+                        Text="{Binding BaseAdressDec, UpdateSourceTrigger=PropertyChanged}" />
+
+                </av:UniformGrid>
+
+                <av:StackPanel Margin="5" Orientation="Horizontal">
+                    <av:Button
+                        Margin="5"
+                        Command="{Binding AddressStepUpCommand}"
+                        Content="    ▼    " />
+
+                    <av:Button
+                        Margin="5"
+                        Command="{Binding AddressStepDownCommand}"
+                        Content="    ▲    " />
+                </av:StackPanel>
+            </av:StackPanel>
+
+        </av:StackPanel>
+
+
+    </av:Grid>
+</av:UserControl>

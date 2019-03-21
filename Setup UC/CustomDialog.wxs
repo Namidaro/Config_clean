@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <!--может потом-->
+<!--<Fragment>
+    <UI Id="InstallDlg_UI">
+      <DialogRef Id="SecondDlg"/>
+      <Dialog Id="InstallDlg"
+       Width="370"
+       Height="270"
+       Title="Amazing Software"
+       NoMinimize="no">
+
+
+        <Control Id="Next"
+         Type="PushButton"
+         X="245"
+         Y="243"
+         Width="100"
+         Height="17">
+          <Publish Event="NewDialog" Value="SecondDlg" />
+        </Control>
+
+      </Dialog>
+    </UI>
+  </Fragment>
+
+
+
+  <Fragment>
+    <UI>
+      <Dialog Width="300" Height="300" Id="SecondDlg">
+        <Control Id="Back"
+        Type="PushButton"
+        X="180"
+        Y="243"
+        Width="100"
+        Height="17">
+          <Publish Event="NewDialog" Value="InstallDlg" />
+        </Control>
+      </Dialog>
+    </UI>
+  </Fragment>-->	
+</Wix>

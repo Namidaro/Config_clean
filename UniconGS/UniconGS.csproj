@@ -1,0 +1,795 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AE793305-5ADF-4A4E-BC92-259920680FB0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UniconGS</RootNamespace>
+    <AssemblyName>PicGSConfig</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ExpressionBlendVersion>3.0.1927.0</ExpressionBlendVersion>
+    <ApplicationIcon>Images\1290602203_Configuration-Settings.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AttachedCommandBehavior, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AttachedCommandBehavior.2.0.0.0\lib\net35\AttachedCommandBehavior.dll</HintPath>
+    </Reference>
+    <Reference Include="CegekaDsa.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DTool.1.0.0.17\lib\net45\CegekaDsa.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="CegekaDsa.TestContracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DTool.1.0.0.17\lib\net45\CegekaDsa.TestContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Innovative.Geometry.Angle, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Angle.2.0.0\lib\netstandard1.2\Innovative.Geometry.Angle.dll</HintPath>
+    </Reference>
+    <Reference Include="Innovative.SolarCalculator, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SolarCalculator.2.0.3\lib\netstandard1.2\Innovative.SolarCalculator.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.3.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.3.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Unity.Wpf, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Unity.6.3.0\lib\net45\Prism.Unity.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\Prism.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ConfiguratorSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>ConfiguratorSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BooleanReverceConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityRevertConverter.cs" />
+    <Compile Include="Converters\BooleanToModuleErrorsColorConverter.cs" />
+    <Compile Include="Enums\DeviceSelectionEnum.cs" />
+    <Compile Include="Enums\LightningScheduleEnum.cs" />
+    <Compile Include="Enums\ModuleSelectionEnum.cs" />
+    <Compile Include="Enums\Picon2MeterFormatterSelector.cs" />
+    <Compile Include="GSMConnection.xaml.cs">
+      <DependentUpon>GSMConnection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\IUpdatableControl.cs" />
+    <Compile Include="RTUConnectionGlobal.cs" />
+    <Compile Include="UI\Configuration\ErrorMaskMark.xaml.cs">
+      <DependentUpon>ErrorMaskMark.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DiscretModules\Picon2States.xaml.cs">
+      <DependentUpon>Picon2States.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Journal\JournalPassword.xaml.cs">
+      <DependentUpon>JournalPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Journal\Picon2JournalEventRecord.cs" />
+    <Compile Include="UI\Picon2ModuleErrors.xaml.cs">
+      <DependentUpon>Picon2ModuleErrors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Picon2DiagnosticsErrors.xaml.cs">
+      <DependentUpon>Picon2DiagnosticsErrors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FuseErrors.xaml.cs">
+      <DependentUpon>FuseErrors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Picon2Diagnostic.xaml.cs">
+      <DependentUpon>Picon2Diagnostic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Picon2\Converters\ObjectAsBoolToVisibilityConverter.cs" />
+    <Compile Include="UI\Picon2\Converters\PlusOneConverter.cs" />
+    <Compile Include="UI\Picon2\DaySheduleView.xaml.cs">
+      <DependentUpon>DaySheduleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Picon2\Extensions.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\Converters\Converters.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\MS915LModuleSpecification.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\Structures\Config910Series.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\Structures\Config915Series.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\Interfaces\IModuleSpecification.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\MRV960ModuleSpecification.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\MRV980ModuleSpecification.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\MII901ModuleSpecification.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\MS911ModuleSpecification.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\MS911RModuleSpecification.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\MS915CModuleSpecification.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\MS910RModuleSpecification.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\MS917ModuleSpecification.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\MSA961ModuleSpecification.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\MSA962ModuleSpecification.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\ModuleSpecification\MSD980ModuleSpecification.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\Picon2CommunicationModule910SeriesView.xaml.cs">
+      <DependentUpon>Picon2CommunicationModule910SeriesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Picon2\ModuleRequests\Picon2CommunicationModule910SeriesViewModel.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\Picon2CommunicationModule915SeriesView.xaml.cs">
+      <DependentUpon>Picon2CommunicationModule915SeriesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Picon2\ModuleRequests\Picon2CommunicationModule915SeriesViewModel.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\Resources\ImageSRCList.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\Picon2ModuleRequestsView.xaml.cs">
+      <DependentUpon>Picon2ModuleRequestsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Picon2\ModuleRequests\Resources\IModuleRequest.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\Resources\ModuleRequest.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\Resources\ModuleTypeList.cs" />
+    <Compile Include="UI\Picon2\ModuleRequests\Picon2ModuleRequestsViewModel.cs" />
+    <Compile Include="UI\Picon2\PICON2ConfigCheckBoxControlView.xaml.cs">
+      <DependentUpon>PICON2ConfigCheckBoxControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Picon2\Picon2ConfigurationView.xaml.cs">
+      <DependentUpon>Picon2ConfigurationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Picon2\Picon2LightingSheduleView.xaml.cs">
+      <DependentUpon>Picon2LightingSheduleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Picon2\ValidationRules\Picon2ConfigIntValidationRules.cs" />
+    <Compile Include="UI\Picon2\ViewModel\DateEnterFieldViewModel.cs" />
+    <Compile Include="UI\Picon2\ViewModel\DaySheduleViewModel.cs" />
+    <Compile Include="UI\Picon2\ViewModel\PICON2ConfigCheckBoxControlViewModel.cs" />
+    <Compile Include="UI\Picon2\ViewModel\PICON2ConfigurationModeViewModel.cs" />
+    <Compile Include="UI\Picon2\ViewModel\Picon2LightingSheduleViewModel.cs" />
+    <Compile Include="UI\Schedule\SolarSchedule\CityCoordinates.cs" />
+    <Compile Include="UI\Schedule\SolarSchedule\Solar.cs" />
+    <Compile Include="UI\Picon2ChannelManagement.xaml.cs">
+      <DependentUpon>Picon2ChannelManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Settings\Picon2Settings.cs" />
+    <Compile Include="UI\TurnOnError.xaml.cs">
+      <DependentUpon>TurnOnError.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UniconGsBootstrapper.cs" />
+    <Compile Include="ViewModel\DiagnosticTabViewModel.cs" />
+    <Page Include="About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateConnectionWizard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DeviceSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GSMConnection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Luxmetr.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewTimeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Configuration\ErrorMaskMark.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\DiscretModules\Picon2States.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Journal\JournalPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Picon2ModuleErrors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Picon2DiagnosticsErrors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\FuseErrors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\MRNetworking\MRNetwork.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\MRNetworking\MRNetworkingEditingViewxaml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Picon2Diagnostic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Picon2\DaySheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Picon2\ModuleRequests\Picon2CommunicationModule910SeriesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Picon2\ModuleRequests\Picon2CommunicationModule915SeriesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Picon2\ModuleRequests\Picon2ModuleRequestsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Picon2\PICON2ConfigCheckBoxControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Picon2\Picon2ConfigurationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Picon2\Picon2LightingSheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Runo3Diagnostics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Schedule\Schedule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Settings\ControllerSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\DiscretModules\AllStates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\BitViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Channels\ChannelManagment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Channels\ChannelsManagment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\DiagnosticsErrors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Configuration\ErrorMask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\GPRS\GPRSConfiguration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\HeatingSchedule\HeatingSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\KUErrors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Lightning.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Configuration\LogicConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Meter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\PiconGSDiagnostics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Channels\Rele.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\SignalGSMLevel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SignalLevelMapping.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Spinner\Spinner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\DiscretModules\States.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Journal\SystemJournal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Time\Time.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Picon2ChannelManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\TurnOnError.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WhistlerBlue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DeviceSelection.xaml.cs">
+      <DependentUpon>DeviceSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Luxmetr.xaml.cs">
+      <DependentUpon>Luxmetr.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Source\Config.cs" />
+    <Compile Include="Source\IDataSource.cs" />
+    <Compile Include="Source\Query.cs" />
+    <Compile Include="UI\MRNetworking\Model\MemoryBitViewModel.cs" />
+    <Compile Include="UI\MRNetworking\Model\MemoryConversionParameters.cs" />
+    <Compile Include="UI\MRNetworking\Model\ModbusMemory.cs" />
+    <Compile Include="UI\MRNetworking\Model\ModbusMemoryEntity.cs" />
+    <Compile Include="UI\MRNetworking\Model\ModbusMemorySettings.cs" />
+    <Compile Include="UI\MRNetworking\MRNetworkingEditingViewxaml.xaml.cs">
+      <DependentUpon>MRNetworkingEditingViewxaml.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MRNetworking\Resources\BoolToColorBrushConverter.cs" />
+    <Compile Include="UI\MRNetworking\MRNetwork.xaml.cs">
+      <DependentUpon>MRNetwork.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MRNetworking\Resources\SplittingBitMarginConverter.cs" />
+    <Compile Include="UI\MRNetworking\ViewModel\ModbusConversionParametersViewModel.cs" />
+    <Compile Include="UI\MRNetworking\ViewModel\ModbusEntityEditingViewmodel.cs" />
+    <Compile Include="UI\MRNetworking\ViewModel\ModbusMemoryEntityViewModel.cs" />
+    <Compile Include="UI\MRNetworking\ViewModel\ModbusMemorySettingsViewModel.cs" />
+    <Compile Include="UI\MRNetworking\ViewModel\ModbusMemoryViewModel.cs" />
+    <Compile Include="UI\Runo3Diagnostics.xaml.cs">
+      <DependentUpon>Runo3Diagnostics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Schedule\GraphicDay.cs" />
+    <Compile Include="UI\Schedule\GraphicMonth.cs" />
+    <Compile Include="UI\Schedule\GraphicMonthSaveing.cs" />
+    <Compile Include="UI\Schedule\GraphicTimecs.cs" />
+    <Compile Include="UI\Schedule\GraphicValue.cs" />
+    <Compile Include="UI\Schedule\GraphicYearSaving.cs" />
+    <Compile Include="UI\Schedule\Schedule.xaml.cs">
+      <DependentUpon>Schedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Settings\ControllerSettings.xaml.cs">
+      <DependentUpon>ControllerSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Validator.cs" />
+    <Compile Include="UI\Configuration\Channel.cs" />
+    <Compile Include="UI\Configuration\ChannelManagment.cs" />
+    <Compile Include="UI\Configuration\ComboBoxItemStr.cs" />
+    <Compile Include="UI\Configuration\Mask.cs" />
+    <Compile Include="UI\GPRS\GPRSSettings.cs" />
+    <Compile Include="UI\HeatingSchedule\Date.cs" />
+    <Compile Include="UI\HeatingSchedule\Heating.cs" />
+    <Compile Include="UI\Journal\EventJournalItem.cs" />
+    <Compile Include="UI\Settings\Settings.cs" />
+    <Compile Include="UI\SignalGSMLevel.xaml.cs">
+      <DependentUpon>SignalGSMLevel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SignalLevelMapping.xaml.cs">
+      <DependentUpon>SignalLevelMapping.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Time\InnerTime.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CreateConnectionWizard.xaml.cs">
+      <DependentUpon>CreateConnectionWizard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewTimeDialog.xaml.cs">
+      <DependentUpon>NewTimeDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Source\Commands.cs" />
+    <Compile Include="Source\Common.cs" />
+    <Compile Include="Source\Connector.cs" />
+    <Compile Include="Source\Converter.cs" />
+    <Compile Include="Source\CRC16.cs" />
+    <Compile Include="Source\DataTransfer.cs" />
+    <Compile Include="Source\IQuery.cs" />
+    <Compile Include="Source\Modbus.cs" />
+    <Compile Include="Source\Slot.cs" />
+    <Compile Include="UI\DiscretModules\AllStates.xaml.cs">
+      <DependentUpon>AllStates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\BitViewer.xaml.cs">
+      <DependentUpon>BitViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Channels\ChannelManagment.xaml.cs">
+      <DependentUpon>ChannelManagment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Channels\ChannelsManagment.xaml.cs">
+      <DependentUpon>ChannelsManagment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\IndexToValueConverter.cs" />
+    <Compile Include="UI\DiagnosticsErrors.xaml.cs">
+      <DependentUpon>DiagnosticsErrors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Configuration\ErrorMask.xaml.cs">
+      <DependentUpon>ErrorMask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\GPRS\GPRSConfiguration.xaml.cs">
+      <DependentUpon>GPRSConfiguration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\HeatingSchedule\HeatingSchedule.xaml.cs">
+      <DependentUpon>HeatingSchedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\KUErrors.xaml.cs">
+      <DependentUpon>KUErrors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Lightning.xaml.cs">
+      <DependentUpon>Lightning.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Configuration\LogicConfig.xaml.cs">
+      <DependentUpon>LogicConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Meter.xaml.cs">
+      <DependentUpon>Meter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PiconGSDiagnostics.xaml.cs">
+      <DependentUpon>PiconGSDiagnostics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Channels\Rele.xaml.cs">
+      <DependentUpon>Rele.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Spinner\FrameBaseAnimation.cs" />
+    <Compile Include="UI\Spinner\Spinner.xaml.cs">
+      <DependentUpon>Spinner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DiscretModules\States.xaml.cs">
+      <DependentUpon>States.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Journal\SystemJournal.xaml.cs">
+      <DependentUpon>SystemJournal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Time\Time.xaml.cs">
+      <DependentUpon>Time.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="ConfiguratorSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>ConfiguratorSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="UnInstall.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PiconGs2.png" />
+    <Resource Include="Images\User-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ProgIcon.ico" />
+    <Resource Include="Images\softwareUpdate-256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1290602203_Configuration-Settings.ico" />
+    <Resource Include="Images\1290720714_USB-Connection.png" />
+    <Resource Include="Images\1290720805_account_offline_overlay.png" />
+    <Resource Include="Images\1290721358_Help.png" />
+    <Resource Include="Images\1290760689_usbpendrive_mount.png" />
+    <Resource Include="Images\1290760930_kwifimanager.png" />
+    <Resource Include="Images\Autonomous.png" />
+    <Resource Include="Images\Disconnect.png" />
+    <Resource Include="Images\Logo.png" />
+    <Resource Include="Images\Reconnect.png" />
+    <Resource Include="Images\Slice 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MLKGS.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Application.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BEMN.Errors\BEMN.Errors.csproj">
+      <Project>{6a79c449-08b7-4888-961f-e0dd2d04c9af}</Project>
+      <Name>BEMN.Errors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NModbus4\NModbus4.Serial\NModbus4.Serial.csproj">
+      <Project>{5E0D2B00-9816-49D1-9DF3-880FFB1B5F21}</Project>
+      <Name>NModbus4.Serial</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NModbus4\NModbus4\NModbus4.csproj">
+      <Project>{50D6E7C6-AA5D-41D3-A193-D8F4EB239A0A}</Project>
+      <Name>NModbus4</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1315549753.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\down.png" />
+    <Resource Include="Images\up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\R3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\luxmetr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\if_sim_settings_1419090.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tilda.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Bitmap1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\picon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_CPU.png" />
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_MII901.png" />
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_MRV960.png" />
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_MRV980.png" />
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_MS911.png" />
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_MS911R.png" />
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_MS915.png" />
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_MS910R.png" />
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_MS917.png" />
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_MSA961.png" />
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_MSA962.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_PowerSupply.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_EMPTY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_MSD980.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_MS915C.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Picon2\ModuleRequests\Images\Image_MS915L.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

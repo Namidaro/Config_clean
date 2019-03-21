@@ -1,0 +1,664 @@
+﻿<UserControl
+    x:Class="UniconGS.UI.Configuration.ErrorMask"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="userControl"
+    mc:Ignorable="d">
+    <Grid
+        x:Name="PART_Holder"
+        Width="{Binding}"
+        Height="{Binding}"
+        Margin="0"
+        VerticalAlignment="Top"
+        DataContext="{Binding}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22.259" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="16" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.041*" />
+            <ColumnDefinition Width="0.12*" />
+            <ColumnDefinition Width="0.12*" />
+            <ColumnDefinition Width="0.12*" />
+            <ColumnDefinition Width="0.12*" />
+            <ColumnDefinition Width="0.12*" />
+            <ColumnDefinition Width="0.12*" />
+            <ColumnDefinition Width="0.12*" />
+            <ColumnDefinition Width="0.12*" />
+            <ColumnDefinition Width="0.12*" />
+            <ColumnDefinition Width="0.12*" />
+            <ColumnDefinition Width="0.12*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Grid.Row="1"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="1"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="1"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="1"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="2"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="2"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="3"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="3"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="4"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="4"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="5"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="5"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="6"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="6"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="7"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="7"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="8"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="8"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="9"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="9"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="10"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="10"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="11"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="11"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="uiBlock1"
+            Grid.Row="2"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="2"
+            TextWrapping="Wrap"
+            Visibility="Hidden" />
+        <TextBlock
+            x:Name="uiBlock2"
+            Grid.Row="3"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="3"
+            TextWrapping="Wrap"
+            Visibility="Hidden" />
+        <TextBlock
+            x:Name="uiBlock3"
+            Grid.Row="4"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="4"
+            TextWrapping="Wrap"
+            Visibility="Hidden" />
+
+
+        <CheckBox
+            x:Name="ui_0"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding Path=.[0], Mode=TwoWay}" />
+        <CheckBox
+            x:Name="ui_1"
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding Path=.[1], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}" />
+        <CheckBox
+            x:Name="ui_2"
+            Grid.Row="1"
+            Grid.Column="3"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding Path=.[2], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}" />
+        <CheckBox
+            x:Name="ui_3"
+            Grid.Row="1"
+            Grid.Column="4"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding Path=.[3], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}" />
+        <CheckBox
+            x:Name="ui_4"
+            Grid.Row="1"
+            Grid.Column="5"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding Path=.[4], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}" />
+        <CheckBox
+            x:Name="ui_5"
+            Grid.Row="1"
+            Grid.Column="6"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding Path=.[5], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}" />
+        <CheckBox
+            x:Name="ui_6"
+            Grid.Row="1"
+            Grid.Column="7"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding Path=.[6], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}" />
+        <CheckBox
+            x:Name="ui_7"
+            Grid.Row="1"
+            Grid.Column="8"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding Path=.[7], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}" />
+        <CheckBox
+            x:Name="ui_8"
+            Grid.Row="1"
+            Grid.Column="9"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[8], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}" />
+        <CheckBox
+            x:Name="ui_9"
+            Grid.Row="1"
+            Grid.Column="10"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[9], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}" />
+        <CheckBox
+            x:Name="ui_10"
+            Grid.Row="1"
+            Grid.Column="11"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[10], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}" />
+        <CheckBox
+            x:Name="ui_11"
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[11], Mode=TwoWay}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_12"
+            Grid.Row="2"
+            Grid.Column="2"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[12], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_13"
+            Grid.Row="2"
+            Grid.Column="3"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[13], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_14"
+            Grid.Row="2"
+            Grid.Column="4"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[14], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_15"
+            Grid.Row="2"
+            Grid.Column="5"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[15], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_16"
+            Grid.Row="2"
+            Grid.Column="6"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[16], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_17"
+            Grid.Row="2"
+            Grid.Column="7"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[17], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_18"
+            Grid.Row="2"
+            Grid.Column="8"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[18], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_19"
+            Grid.Row="2"
+            Grid.Column="9"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[19], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_20"
+            Grid.Row="2"
+            Grid.Column="10"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[20], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_21"
+            Grid.Row="2"
+            Grid.Column="11"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[21], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_22"
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[22], Mode=TwoWay}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_23"
+            Grid.Row="3"
+            Grid.Column="2"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[23], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_24"
+            Grid.Row="3"
+            Grid.Column="3"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[24], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_25"
+            Grid.Row="3"
+            Grid.Column="4"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[25], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_26"
+            Grid.Row="3"
+            Grid.Column="5"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[26], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_27"
+            Grid.Row="3"
+            Grid.Column="6"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[27], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_28"
+            Grid.Row="3"
+            Grid.Column="7"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[28], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_29"
+            Grid.Row="3"
+            Grid.Column="8"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[29], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_30"
+            Grid.Row="3"
+            Grid.Column="9"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[30], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_31"
+            Grid.Row="3"
+            Grid.Column="10"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[31], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_32"
+            Grid.Row="3"
+            Grid.Column="11"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[32], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_33"
+            Grid.Row="5"
+            Grid.Column="1"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[33], Mode=TwoWay}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_34"
+            Grid.Row="5"
+            Grid.Column="2"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[34], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_35"
+            Grid.Row="5"
+            Grid.Column="3"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[35], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_36"
+            Grid.Row="5"
+            Grid.Column="4"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[36], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_37"
+            Grid.Row="5"
+            Grid.Column="5"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[37], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_38"
+            Grid.Row="5"
+            Grid.Column="6"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[38], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_39"
+            Grid.Row="5"
+            Grid.Column="7"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[39], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_40"
+            Grid.Row="5"
+            Grid.Column="8"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[40], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_41"
+            Grid.Row="5"
+            Grid.Column="9"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[41], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_42"
+            Grid.Row="5"
+            Grid.Column="10"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[42], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+        <CheckBox
+            x:Name="ui_43"
+            Grid.Row="5"
+            Grid.Column="11"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="CheckBox_Click"
+            Content=""
+            IsChecked="{Binding .[43], Mode=TwoWay}"
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}"
+            Visibility="Hidden" />
+    </Grid>
+</UserControl>

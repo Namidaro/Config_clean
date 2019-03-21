@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="UniconGS.UI.SystemJournal"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}" SnapsToDevicePixels="True">
+    <Grid>
+    	<Grid.RowDefinitions>
+    		<RowDefinition/>
+    		<RowDefinition Height="28"/>
+    	</Grid.RowDefinitions>
+        <ListView ItemsSource="{Binding EventJournal}" x:Name="uiJournal">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="140" Header="Дата"  
+                                DisplayMemberBinding="{Binding EventDate}" />
+                    <GridViewColumn Width="140" Header="Время"  
+                                DisplayMemberBinding="{Binding EventTime}" />
+                    <GridViewColumn Width="250" Header="Сообщение"  
+                                DisplayMemberBinding="{Binding EventMessage}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="uiImport" VerticalAlignment="Center" Width="87" Content="Прочитать" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+            
+    </Grid>
+</UserControl>

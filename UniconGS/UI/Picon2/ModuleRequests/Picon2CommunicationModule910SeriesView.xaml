@@ -1,0 +1,638 @@
+﻿<Window x:Class="UniconGS.UI.Picon2.ModuleRequests.Picon2CommunicationModule910SeriesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UniconGS.UI.Picon2.ModuleRequests"
+        xmlns:converters="clr-namespace:UniconGS.Converters"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="450" Width="300">
+    <Window.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converters:BooleanToVisibilityRevertConverter x:Key="BoolToVisibilityReverceConverter"/>
+        <converters:BooleanReverseConverter x:Key="BoolReverseConverter"/>
+
+        <Style x:Key="ButtonFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" 
+                                   SnapsToDevicePixels="true" 
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
+                                   StrokeThickness="1" 
+                                   StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#F3F3F3" Offset="0"/>
+            <GradientStop Color="#EBEBEB" Offset="0.5"/>
+            <GradientStop Color="#DDDDDD" Offset="0.5"/>
+            <GradientStop Color="#CDCDCD" Offset="1"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+        <Style x:Key="ToggleRectStyleUpper" TargetType="{x:Type ToggleButton}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}" >
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="on"
+                                    Grid.Column="0"
+                                    Background="LightGray"
+                                    CornerRadius="2,0,0,2" 
+                                    Margin="0,0,0,0" 
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch"
+                                    >
+                                <TextBlock x:Name="onText" 
+                                           Text="верх" 
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"
+                                           />
+                            </Border>
+                            <Border x:Name="off" 
+                                    Grid.Column="1"
+                                    Background="LightGray" 
+                                    CornerRadius="0,2,2,0" 
+                                    Margin="0,0,0,0"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch"
+                                    >
+                                <TextBlock x:Name="offText" 
+                                           Text="низ" 
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"
+                                           
+                                           />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="on" Property="Background" Value="LightBlue"/>
+                                <Setter TargetName="onText" Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="off" Property="Background" Value="LightBlue"/>
+                                <Setter TargetName="offText" Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ToggleRectStyleRadio" TargetType="{x:Type ToggleButton}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}" >
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="on"
+                                    Grid.Column="0"
+                                    Background="LightGray"
+                                    CornerRadius="2,0,0,2" 
+                                    Margin="0,0,0,0" 
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch"
+                                    >
+                                <TextBlock x:Name="onText" 
+                                           Text="радио" 
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"
+                                           />
+                            </Border>
+                            <Border x:Name="off" 
+                                    Grid.Column="1"
+                                    Background="LightGray" 
+                                    CornerRadius="0,2,2,0" 
+                                    Margin="0,0,0,0"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch"
+                                    >
+                                <TextBlock x:Name="offText" 
+                                           Text="выделенная линия" 
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"
+                                           TextWrapping="Wrap"
+                                           />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="on" Property="Background" Value="IndianRed"/>
+                                <Setter TargetName="onText" Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="off" Property="Background" Value="IndianRed"/>
+                                <Setter TargetName="offText" Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <!--  -->
+        <Border Name="CommunicationModule"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="4"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Margin="3,3,3,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Name="Type_TB"
+                         Grid.Row="0"
+                         Grid.Column="0"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Center"
+                         Margin="3">
+                    <TextBox.Text>
+                        <Binding Path="TypeAddress">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox Name="Delay_TB"
+                         Grid.Row="1"
+                         Grid.Column="0"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Center"
+                         Margin="3"
+                         IsEnabled="{Binding IsUpper,Converter={StaticResource BoolReverseConverter}}">
+                    <TextBox.Text>
+                        <Binding Path="ResponseAwait">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBlock Name="Type_text"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Text="Адрес - тип модуля (0 - нет)"
+                           Margin="5"/>
+
+                <TextBlock Name="Delay_text"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Text="Ожидание ответа (*0,5 мс)"
+                           Margin="5"/>
+
+            </Grid>
+        </Border>
+        <!--  -->
+        <Border Name="Config"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="4"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Margin="3,0,3,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Name="Speed_CB"
+                          Grid.Row="0"
+                          Grid.Column="0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Margin="3"
+                          IsChecked="{Binding BitConfig[0], Mode=TwoWay}"/>
+
+                <CheckBox Name="Protocol_CB"
+                          Grid.Row="1"
+                          Grid.Column="0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Margin="3"
+                          IsChecked="{Binding BitConfig[1], Mode=TwoWay}"/>
+
+                <CheckBox Name="RecieveFilter_CB"
+                          Grid.Row="2"
+                          Grid.Column="0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Margin="3"
+                          IsChecked="{Binding BitConfig[2], Mode=TwoWay}"/>
+
+                <CheckBox Name="Amplify_CB"
+                          Grid.Row="3"
+                          Grid.Column="0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Margin="3"
+                          IsChecked="{Binding BitConfig[3], Mode=TwoWay}"/>
+
+                <CheckBox Name="ByteData"
+                          Grid.Row="4"
+                          Grid.Column="0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Margin="3"
+                          IsChecked="{Binding BitConfig[4], Mode=TwoWay}"/>
+
+                <CheckBox Name="Parity_1"
+                          Grid.Row="5"
+                          Grid.Column="0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Margin="3"
+                          IsChecked="{Binding BitConfig[5], Mode=TwoWay}"/>
+
+                <CheckBox Name="Parity_2"
+                          Grid.Row="6"
+                          Grid.Column="0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Margin="3"
+                          IsChecked="{Binding BitConfig[6], Mode=TwoWay}"/>
+
+                <CheckBox Name="StopBits"
+                          Grid.Row="7"
+                          Grid.Column="0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Margin="3"
+                          IsChecked="{Binding BitConfig[7], Mode=TwoWay}"/>
+
+
+
+                <TextBlock Name="Speed_text"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Text="Скорость ((75 или 150)/1200)" />
+
+                <TextBlock Name="Protocol_text"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Text="Протокол (v.23 / Bell.202)" />
+
+                <TextBlock Name="Filter_text"
+                           Grid.Row="2"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Text="Приемный фильтр (нет / есть)" />
+
+                <TextBlock Name="Amplify_text"
+                           Grid.Row="3"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Text="Усиление (нет / +3 dB)" />
+
+
+
+                <TextBlock Name="ByteData_TB"
+                           Grid.Row="4"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Text="Биты данных (8 бит / 7 бит)" />
+
+                <TextBlock Name="ParityOdd_TB"
+                           Grid.Row="5"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Text="Паритет (нечет / чет)" />
+
+                <TextBlock Name="PrityEx_TB"
+                           Grid.Row="6"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Text="Паритет (нет / есть)" />
+
+                <TextBlock Name="StopBits_TB"
+                           Grid.Row="7"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Text="Число стоп битов (1 бит / 2 бита)" />
+            </Grid>
+        </Border>
+        <!--  -->
+        <Border Name="Delays"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="4"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Margin="3,0,3,1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Name="IOTimeout_TB"
+                         Grid.Row="0"
+                         Grid.Column="0"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Stretch"
+                         Margin="1"
+                         IsEnabled="{Binding IsUpper,Converter={StaticResource BoolReverseConverter}}">
+                    <TextBox.Text>
+                        <Binding Path="IOTimeout">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox Name="TransmitEnable_TB_Ushort"
+                         Grid.Row="1"
+                         Grid.Column="0"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Stretch"
+                         Margin="1"
+                         Visibility="{Binding IsRadio,Converter={StaticResource BoolToVisibilityReverceConverter}}">
+                    <TextBox.Text>
+                        <Binding Path="TransmitEnableDelayUshort">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="TransmitEnable_TB_Byte"
+                         Grid.Row="1"
+                         Grid.Column="0"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Stretch"
+                         Margin="1"
+                         Visibility="{Binding IsRadio,Converter={StaticResource BoolToVisibilityConverter}}">
+                    <TextBox.Text>
+                        <Binding Path="TransmitEnableDelayByte">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+
+
+
+                <TextBox Name="TransmitDisable_TB_Ushort"
+                         Grid.Row="2"
+                         Grid.Column="0"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Stretch"
+                         Margin="1"
+                         Visibility="{Binding IsRadio,Converter={StaticResource BoolToVisibilityReverceConverter}}">
+                    <TextBox.Text>
+                        <Binding Path="TransmitDisableDelayUshort">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox Name="TransmitDisable_TB_Byte"
+                         Grid.Row="2"
+                         Grid.Column="0"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Stretch"
+                         Margin="1"
+                         Visibility="{Binding IsRadio,Converter={StaticResource BoolToVisibilityConverter}}">
+                    <TextBox.Text>
+                        <Binding Path="TransmitDisableDelayByte">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+
+                <TextBlock Name="IOTimeout_text"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="3"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Text="Таймаут ввода/вывода (*10 мс)" />
+
+                <TextBlock Name="TransmitEnable_text_ushort"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Text="Вкл. передачи (*0,1 мс)" 
+                           Visibility="{Binding IsRadio,Converter={StaticResource BoolToVisibilityReverceConverter}}"/>
+
+                <TextBlock Name="TransmitEnable_text_byte"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Text="Вкл. передачи (*10 мс)" 
+                           Visibility="{Binding IsRadio,Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                <TextBlock Name="TransmitDisable_text_ushort"
+                           Grid.Row="2"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Text="Выкл. передачи (*0,1 мс)"
+                           Visibility="{Binding IsRadio,Converter={StaticResource BoolToVisibilityReverceConverter}}"/>
+
+                <TextBlock Name="TransmitDisable_text_byte"
+                           Grid.Row="2"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Text="Выкл. передачи (*10 мс)"
+                           Visibility="{Binding IsRadio,Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+
+
+                <TextBox Name="TransmitEnablePause_TB"
+                         Grid.Row="1"
+                         Grid.Column="2"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Stretch"
+                         Margin="1"
+                         Visibility="{Binding IsRadio,Converter={StaticResource BoolToVisibilityConverter}}" >
+                    <TextBox.Text>
+                        <Binding Path="TransmitEnablePause">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox Name="TransmitDisablePause_TB"
+                         Grid.Row="2"
+                         Grid.Column="2"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Stretch"
+                         Margin="1"
+                         Visibility="{Binding IsRadio,Converter={StaticResource BoolToVisibilityConverter}}">
+                    <TextBox.Text>
+                        <Binding Path="TransmitDisablePause">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBlock Name="TransmitEnablePause_text"
+                           Grid.Row="1"
+                           Grid.Column="3"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="3"
+                           Text="пауза" 
+                           Visibility="{Binding IsRadio,Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                <TextBlock Name="TransmitDisablePause_text"
+                           Grid.Row="2"
+                           Grid.Column="3"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="3"
+                           Text="пауза" 
+                           Visibility="{Binding IsRadio,Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+            </Grid>
+        </Border>
+        <!--  -->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <ToggleButton Name="UpperSelector"
+                              Grid.Column="0"
+                              Grid.Row="2"
+                              IsChecked="{Binding IsUpper, Mode=TwoWay,Converter={StaticResource BoolReverseConverter}}"
+                              IsThreeState="False"
+                              Style="{StaticResource ToggleRectStyleUpper}"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              HorizontalContentAlignment="Stretch"
+                              VerticalContentAlignment="Stretch"
+                              Visibility="Collapsed"
+                              />
+            <ToggleButton Name="RadioSelector"
+                              Grid.Column="0"
+                              Grid.ColumnSpan="2"
+                              Grid.Row="2"
+                              IsChecked="{Binding IsRadio, Mode=TwoWay,Converter={StaticResource BoolReverseConverter}}"
+                              IsThreeState="False"
+                              Style="{StaticResource ToggleRectStyleRadio}"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              HorizontalContentAlignment="Stretch"
+                              VerticalContentAlignment="Stretch"
+                              />
+            <Button Name="Write"
+                    Grid.Column="2"
+                    Margin="1"
+                    Content="Записать"
+                    Command="{Binding WriteRequestCommand}" />
+            <Button Name="Read"
+                    Grid.Column="3"
+                    Margin="1"
+                    Content="Прочитать"
+                    Command="{Binding ReadRequestCommand}"/>
+            <Button Name="Close"
+                    Grid.Column="3"
+                    Margin="1"
+                    Content="Закрыть"
+                    Command="{Binding CloseWindowCommand}"
+                    Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Window>

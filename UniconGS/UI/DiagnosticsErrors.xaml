@@ -1,0 +1,35 @@
+﻿<UserControl
+    x:Class="UniconGS.UI.DiagnosticsErrors"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:UniconGS.UI">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <local:BitViewer
+                x:Name="uiModulesFail"
+                Margin="0,2"
+                Text="Отказ модулей" />
+            <local:BitViewer
+                x:Name="uiModule2Fail"
+                Margin="0,2"
+                Text="Отказ дискретного модуля 1" />
+            <local:BitViewer
+                x:Name="uiModule3Fail"
+                Margin="0,2"
+                Text="Отказ дискретного модуля 2" />
+            <local:BitViewer
+                x:Name="uiModule4Fail"
+                Margin="0,2"
+                Text="Отказ дискретного модуля 3" />
+            <local:BitViewer
+                x:Name="uiModule5Fail"
+                Margin="0,2"
+                Text="Отказ дискретного модуля 4" />
+            <local:BitViewer
+                x:Name="uiModule1Fail"
+                Margin="0,2"
+                Text="Отказ модуля реле" />
+        </StackPanel>
+
+    </Grid>
+</UserControl>

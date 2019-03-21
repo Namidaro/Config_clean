@@ -1,0 +1,1043 @@
+﻿<UserControl x:Class="UniconGS.UI.Picon2.Picon2ConfigurationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:picon2="clr-namespace:UniconGS.UI.Picon2"
+    xmlns:converters="clr-namespace:UniconGS.UI.Picon2.Converters"
+    xmlns:converters1="clr-namespace:UniconGS.Converters"
+    xmlns:userControl="clr-namespace:UniconGS.UI.Picon2.ViewModel"
+    xmlns:validators="clr-namespace:UniconGS.UI.Picon2.ValidationRules"
+    d:DesignHeight="800"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style  TargetType="{x:Type ComboBox}" BasedOn = "{StaticResource {x:Type ComboBox}}" >
+            <Setter Property="MinHeight" Value="25"></Setter>
+        </Style>
+        <DataTemplate DataType="{x:Type userControl:DateEnterFieldViewModel}">
+
+            <Grid Margin="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox
+                        Name="FirstPart"
+                        Width="30"
+                        VerticalContentAlignment="Bottom"
+                        BorderBrush="White"
+                        BorderThickness="2"
+                        FontSize="13"
+                        MaxLength="3"
+                        Text="{Binding DatePart1, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label
+                        VerticalContentAlignment="Bottom"
+                        Background="White"
+                        Content="." />
+                    <TextBox
+                        Name="SecondPart"
+                        Width="30"
+                        VerticalContentAlignment="Bottom"
+                        BorderBrush="White"
+                        BorderThickness="2"
+                        FontSize="13"
+                        MaxLength="3"
+                        Text="{Binding DatePart2, UpdateSourceTrigger=PropertyChanged}" />
+
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        <converters:ObjectAsBoolToVisibilityConverter x:Key="ObjectAsBoolToVisibilityConverter"></converters:ObjectAsBoolToVisibilityConverter>
+        <converters:PlusOneConverter x:Key="PlusOneConverter"></converters:PlusOneConverter>
+        <ControlTemplate x:Key="GroupBoxTemplate" TargetType="GroupBox">
+            <Grid Margin="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Border
+                    Grid.Row="0"
+                    Background="#25A0DA"
+                    BorderBrush="#25A0DA"
+                    BorderThickness="1">
+                    <Label Foreground="White">
+                        <ContentPresenter
+                            Margin="4"
+                            ContentSource="Header"
+                            RecognizesAccessKey="True" />
+                    </Label>
+                </Border>
+
+                <Border
+                    Grid.Row="1"
+                    BorderBrush="#25A0DA"
+                    BorderThickness="1,0,1,1">
+                    <ContentPresenter Margin="4" />
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <validators:Picon2ConfigIntValidationRules x:Key="Picon2ConfigIntValidationRule"/>
+        <converters1:BooleanReverseConverter x:Key="BooleanReverceConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <!--  указатель назад и Имя устройства  -->
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Orientation="Horizontal">
+
+
+
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Text="   Конфигурация Picon2" />
+                <!--<TextBlock
+                    VerticalAlignment="Center"
+                    Text="{Binding DeviceName}" />-->
+            </StackPanel>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <GroupBox
+                Grid.Row="0"
+                Margin="3"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Header="Настройка каналов"
+                Template="{StaticResource GroupBoxTemplate}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="21*" />
+                        <RowDefinition Height="85*" />
+                        <RowDefinition Height="85*" />
+                        <RowDefinition Height="85*" />
+                        <RowDefinition Height="85*" />
+                        <RowDefinition Height="85*" />
+                        <RowDefinition Height="85*" />
+                        <RowDefinition Height="85*" />
+                        <RowDefinition Height="85*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="2,1,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Text="№" Height="16" Width="13" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="89,0,89,4"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Text="Данные КУ" Height="16" Width="60" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Margin="89,0,89,4"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Text="Выходы КУ" Height="16" Width="60" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="3"
+                        Margin="60,0,59,4"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Text="Контроль управления" Height="16" Width="120" />
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Text="1" Height="16" Width="6" />
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Text="2" Height="16" Width="6" />
+                    <TextBlock
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Text="3" Height="16" Width="6" />
+                    <TextBlock
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Text="4" Height="16" Width="6" />
+                    <TextBlock
+                        Grid.Row="5"
+                        Grid.Column="0"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Text="5" Height="16" Width="6" />
+                    <TextBlock
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Text="6" Height="16" Width="6" />
+                    <TextBlock
+                        Grid.Row="7"
+                        Grid.Column="0"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Text="7" Height="16" Width="6" />
+                    <TextBlock
+                        Grid.Row="8"
+                        Grid.Column="0"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Text="8" Height="16" Width="6" />
+
+                    <ComboBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding DataKuCollection}"
+                        SelectedItem="{Binding DataKuSelected[0], Mode=TwoWay}" Height="25" />
+                    <ComboBox
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding DataKuCollection}"
+                        SelectedItem="{Binding DataKuSelected[1], Mode=TwoWay}" Height="25" />
+
+                    <ComboBox
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding DataKuCollection}"
+                        SelectedItem="{Binding DataKuSelected[2], Mode=TwoWay}" Height="25" />
+
+                    <ComboBox
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding DataKuCollection}"
+                        SelectedItem="{Binding DataKuSelected[3], Mode=TwoWay}" Height="25" />
+
+                    <ComboBox
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding DataKuCollection}"
+                        SelectedItem="{Binding DataKuSelected[4], Mode=TwoWay}" Height="25" />
+
+                    <ComboBox
+                        Grid.Row="6"
+                        Grid.Column="1"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding DataKuCollection}"
+                        SelectedItem="{Binding DataKuSelected[5], Mode=TwoWay}" Height="25" />
+
+                    <ComboBox
+                        Grid.Row="7"
+                        Grid.Column="1"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding DataKuCollection}"
+                        SelectedItem="{Binding DataKuSelected[6], Mode=TwoWay}" Height="25" />
+
+                    <ComboBox
+                        Grid.Row="8"
+                        Grid.Column="1"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding DataKuCollection}"
+                        SelectedItem="{Binding DataKuSelected[7], Mode=TwoWay}" Height="25" />
+
+
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        VerticalAlignment="Top" Height="62">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Вкл.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelected[0], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChanged" />
+
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Отк.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelectedInv[0], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChangedInv" />
+
+                    </Grid>
+
+
+
+
+                    <Grid
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        VerticalAlignment="Top" Height="62">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Вкл.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelected[1], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChanged" />
+
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Отк.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelectedInv[1], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChangedInv" />
+
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        VerticalAlignment="Top" Height="62">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Вкл.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelected[2], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChanged" />
+
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Отк.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelectedInv[2], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChangedInv" />
+
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        VerticalAlignment="Top" Height="62">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Вкл.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelected[3], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChanged" />
+
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Отк.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelectedInv[3], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChangedInv" />
+
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="5"
+                        Grid.Column="2"
+                        VerticalAlignment="Top" Height="62">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Вкл.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelected[4], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChanged" />
+
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Отк.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelectedInv[4], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChangedInv" />
+
+                    </Grid>
+
+
+
+
+
+
+
+                    <Grid
+                        Grid.Row="6"
+                        Grid.Column="2"
+                        VerticalAlignment="Top" Height="62">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Вкл.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelected[5], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChanged" />
+
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Отк.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelectedInv[5], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChangedInv" />
+
+                    </Grid>
+
+
+
+
+
+
+
+
+                    <Grid
+                        Grid.Row="7"
+                        Grid.Column="2"
+                        VerticalAlignment="Top" Height="62">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Вкл.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelected[6], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChanged" />
+
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Отк.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelectedInv[6], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChangedInv" />
+
+                    </Grid>
+
+
+
+
+
+
+
+
+
+                    <Grid
+                        Grid.Row="8"
+                        Grid.Column="2"
+                        VerticalAlignment="Top" Height="62">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Вкл.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelected[7], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChanged" />
+
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Отк.
+                        </Label>
+                        <ComboBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding OutputsKuCollection}"
+                            SelectedItem="{Binding OutputsKuSelectedInv[7], Mode=TwoWay}"
+                            SelectionChanged="Selector_OnSelectionChangedInv" />
+
+                    </Grid>
+
+
+
+
+
+
+
+
+
+                    <ComboBox
+                        Grid.Row="1"
+                        Grid.Column="3"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding ManagementKuCollection}"
+                        SelectedItem="{Binding ManagementKuSelected[0], Mode=TwoWay}"
+                        SelectionChanged="_cbManagemnt_SelectionChanged" Height="25" />
+
+                    <ComboBox
+                        Grid.Row="2"
+                        Grid.Column="3"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding ManagementKuCollection}"
+                        SelectedItem="{Binding ManagementKuSelected[1], Mode=TwoWay}"
+                        SelectionChanged="_cbManagemnt_SelectionChanged" Height="25" />
+
+                    <ComboBox
+                        Grid.Row="3"
+                        Grid.Column="3"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding ManagementKuCollection}"
+                        SelectedItem="{Binding ManagementKuSelected[2], Mode=TwoWay}"
+                        SelectionChanged="_cbManagemnt_SelectionChanged" Height="25" />
+
+                    <ComboBox
+                        Grid.Row="4"
+                        Grid.Column="3"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding ManagementKuCollection}"
+                        SelectedItem="{Binding ManagementKuSelected[3], Mode=TwoWay}"
+                        SelectionChanged="_cbManagemnt_SelectionChanged" Height="25" />
+
+                    <ComboBox
+                        Grid.Row="5"
+                        Grid.Column="3"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding ManagementKuCollection}"
+                        SelectedItem="{Binding ManagementKuSelected[4], Mode=TwoWay}"
+                        SelectionChanged="_cbManagemnt_SelectionChanged" Height="25" />
+
+                    <ComboBox
+                        Grid.Row="6"
+                        Grid.Column="3"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding ManagementKuCollection}"
+                        SelectedItem="{Binding ManagementKuSelected[5], Mode=TwoWay}"
+                        SelectionChanged="_cbManagemnt_SelectionChanged" Height="25" />
+
+                    <ComboBox
+                        Grid.Row="7"
+                        Grid.Column="3"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding ManagementKuCollection}"
+                        SelectedItem="{Binding ManagementKuSelected[6], Mode=TwoWay}"
+                        SelectionChanged="_cbManagemnt_SelectionChanged" Height="25" />
+
+                    <ComboBox
+                        Grid.Row="8"
+                        Grid.Column="3"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ItemsSource="{Binding ManagementKuCollection}"
+                        SelectedItem="{Binding ManagementKuSelected[7], Mode=TwoWay}"
+                        SelectionChanged="_cbManagemnt_SelectionChanged" Height="25" />
+                </Grid>
+            </GroupBox>
+            <UniformGrid
+                Grid.Row="1"
+                Margin="2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Columns="4"
+                Rows="1">
+                <Button
+                    Width="Auto"
+                    Margin="2"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding GetConfigurationFromFileCommand}"
+                    Content="Прочитать из файла" />
+                <Button
+                    Width="Auto"
+                    Margin="2"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding SaveConfigurationInFileCommand}"
+                    Content="Сохранить в файл" />
+                <Button
+                    Width="Auto"
+                    Margin="2"
+                    IsEnabled="{Binding IsAutonomus, Converter={StaticResource BooleanReverceConverter}}"
+                    HorizontalContentAlignment="Stretch"
+                    Command="{Binding SendConfiguration}"
+                    Content="         Записать" />
+                <Button
+                    Width="Auto"
+                    Margin="2"
+                    IsEnabled="{Binding IsAutonomus, Converter={StaticResource BooleanReverceConverter}}"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding GetConfiguration}"
+                    Content="Прочитать" />
+            </UniformGrid>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Border
+                Margin="5"
+                BorderBrush="#25A0DA"
+                BorderThickness="1">
+                <Expander Header="Графики">
+                    <UniformGrid Columns="3">
+                        <Label Margin="3">График 4</Label>
+                        <ContentControl Content="{Binding SheduleDates[0]}" />
+                        <ContentControl Content="{Binding SheduleDates[1]}" />
+
+                        <Label Margin="3">ЕК 1</Label>
+                        <ContentControl Content="{Binding SheduleDates[2]}" />
+                        <ContentControl Content="{Binding SheduleDates[3]}" />
+
+                        <Label Margin="3">ЕК 2</Label>
+                        <ContentControl Content="{Binding SheduleDates[4]}" />
+                        <ContentControl Content="{Binding SheduleDates[5]}" />
+
+                        <Label Margin="3">ЕК 3</Label>
+                        <ContentControl Content="{Binding SheduleDates[6]}" />
+                        <ContentControl Content="{Binding SheduleDates[7]}" />
+                    </UniformGrid>
+                </Expander>
+            </Border>
+            <GroupBox
+                Grid.Row="1"
+                Margin="3"
+                Header="Автоматика"
+                Template="{StaticResource GroupBoxTemplate}">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Число подкл. контроллеров:" />
+                        <TextBox
+                            Width="50"
+                            Margin="5,0"
+                            LostFocus="TimeToStartTextBox_OnLostFocus"
+                            PreviewTextInput="TimeToStartTextBox_OnPreviewTextInput"
+                            ToolTip="Значение должно быть в пределах от 0 до 1000" >
+                            <!--Text="{Binding ControllersNumber, Mode=TwoWay}"-->
+
+                            <TextBox.Text>
+                                <Binding Path="ControllersNumber"
+                                         Mode="TwoWay"
+                                         ValidatesOnNotifyDataErrors="True"
+                                         ValidatesOnDataErrors="True"
+                                         NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <validators:Picon2ConfigIntValidationRules />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Время включения автоматики:" />
+                        <TextBox
+                            Width="50"
+                            Margin="5,0"
+                            LostFocus="TimeToStartTextBox_OnLostFocus"
+                            PreviewTextInput="TimeToStartTextBox_OnPreviewTextInput"
+                            ToolTip="Значение должно быть в пределах от 0 до 1000"
+                            >
+                            <!--Text="{Binding TimeToStart, Mode=TwoWay}"-->
+                            <TextBox.Text>
+                                <Binding Path="TimeToStart"
+                                         Mode="TwoWay"
+                                         ValidatesOnNotifyDataErrors="True"
+                                         ValidatesOnDataErrors="True"
+                                         NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <validators:Picon2ConfigIntValidationRules />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBlock Text="c." />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox
+                Grid.Row="2"
+                Margin="3"
+                Header="Маска неисправностей"
+                Template="{StaticResource GroupBoxTemplate}">
+                <picon2:PICON2ConfigCheckBoxControlView
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    DataContext="{Binding FaultMask}"
+                    PreviewMouseDown="FaultMask_OnPreviewMouseDown" />
+            </GroupBox>
+            <GroupBox
+                Grid.Row="3"
+                Margin="3"
+                VerticalAlignment="Top"
+                Header="Неисправности"
+                Template="{StaticResource GroupBoxTemplate}">
+                <Grid>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <ItemsControl AlternationCount="8" ItemsSource="{Binding FaultCanals}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Expander Margin="5,2">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Ellipse
+                                                        Width="5"
+                                                        Height="5"
+                                                        Margin="0,0,10,0"
+                                                        Fill="Red"
+                                                        Visibility="{Binding Path=IsAtLeastOneSelected, Converter={StaticResource ObjectAsBoolToVisibilityConverter}}" />
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Канал №" />
+                                                        <TextBlock Text="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlusOneConverter}}" />
+                                                    </StackPanel>
+
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <picon2:PICON2ConfigCheckBoxControlView
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                DataContext="{Binding ., Mode=TwoWay}" />
+                                        </Expander>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+
+                            <Expander Margin="5,2">
+                                <Expander.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse
+                                            Width="5"
+                                            Height="5"
+                                            Margin="0,0,10,0"
+                                            Fill="Red"
+                                            Visibility="{Binding FaultPower.IsAtLeastOneSelected, Converter={StaticResource ObjectAsBoolToVisibilityConverter}}" />
+                                        <TextBlock Text="Питание" />
+                                    </StackPanel>
+                                </Expander.Header>
+                                <picon2:PICON2ConfigCheckBoxControlView
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    DataContext="{Binding FaultPower, Mode=TwoWay}" />
+                            </Expander>
+                            <Expander Margin="5,2">
+                                <Expander.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse
+                                            Width="5"
+                                            Height="5"
+                                            Margin="0,0,10,0"
+                                            Fill="Red"
+                                            Visibility="{Binding FaultManagement.IsAtLeastOneSelected, Converter={StaticResource ObjectAsBoolToVisibilityConverter}}" />
+                                        <TextBlock Text="Режим управления" />
+                                    </StackPanel>
+                                </Expander.Header>
+                                <picon2:PICON2ConfigCheckBoxControlView
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    DataContext="{Binding FaultManagement, Mode=TwoWay}" />
+                            </Expander>
+                            <Expander Margin="5,2">
+                                <Expander.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse
+                                            Width="5"
+                                            Height="5"
+                                            Margin="0,0,10,0"
+                                            Fill="Red"
+                                            Visibility="{Binding FaultSecurity.IsAtLeastOneSelected, Converter={StaticResource ObjectAsBoolToVisibilityConverter}}" />
+                                        <TextBlock Text="Охрана" />
+                                    </StackPanel>
+                                </Expander.Header>
+                                <picon2:PICON2ConfigCheckBoxControlView
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    DataContext="{Binding FaultSecurity, Mode=TwoWay}" />
+                            </Expander>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</UserControl>

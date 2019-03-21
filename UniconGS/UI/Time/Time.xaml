@@ -1,0 +1,103 @@
+﻿<UserControl
+    x:Class="UniconGS.UI.Time.Time"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid
+        Height="147.096"
+        Margin="0"
+        VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="23" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.RowSpan="2" Margin="0">
+            <Label HorizontalAlignment="Center" Content="Локальное время" />
+            <Label
+                x:Name="uiLocalTime"
+                Margin="20,1,20,0"
+                HorizontalAlignment="Center"
+                Content="Label"
+                FontSize="16"
+                FontWeight="Bold">
+                <Label.Foreground>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0.546" Color="#FF343434" />
+                        <GradientStop Offset="0.562" Color="#FF868484" />
+                    </LinearGradientBrush>
+                </Label.Foreground>
+            </Label>
+            <Label
+                x:Name="uiLocalDate"
+                Margin="20,0"
+                HorizontalAlignment="Center"
+                Content="Label"
+                FontSize="16"
+                FontWeight="Bold">
+                <Label.Foreground>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0.546" Color="#FF343434" />
+                        <GradientStop Offset="0.562" Color="#FF868484" />
+                    </LinearGradientBrush>
+                </Label.Foreground>
+            </Label>
+            <Label
+                Margin="0,2,0,0"
+                HorizontalAlignment="Center"
+                Content="Реальное время" />
+            <Label
+                x:Name="uiRealTime"
+                Margin="20,1,20,0"
+                HorizontalAlignment="Center"
+                Content="Label"
+                FontSize="16"
+                FontWeight="Bold">
+                <Label.Foreground>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0.546" Color="#FF343434" />
+                        <GradientStop Offset="0.562" Color="#FF868484" />
+                    </LinearGradientBrush>
+                </Label.Foreground>
+            </Label>
+            <Label
+                x:Name="uiRealDate"
+                Margin="20,0"
+                HorizontalAlignment="Center"
+                Content="Label"
+                FontSize="16"
+                FontWeight="Bold">
+                <Label.Foreground>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0.546" Color="#FF343434" />
+                        <GradientStop Offset="0.562" Color="#FF868484" />
+                    </LinearGradientBrush>
+                </Label.Foreground>
+            </Label>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="1"
+            Margin="0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                x:Name="uiChangeTime"
+                Width="150"
+                Margin="2,0,0,0"
+                VerticalAlignment="Top"
+                Click="uiChangeTime_Click"
+                Content="Изменить"
+                ToolTip="Изменение времени в устройстве" />
+            <Button
+                x:Name="uiSystemTime"
+                Width="150"
+                Margin="7,0,3.725,0"
+                Click="uiSystemTime_Click"
+                Content="Записать системное"
+                ToolTip="Изменение времени в устройстве на время, установленное на данном компьютере"
+                d:LayoutOverrides="Height" />
+        </StackPanel>
+    </Grid>
+</UserControl>

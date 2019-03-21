@@ -1,0 +1,115 @@
+﻿<UserControl
+    x:Class="UniconGS.UI.Runo3Diagnostics"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:UniconGS.UI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="700"
+    Height="300"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,0,5,-110">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="73*" />
+            <RowDefinition Height="17*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="250*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="15*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="113*" />
+
+        </Grid.ColumnDefinitions>
+
+        <Image
+            Grid.RowSpan="7"
+            Grid.ColumnSpan="5"
+            Height="295"
+            Margin="-13,5,288,0"
+            VerticalAlignment="Top"
+            Source="/PicGSConfig;Component/Images/R3.png "/>
+        <StackPanel
+            x:Name="uiReleRunoModule"
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="4"
+            Margin="0"
+            Orientation="Horizontal">
+            <local:Lightning
+                Width="18"
+                Height="17"
+                HorizontalAlignment="Left"
+                RenderTransformOrigin="-2.611,2.765" />
+            <local:Lightning
+                Width="17"
+                Height="17"
+                HorizontalAlignment="Left"
+                RenderTransformOrigin="-2.824,2.471" />
+            <local:Lightning Width="17" HorizontalAlignment="Left" />
+        </StackPanel>
+
+        <StackPanel
+            x:Name="uiReleWork"
+            Grid.Row="5"
+            Grid.Column="1"
+            Grid.ColumnSpan="4"
+            Margin="0,0,0,3"
+            Orientation="Horizontal">
+            <local:Lightning
+                Width="18"
+                Height="17"
+                HorizontalAlignment="Left" />
+        </StackPanel>
+
+        <StackPanel
+            x:Name="uiCh"
+            Grid.Row="3"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Width="20"
+            HorizontalAlignment="Left"
+            Orientation="Horizontal">
+            <local:Lightning
+                Width="17"
+                Margin="0,2,0,1"
+                HorizontalAlignment="Left" />
+        </StackPanel>
+
+        <StackPanel
+            x:Name="uiGSM1"
+            Grid.Row="3"
+            Grid.Column="2"
+            Width="18"
+            Margin="2,0,0,0"
+            HorizontalAlignment="Left"
+            Orientation="Horizontal">
+            <local:Lightning
+                Width="18"
+                Height="17"
+                Margin="0,2,0,1"
+                HorizontalAlignment="Left" />
+        </StackPanel>
+
+        <StackPanel
+            x:Name="uiGSM2"
+            Grid.Row="3"
+            Grid.Column="3"
+            Width="20"
+            Height="20"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <local:Lightning Height="17" Margin="0,2,2,1" />
+        </StackPanel>
+
+    </Grid>
+</UserControl>
+
+

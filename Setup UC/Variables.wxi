@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <!--переменные-->
+  <?define ProductName="Универсальный конфигуратор РУНО+ПИКОН" ?>
+  <?define ProductVersion="3.2.0" ?>
+  <?define ProductCode="*"?>
+  <?define UpgradeCode="DEAF5D38-81A9-487C-A3AD-62D040905AEB"?>
+  <?define Manufacturer="БЭМН"?>
+</Include>

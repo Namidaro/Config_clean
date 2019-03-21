@@ -1,0 +1,38 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:UniconGS.UI"
+    xmlns:discretModules="clr-namespace:UniconGS.UI.DiscretModules"
+    x:Class="UniconGS.UI.DiscretModules.AllStates"
+    mc:Ignorable="d" d:DesignWidth="708.9" d:DesignHeight="388.728">
+	<Grid>
+		<WrapPanel>
+            <GroupBox x:Name="uiGroupBox1" Margin="2" Header="Дискретный модуль №1" Height="98.182">
+                <Grid Margin="0,5,0,0">
+                    <discretModules:States Margin="0" x:Name="uiState1"/>
+                    <discretModules:Picon2States Margin="0" x:Name="uiPicon2State1" Visibility="Collapsed"/>
+                </Grid>
+            </GroupBox>
+            <GroupBox x:Name="uiGroupBox2"  Margin="2" Header="Дискретный модуль №2" Visibility="Hidden">
+                <Grid Margin="0,5,0,0">
+                    <discretModules:States Margin="0" x:Name="uiState2"/>
+                    <discretModules:Picon2States Margin="0" x:Name="uiPicon2State2" Visibility="Collapsed"/>
+                </Grid>
+            </GroupBox>
+            <GroupBox x:Name="uiGroupBox3" Margin="2" Header="Дискретный модуль №3" Visibility="Hidden">
+                <Grid Margin="0,5,0,0">
+                    <discretModules:States Margin="0" x:Name="uiState3"/>
+                    <discretModules:Picon2States Margin="0" x:Name="uiPicon2State3" Visibility="Collapsed"/>
+                </Grid>
+            </GroupBox>
+            <GroupBox x:Name="uiGroupBox4" Margin="2" Header="Дискретный модуль №4" Visibility="Hidden">
+                <Grid Margin="0,5,0,0">
+                    <discretModules:States Margin="0" x:Name="uiState4" />
+                    <discretModules:Picon2States Margin="0" x:Name="uiPicon2State4" Visibility="Collapsed"/>
+                </Grid>
+            </GroupBox>
+        </WrapPanel>
+    </Grid>
+</UserControl>

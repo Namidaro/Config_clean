@@ -1,0 +1,74 @@
+﻿<UserControl
+    x:Class="UniconGS.UI.Meter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="289"
+    MinHeight="245">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="138.667" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1">
+            <Label Content="Дата:" />
+            <Label Content="Время:" />
+            <Label Content="Серийный номер:" />
+            <Label Content="Ua(В):" />
+            <Label Content="Ub(В):" />
+            <Label Content="Uc(В):" />
+            <Label Content="Ia(A):" />
+            <Label Content="Ib(A):" />
+            <Label Content="Ic(A):" />
+            <Label Content="Pa(кВт):" />
+            <Label Content="Pb(кВт):" />
+            <Label Content="Pc(кВт):" />
+            <Label Content="A(кВт/ч):" />
+            <Label Name="EnM" Content="Aм(кВт/ч)" />
+            <Label Name="EnD" Content="Aд(кВт/ч)" />
+
+        </StackPanel>
+        <StackPanel
+            x:Name="PART_DATAHOLDER"
+            Grid.Row="1"
+            Grid.Column="1">
+            <Label x:Name="uiDate" Content="****" />
+            <Label x:Name="uiTime" Content="****" />
+            <Label x:Name="uiSerialNumber" Content="****" />
+            <Label x:Name="uiVoltageA" Content="****" />
+            <Label x:Name="uiVoltageB" Content="****" />
+            <Label x:Name="uiVoltageC" Content="****" />
+            <Label x:Name="uiCurrentA" Content="****" />
+            <Label x:Name="uiCurrentB" Content="****" />
+            <Label x:Name="uiCurrentC" Content="****" />
+            <Label x:Name="uiPowerA" Content="****" />
+            <Label x:Name="uiPowerB" Content="****" />
+            <Label x:Name="uiPowerC" Content="****" />
+            <Label x:Name="uiEnergyO" Content="****" />
+            <Label x:Name="uiEnergyM" Content="****" />
+            <Label x:Name="uiEnergyD" Content="****" />
+
+        </StackPanel>
+        <StackPanel
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2"
+            Margin="0,0,0,289"
+            Orientation="Horizontal"
+            Visibility="Hidden">
+            <TextBox
+                x:Name="uiPassword"
+                Width="109.053"
+                Margin="0,2"
+                VerticalContentAlignment="Center"
+                TextWrapping="Wrap" />
+            <Button
+                x:Name="uiSetPassword"
+                Width="75"
+                Margin="5,2,0,2"
+                Content="Задать" />
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,42 @@
+﻿<UserControl
+    x:Class="UniconGS.UI.KUErrors"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:UniconGS.UI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid>
+        <StackPanel
+            x:Name="uiErrors"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            >
+            <local:BitViewer
+                Margin="0,2"
+                Text="Нет питания"
+                d:LayoutOverrides="Height" />
+            <local:BitViewer
+                Margin="0,2"
+                Text="Неисправность цепи управления"
+                d:LayoutOverrides="Height" />
+            <local:BitViewer
+                Margin="0,2"
+                Text="Неисправность охраны"
+                d:LayoutOverrides="Height" />
+            <local:BitViewer
+                Margin="0,2"
+                Text="Неисправность управления"
+                d:LayoutOverrides="Height" />
+            <local:BitViewer
+                Margin="0,2"
+                Text="Неисправность предохранителей"
+                d:LayoutOverrides="Height" />
+            
+            <local:BitViewer
+                Margin="0,2"
+                Text="Неисправность контроллера"
+                d:LayoutOverrides="Height" />
+        </StackPanel>
+    </Grid>
+</UserControl>
