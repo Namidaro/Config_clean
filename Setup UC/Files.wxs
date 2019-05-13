@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Fragment>
-	  <DirectoryRef Id="INSTALLFOLDER" FileSource="c:\#git\Configurator\UniconGS\bin\Release\"> 
+	  <DirectoryRef Id="INSTALLFOLDER" FileSource="c:\#git\temp\UniconGS\bin\Release\"> 
 
 	    <Component Id="ProductComponent" Guid="65F5390D-A2DF-4BB4-A7B3-BE1F5C1D99E4">
 	      <File Id='PicGSConfig' DiskId='1' Name='PicGSConfig.exe'/>

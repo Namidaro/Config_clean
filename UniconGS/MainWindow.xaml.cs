@@ -609,6 +609,8 @@ namespace UniconGS
                 this.uiAutonomous.IsEnabled = true;
                 AutonomusCheck = 0;
                 uiAutonomusPresenter.Visibility = Visibility.Hidden;
+
+
             }
 
         }
@@ -921,7 +923,7 @@ namespace UniconGS
             if (AutonomusCheck == 0)
             {
                 AutonomusCheck++;
-                
+
                 if (_uiUpdateTimer != null)
                 {
                     _uiUpdateTimer.Dispose();
@@ -1065,14 +1067,14 @@ namespace UniconGS
             this.uiReconnect.IsEnabled = false;
             this.uiDisconnect.IsEnabled = true;
             this.uiConnect.IsEnabled = false;
-            this.uiAutonomous.IsEnabled = false;
+            this.uiAutonomous.IsEnabled = true;
 
             this.uiMainControl.SelectedIndex = 1;
-            for (int i = 1; i < this.uiMainControl.Items.Count; i++)
-            {
-                (this.uiMainControl.Items[i] as TabItem).IsEnabled = false;
-            }
-            //this.uiTime.DisableAutonomous();
+            //for (int i = 1; i < this.uiMainControl.Items.Count; i++)
+            //{
+            //    (this.uiMainControl.Items[i] as TabItem).IsEnabled = true;
+            //}
+            this.uiTime.DisableAutonomous();
             this.uiSettings.IsAutonomous = _isAutonomous;
             this.uiSystemJournal.DisableAutonomous();
             this.uiLogicConfig.DisableAutonomous();
@@ -1083,7 +1085,7 @@ namespace UniconGS
             this.uiEnergySchedule.DisableAutonomous();
             this.uiBacklightSchedule.DisableAutonomous();
             this.uiChannelsManagment.DisableAutonomus();
-
+            this.uiSignalGSMLevel.DisableAutonomus();
             this.uiSettings.DisableAutonomus();
 
             //todo:disableautonomus
@@ -1091,6 +1093,7 @@ namespace UniconGS
             this.Picon2ModuleRequest.DisableAutonomus();
             this.picon2LightingSheduleView.DisableAutonomus();
 
+            _semaphoreSlim = new SemaphoreSlim(1, 1);
         }
         #endregion
 

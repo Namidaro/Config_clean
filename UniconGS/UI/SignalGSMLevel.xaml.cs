@@ -141,6 +141,14 @@ namespace UniconGS.UI
             uiNoLevelLabel.Visibility = Visibility.Visible;
         }
 
+        public void DisableAutonomus()
+        {
+            UiSignalGSM.Visibility = Visibility.Visible;
+            SignalLevelMapping.Visibility = Visibility.Visible;
+            this.uiLevelLabel.Visibility = Visibility.Visible;
+            uiNoLevelLabel.Visibility = Visibility.Hidden;
+        }
+
         internal class ShowMessageEventHandler
         {
             private Action<string, string, MessageBoxImage> showMessage;

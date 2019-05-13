@@ -118,9 +118,13 @@ namespace UniconGS.UI.Settings
 
         private string GetSignatureString(List<ushort> value)
         {
-            ushort[] deviceName = value.GetRange(0, 4).ToArray();
+            ushort[] deviceName = value.GetRange(0, 5).ToArray();
+            //убираем лишний символ
+            deviceName[4] = (ushort)(LOBYTE(deviceName[4]));
+
             ushort[] version = value.GetRange(8, 3).ToArray();
             ushort[] date = value.GetRange(16, 5).ToArray();
+            
 
             var devName = "Имя устройства: " + Converter.GetStringFromWords(deviceName) + ";\r\n";
             var v = "Версия:  " + ((byte)(version[1] >> 8)).ToString() + "."
@@ -150,7 +154,7 @@ namespace UniconGS.UI.Settings
         #region PLC reset
         private async void uiPLCReset_Click(object sender, RoutedEventArgs e)
         {
-                ResetPLC();
+            ResetPLC();
         }
 
         private async void ResetPLC()
@@ -261,7 +265,7 @@ namespace UniconGS.UI.Settings
             uiSaveSettings.IsEnabled = true;
         }
 
-        
+
 
         private void uiOpenSettings_Click(object sender, RoutedEventArgs e)
         {
@@ -486,6 +490,23 @@ namespace UniconGS.UI.Settings
         {
             GetPicon2ModuleInfo.Invoke();
         }
-
+        /// <summary>
+        /// Возвращает младший байт слова
+        /// </summary>
+        /// <param name="v">Слово.</param>
+        /// <returns>Мл.байт</returns>
+        public static byte LOBYTE(long v)
+        {
+            return (byte)(v & 0xff);
+        }
+        /// <summary>
+        /// Возвращает старший байт слова.
+        /// </summary>
+        /// <param name="v">Слово.</param>
+        /// <returns>Ст.байт</returns>
+        public static byte HIBYTE(long v)
+        {
+            return (byte)(v >> 8);
+        }
     }
 }

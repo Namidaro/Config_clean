@@ -451,5 +451,12 @@ namespace UniconGS.UI.Time
             this.uiSystemTime.IsEnabled = false;
             SetDefault();
         }
+
+        public void DisableAutonomous()
+        {
+            this.uiChangeTime.IsEnabled = true;
+            this.uiSystemTime.IsEnabled = true;
+            Update();
+        }
     }
 }
