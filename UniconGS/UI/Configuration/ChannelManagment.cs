@@ -13,6 +13,11 @@ namespace UniconGS.UI.Configuration
     {
         private Mask _securityMask;
         private Mask _errorMask;
+        private Mask _powerMask;
+        private Mask _managementMask;
+        private ObservableCollection<Channel> _channels;
+        private ObservableCollection<Mask> _channelMasks;
+
         private ushort _automationTime = 100;
 
         [XmlElement]
@@ -33,9 +38,31 @@ namespace UniconGS.UI.Configuration
             }
         }
         [XmlElement]
-        public ObservableCollection<Channel> Channels { get; set; }
+        public ObservableCollection<Channel> Channels
+        {
+            get
+            {
+                return this._channels;
+            }
+            set
+            {
+                this._channels = value;
+                this.onPropertyChanged("Channels");
+            }
+        }
         [XmlElement]
-        public ObservableCollection<Mask> ChannelMasks { get; set; }
+        public ObservableCollection<Mask> ChannelMasks
+        {
+            get
+            {
+                return this._channelMasks;
+            }
+            set
+            {
+                this._channelMasks = value;
+                this.onPropertyChanged("ChannelMasks");
+            }
+        }
         [XmlElement]
         public Mask SecurityMask
         {
@@ -46,12 +73,37 @@ namespace UniconGS.UI.Configuration
             set
             {
                 this._securityMask = value;
+                this.onPropertyChanged("SecurityMask");
             }
         }
         [XmlElement]
-        public Mask ManagmentMask { get; set; }
+        public Mask ManagmentMask
+        {
+            get
+            {
+                return this._managementMask;
+            }
+            set
+            {
+                this._managementMask = value;
+                onPropertyChanged("ManagmentMask");
+            }
+        }
         [XmlElement]
         public Mask PowerMask
+        {
+            get
+            {
+                return this._powerMask;
+            }
+            set
+            {
+                this._powerMask = value;
+                onPropertyChanged("PowerMask");
+            }
+        }
+        [XmlElement]
+        public Mask ErrorMask
         {
             get
             {
@@ -60,11 +112,9 @@ namespace UniconGS.UI.Configuration
             set
             {
                 this._errorMask = value;
-                onPropertyChanged("PowerMask");
+                onPropertyChanged("ErrorMask");
             }
         }
-        [XmlElement]
-        public Mask ErrorMask { get; set; }
 
         public ChannelManagment()
         {

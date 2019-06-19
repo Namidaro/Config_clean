@@ -495,57 +495,7 @@ namespace UniconGS.UI.Configuration
                 var result = this.OpenFromFile(typeof(ChannelManagment));
                 if (result != null)
                 {
-                    this.ClearAll();
-                    if (this.StartWork != null)
-                        this.StartWork();
-                    this._value = (ChannelManagment)result;
-                    this.UpdateBinding();
-                    this.MatrixUpdate();
-                    if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_RUNO)
-                    {
-                        for (int i = 0; i < 11; i++)
-                        {
-                            if (this.uiErrorMatrix.isChecked(i))
-                            {
-                                foreach (var item in this._maswks)
-                                {
-                                    if (!item.isChecked(i))
-                                        item.SetDisable(i);
-                                }
-                            }
-                        }
-                    }
-                    else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS)
-                    {
-                        for (int i = 0; i < 44; i++)
-                        {
-                            if (this.uiErrorMatrix.isChecked(i))
-                            {
-                                foreach (var item in this._maswks)
-                                {
-                                    if (!item.isChecked(i))
-                                        item.SetDisable(i);
-                                }
-                            }
-                        }
-                    }
-                    else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
-                    {
-
-                        for (int i = 0; i < 44; i++)
-                        {
-                            if (this.uiErrorMatrix.isChecked(i))
-                            {
-                                foreach (var item in this._maswks)
-                                {
-                                    if (!item.isChecked(i))
-                                        item.SetDisable(i);
-                                }
-                            }
-                        }
-                    }
-                    if (this.StopWork != null)
-                        this.StopWork();
+                    SetOpenedConfig((ChannelManagment)result);
                 }
             }
             if (MainWindow.isAutonomus == true)
@@ -559,6 +509,60 @@ namespace UniconGS.UI.Configuration
                     uiLogicConfigSave.IsEnabled = uiLogicExport.IsEnabled = uiLogicImport.IsEnabled = true;
             }
 
+        }
+        private void SetOpenedConfig(ChannelManagment result)
+        {
+            this.ClearAll();
+            if (this.StartWork != null)
+                this.StartWork();
+            this._value = result;
+            this.UpdateBinding();
+            this.MatrixUpdate();
+            if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_RUNO)
+            {
+                for (int i = 0; i < 11; i++)
+                {
+                    if (this.uiErrorMatrix.isChecked(i))
+                    {
+                        foreach (var item in this._maswks)
+                        {
+                            if (!item.isChecked(i))
+                                item.SetDisable(i);
+                        }
+                    }
+                }
+            }
+            else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS)
+            {
+                for (int i = 0; i < 44; i++)
+                {
+                    if (this.uiErrorMatrix.isChecked(i))
+                    {
+                        foreach (var item in this._maswks)
+                        {
+                            if (!item.isChecked(i))
+                                item.SetDisable(i);
+                        }
+                    }
+                }
+            }
+            else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
+            {
+
+                for (int i = 0; i < 44; i++)
+                {
+                    if (this.uiErrorMatrix.isChecked(i))
+                    {
+                        foreach (var item in this._maswks)
+                        {
+                            if (!item.isChecked(i))
+                                item.SetDisable(i);
+                        }
+                    }
+                }
+            }
+            if (this.StopWork != null)
+                this.StopWork();
         }
 
         private void ClearAll()
@@ -705,7 +709,8 @@ namespace UniconGS.UI.Configuration
                 {
                     if (value is Array)
                     {
-                        this._value.SetData(value);
+                        ImportComplete(value);
+                        //this._value.SetData(value);
                     }
                 }
             }
