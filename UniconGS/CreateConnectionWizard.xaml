@@ -110,12 +110,12 @@
                             <Label Content="Ожидание чтения, мс"/>
                             <TextBox
                                 x:Name="uiReadTimeout"
-                                Text="500"
+                                Text="1000"
                                 TextWrapping="Wrap" />
                             <Label Content="Ожидание записи, мс"/>
                             <TextBox
                                 x:Name="uiWriteTimeout"
-                                Text="500"
+                                Text="1000"
                                 TextWrapping="Wrap" />
                         </StackPanel>
                         <StackPanel Margin="5">

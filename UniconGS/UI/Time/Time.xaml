@@ -13,15 +13,18 @@
             <RowDefinition />
             <RowDefinition Height="23" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.RowSpan="2" Margin="0">
-            <Label HorizontalAlignment="Center" Content="Локальное время" />
+        <StackPanel Grid.RowSpan="2" Margin="0"
+                    VerticalAlignment="Center">
+            <Label HorizontalAlignment="Center" Content="Локальное время" 
+                   Visibility="Collapsed"/>
             <Label
                 x:Name="uiLocalTime"
                 Margin="20,1,20,0"
                 HorizontalAlignment="Center"
                 Content="Label"
                 FontSize="16"
-                FontWeight="Bold">
+                FontWeight="Bold"
+                Visibility="Collapsed">
                 <Label.Foreground>
                     <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                         <GradientStop Offset="0.546" Color="#FF343434" />
@@ -35,7 +38,8 @@
                 HorizontalAlignment="Center"
                 Content="Label"
                 FontSize="16"
-                FontWeight="Bold">
+                FontWeight="Bold"
+                Visibility="Collapsed">
                 <Label.Foreground>
                     <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                         <GradientStop Offset="0.546" Color="#FF343434" />
@@ -46,7 +50,7 @@
             <Label
                 Margin="0,2,0,0"
                 HorizontalAlignment="Center"
-                Content="Реальное время" />
+                Content="Время" />
             <Label
                 x:Name="uiRealTime"
                 Margin="20,1,20,0"

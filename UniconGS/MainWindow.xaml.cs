@@ -279,6 +279,7 @@ namespace UniconGS
                 {
                     return;
                 }
+                await uiTime.Update();
                 //await _semaphoreSlim.WaitAsync();
                 var isDiagTabSelected = false;
                 Application.Current.Dispatcher.Invoke(() =>
@@ -292,13 +293,13 @@ namespace UniconGS
                     if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
                     {
                         await uiPicon2DiagnosticsErrors.Update();
-                        await uiTime.Update();
+                        //await uiTime.Update();
                         await uiSignalGSMLevel.Update();
                     }
                     else
                     {
                         await uiPiconDiagnostics.Update();
-                        await uiTime.Update();
+                        //await uiTime.Update();
                         await uiSignalGSMLevel.Update();
                         await uiRuno3Diagnostics.Update();
                         await uiDiagnosticsErrors.Update();
@@ -927,9 +928,18 @@ namespace UniconGS
                 if (_uiUpdateTimer != null)
                 {
                     _uiUpdateTimer.Dispose();
-                    _semaphoreSlim.Dispose();
+                    _semaphoreSlim?.Dispose();
                 }
-                RTUConnectionGlobal.CloseConnection();
+                try
+                {
+                    RTUConnectionGlobal.CloseConnection();
+                }
+                catch (Exception ex)
+                {
+                    //тут короче какая-то херня, на win7 при уничтожении modbusmaster'а пишет "такой порт не существует" и вылетает по эксепшену. 
+                    //если просто игнорить эту проблему - вроде ничего не ломается
+                    //MessageBox.Show(ex.Message);
+                }
                 if (MessageBox.Show("Связь с устройством потеряна. Перейти в автономный режим?", "Внимание!", MessageBoxButton.YesNo,
                         MessageBoxImage.Information) == MessageBoxResult.Yes)
                 {
@@ -1167,13 +1177,17 @@ namespace UniconGS
 
         public void Stop()
         {
-            this._shutDownEvent.Set();
-            if (_work != null) this._work.Abort();
-            this._work = null;
-            _semaphoreSlim.Dispose();
-            RTUConnectionGlobal.CloseConnection();
+            try
+            {
+                this._shutDownEvent.Set();
+                if (_work != null) this._work.Abort();
+                this._work = null;
+                _semaphoreSlim.Dispose();
+                RTUConnectionGlobal.CloseConnection();
 
-            DataTransfer.UnInit();
+                DataTransfer.UnInit();
+            }
+            catch (Exception ex) { };
         }
 
         #endregion Thread
@@ -1204,17 +1218,25 @@ namespace UniconGS
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this._config.Save();
-            this.uiDisconnectBtn_Click(this, new RoutedEventArgs());
-            _semaphoreSlim.Dispose();
+            try
+            {
+                this.uiDisconnectBtn_Click(this, new RoutedEventArgs());
+                _semaphoreSlim.Dispose();
 
-            RTUConnectionGlobal.CloseConnection();
+                RTUConnectionGlobal.CloseConnection();
+            }
+            catch (Exception ex) { };
         }
         #endregion Common
 
         private void uiDeviceSelection_Click(object sender, RoutedEventArgs e)
         {
-            _semaphoreSlim.Dispose();
-            RTUConnectionGlobal.CloseConnection();
+            try
+            {
+                _semaphoreSlim.Dispose();
+                RTUConnectionGlobal.CloseConnection();
+            }
+            catch (Exception ex) { };
             this.Close();
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
 using System.Windows;
 
 namespace UniconGS
@@ -13,7 +14,8 @@ namespace UniconGS
             InitializeComponent();
             this.Title = AssemblyTitle;
             this.uiProdutName.Text = string.Format("{0}", AssemblyProduct);
-            this.uiVersion.Text = "Версия: 4.0.1"; /*string.Format("Версия: {0} ",AssemblyVersion)*/
+            FileInfo f = new FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            this.uiVersion.Text = "Версия: 4.0.1 от " + f.LastWriteTime; /*string.Format("Версия: {0} ",AssemblyVersion)*/
             this.uiCopyright.Text = AssemblyCopyright;
             this.uiCompanyName.Text = AssemblyCompany;
             this.uiDescription.Text = AssemblyDescription;

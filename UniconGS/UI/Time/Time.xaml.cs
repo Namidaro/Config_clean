@@ -80,7 +80,8 @@ namespace UniconGS.UI.Time
             }
             else
             {
-                ushort[] value = await RTUConnectionGlobal.GetDataByAddress(1, 0x1000, 16);
+                //ushort[] value = await RTUConnectionGlobal.GetDataByAddress(1, 0x1000, 16);
+                ushort[] value = await RTUConnectionGlobal.GetDataByAddress(1, 0x1000, 8);
                 Application.Current.Dispatcher.Invoke(() =>
                         {
                             SetTime(value);
@@ -151,7 +152,7 @@ namespace UniconGS.UI.Time
         private void SetTime(ushort[] _value)
         {
             var realTime = _value.ToList().GetRange(0, 8);
-            var localTime = _value.ToList().GetRange(8, 8);
+            //var localTime = _value.ToList().GetRange(8, 8);
             this._clock = new DateTime[2];
             try
             {
@@ -175,28 +176,28 @@ namespace UniconGS.UI.Time
                 this.uiRealTime.Content = "Ошибка";
                 this.uiRealTime.ToolTip = "Не верный формат времени";
             }
-            try
-            {
-                DateTime dtL = new DateTime(Convert.ToInt32(localTime[0]), Convert.ToInt32(localTime[1]),
-                    Convert.ToInt32(localTime[2]), Convert.ToInt32(localTime[4]),
-                    Convert.ToInt32(localTime[5]), Convert.ToInt32(localTime[6]));
+            //try
+            //{
+            //    DateTime dtL = new DateTime(Convert.ToInt32(localTime[0]), Convert.ToInt32(localTime[1]),
+            //        Convert.ToInt32(localTime[2]), Convert.ToInt32(localTime[4]),
+            //        Convert.ToInt32(localTime[5]), Convert.ToInt32(localTime[6]));
 
-                this.uiLocalDate.Content = dtL.Day + "/" + dtL.Month + "/" + dtL.Year;
-                this.uiLocalTime.Content =
-                    ((dtL.Hour < 10) == true ? ("0" + dtL.Hour).ToString() : (dtL.Hour.ToString())).ToString() +
-                    ":" +
-                    ((dtL.Minute < 10) == true ? ("0" + dtL.Minute).ToString() : (dtL.Minute.ToString()))
-                    .ToString() + ":" +
-                    ((dtL.Second < 10 == true) ? ("0" + dtL.Second) : (dtL.Second.ToString()));
-                this._clock[1] = dtL;
-            }
-            catch (Exception e)
-            {
-                this.uiLocalDate.Content = "Ошибка";
-                this.uiLocalDate.ToolTip = "Не верный формат даты";
-                this.uiLocalTime.Content = "Ошибка";
-                this.uiLocalTime.ToolTip = "Не верный формат времени";
-            }
+            //    this.uiLocalDate.Content = dtL.Day + "/" + dtL.Month + "/" + dtL.Year;
+            //    this.uiLocalTime.Content =
+            //        ((dtL.Hour < 10) == true ? ("0" + dtL.Hour).ToString() : (dtL.Hour.ToString())).ToString() +
+            //        ":" +
+            //        ((dtL.Minute < 10) == true ? ("0" + dtL.Minute).ToString() : (dtL.Minute.ToString()))
+            //        .ToString() + ":" +
+            //        ((dtL.Second < 10 == true) ? ("0" + dtL.Second) : (dtL.Second.ToString()));
+            //    this._clock[1] = dtL;
+            //}
+            //catch (Exception e)
+            //{
+            //    this.uiLocalDate.Content = "Ошибка";
+            //    this.uiLocalDate.ToolTip = "Не верный формат даты";
+            //    this.uiLocalTime.Content = "Ошибка";
+            //    this.uiLocalTime.ToolTip = "Не верный формат времени";
+            //}
         }
 
 
