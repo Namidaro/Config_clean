@@ -37,7 +37,9 @@ namespace UniconGS.UI.Settings
         public delegate void SetValueControlsDelegate(Settings settings);
         public delegate void SetPicon2ValueControlsDelegate(Picon2Settings picon2settings);
         public delegate void GetPicon2ModuleInfoDelegate();
+        public delegate void UpdateCommand();
         object x;
+        public event UpdateCommand UpdateCommandExecuted;
         public event GetControlsValueDelegate GetControlsValue;
         public event GetPicon2ControlsValueDelegate GetPicon2ControlsValue;
         public event SetValueControlsDelegate SetControlsValue;
@@ -46,6 +48,7 @@ namespace UniconGS.UI.Settings
         private Settings _settings;
         private Picon2Settings _picon2Settings;
         private bool _isWriteSettings;
+        private bool _isUpdateable = false;
         //private ushort[] _logicConfig;
         //private ushort[] _lightingSchedule;
         //private ushort[] _backlightSchedule;
@@ -81,6 +84,8 @@ namespace UniconGS.UI.Settings
                 uiReadAll.IsEnabled = true;
                 IsPicon2 = false;
             }
+
+
         }
         public event EventHandler ReadAll;
         public event EventHandler WriteAll;
@@ -124,6 +129,7 @@ namespace UniconGS.UI.Settings
 
             ushort[] version = value.GetRange(8, 3).ToArray();
             ushort[] date = value.GetRange(16, 5).ToArray();
+
             
 
             var devName = "Имя устройства: " + Converter.GetStringFromWords(deviceName) + ";\r\n";
@@ -131,9 +137,26 @@ namespace UniconGS.UI.Settings
                     + ((byte)version[1]).ToString() + "."
                     + ((byte)(version[0] >> 8)).ToString() + "."
                     + ((byte)version[0]).ToString() + ";\n\r";
+
+            _isUpdateable = CheckVersionUpdateAvailability(Converter.GetStringFromWords(deviceName), (byte)(version[1] >> 8),
+                    ((byte)version[1]));
             var d = "Дата: " + Converter.GetStringFromWords(date) + ".";
 
             return devName + v + d;
+        }
+
+        private bool CheckVersionUpdateAvailability(string deviceName, byte versionFirstByte, byte versionSecondByte)
+        {
+            if (!deviceName.ToLower().Contains("gs")) return false;
+
+            if (Convert.ToInt16(versionFirstByte) > 5) return true;
+            else if (Convert.ToInt16(versionFirstByte) == 5)
+            {
+                if (Convert.ToInt16(versionSecondByte) > 0) return true;
+                else return false;
+            }
+            else return false;
+
         }
 
         private void ReadSignatureComplete(ushort[] value)
@@ -144,12 +167,20 @@ namespace UniconGS.UI.Settings
             }
             else
             {
-                ShowMessage(this.GetSignatureString((value).ToList()), "Сигнатура устройства.",
-                    MessageBoxImage.Information);
+                DeviceSignatureWindow _deviceSigWnd = new DeviceSignatureWindow(this.GetSignatureString((value).ToList()), _isUpdateable);
+                _deviceSigWnd.UpdateEvent += UpdateCommandExecute;
+                _deviceSigWnd.ShowDialog();
+                _deviceSigWnd.UpdateEvent -= UpdateCommandExecute;
+                //ShowMessage(this.GetSignatureString((value).ToList()), "Сигнатура устройства.",
+                //    MessageBoxImage.Information);
             }
             uiSignature.IsEnabled = true;
         }
         #endregion Signature
+        private void UpdateCommandExecute()
+        {
+            UpdateCommandExecuted?.Invoke();
+        }
 
         #region PLC reset
         private async void uiPLCReset_Click(object sender, RoutedEventArgs e)

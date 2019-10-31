@@ -13,7 +13,7 @@
             <RowDefinition />
             <RowDefinition Height="23" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.RowSpan="2" Margin="0"
+        <StackPanel Grid.Row="0" Margin="0"
                     VerticalAlignment="Center">
             <Label HorizontalAlignment="Center" Content="Локальное время" 
                    Visibility="Collapsed"/>
@@ -80,6 +80,21 @@
                 </Label.Foreground>
             </Label>
         </StackPanel>
+        <!--<StackPanel Grid.Row="1" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <CheckBox Name="uiGSMSyncCheckBox"
+                      Content="Синхронизация по GSM"
+                      HorizontalContentAlignment="Center"
+                      VerticalContentAlignment="Center"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center" 
+                      Checked="GSMSyncCheckBox_Checked"
+                      Unchecked="GSMSyncCheckBox_Checked"
+                      
+                      />
+        </StackPanel>-->
         <StackPanel
             Grid.Row="1"
             Margin="0"

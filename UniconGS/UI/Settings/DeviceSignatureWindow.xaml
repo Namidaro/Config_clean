@@ -1,0 +1,47 @@
+﻿<Window x:Class="UniconGS.UI.Settings.DeviceSignatureWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UniconGS.UI.Settings"
+        mc:Ignorable="d"
+        Title="Сигнатура устройства" Height="200" Width="280">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" 
+                    Grid.Row="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <TextBlock Name="uiDeviceSignatureText"
+                       Margin="5"
+                       Text=" "
+                       />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1">
+            <Button Name="uiUpdateDeviceButton" 
+                    Click="uiUpdateDeviceButton_Click"
+                    Content="Обновить устройство"
+                    Width="125"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Margin="3"
+                    />
+            <Button Name="uiOKButton" Click="uiOKButton_Click"
+                    Content="OK"
+                    Width="125"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Margin="3"
+                    />
+        </StackPanel>
+    </Grid>
+</Window>

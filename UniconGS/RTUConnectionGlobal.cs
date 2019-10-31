@@ -142,7 +142,6 @@ namespace UniconGS
             if (_modbusMaster != null)
             {
                 await _semaphoreSlim.WaitAsync();
-                OnWritingStartedAction?.Invoke();
                 try
                 {
                     OnWritingStartedAction?.Invoke();

@@ -251,6 +251,9 @@
     <Compile Include="UI\Picon2ChannelManagement.xaml.cs">
       <DependentUpon>Picon2ChannelManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Settings\DeviceSignatureWindow.xaml.cs">
+      <DependentUpon>DeviceSignatureWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Settings\Picon2Settings.cs" />
     <Compile Include="UI\TurnOnError.xaml.cs">
       <DependentUpon>TurnOnError.xaml</DependentUpon>
@@ -444,6 +447,10 @@
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Settings\DeviceSignatureWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\SignalGSMLevel.xaml">
       <SubType>Designer</SubType>

@@ -51,16 +51,28 @@ namespace UniconGS.UI
             }
             if (SignalValue > 0 && SignalValue <= 10)
             {
+                UiSignalGSM.Visibility = Visibility.Visible;
+                SignalLevelMapping.Visibility = Visibility.Visible;
+                this.uiLevelLabel.Visibility = Visibility.Visible;
+                uiNoLevelLabel.Visibility = Visibility.Hidden;
                 uiSignalGSM.Content = value[0];
                 uiSignalGSM.Background = System.Windows.Media.Brushes.Red;
             }
             if (SignalValue >= 11 && SignalValue <= 20)
             {
+                UiSignalGSM.Visibility = Visibility.Visible;
+                SignalLevelMapping.Visibility = Visibility.Visible;
+                this.uiLevelLabel.Visibility = Visibility.Visible;
+                uiNoLevelLabel.Visibility = Visibility.Hidden;
                 uiSignalGSM.Content = value[0];
                 uiSignalGSM.Background = System.Windows.Media.Brushes.Yellow;
             }
             if (SignalValue >= 21 && SignalValue != 99)
             {
+                UiSignalGSM.Visibility = Visibility.Visible;
+                SignalLevelMapping.Visibility = Visibility.Visible;
+                this.uiLevelLabel.Visibility = Visibility.Visible;
+                uiNoLevelLabel.Visibility = Visibility.Hidden;
                 uiSignalGSM.Content = value[0];
                 uiSignalGSM.Background = System.Windows.Media.Brushes.LimeGreen;
             }

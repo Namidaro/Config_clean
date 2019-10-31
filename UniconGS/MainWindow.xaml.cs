@@ -235,6 +235,7 @@ namespace UniconGS
             this.uiSettings.SetPicon2ControlsValue += new ControllerSettings.SetPicon2ValueControlsDelegate(SetPicon2ValueControls);
             this.uiSettings.GetPicon2ModuleInfo += new ControllerSettings.GetPicon2ModuleInfoDelegate(GetPicon2ModuleInfo);
             this.uiSettings.ShowMessage += new ControllerSettings.ShowMessageEventHandler(ShowMessage);
+            this.uiSettings.UpdateCommandExecuted += new ControllerSettings.UpdateCommand(PiconGSUpdateExecuted);
             this.uiSettings.IsAutonomous = this._isAutonomous;
             this.uiSettings.Config = this._config;
 
@@ -279,7 +280,7 @@ namespace UniconGS
                 {
                     return;
                 }
-                await uiTime.Update();
+                
                 //await _semaphoreSlim.WaitAsync();
                 var isDiagTabSelected = false;
                 Application.Current.Dispatcher.Invoke(() =>
@@ -290,6 +291,7 @@ namespace UniconGS
                 if (isDiagTabSelected)
                 {
                     await _semaphoreSlim.WaitAsync();
+                    await uiTime.Update();
                     if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
                     {
                         await uiPicon2DiagnosticsErrors.Update();
@@ -314,6 +316,7 @@ namespace UniconGS
                 if (isLogicTabSelected)
                 {
                     await _semaphoreSlim.WaitAsync();
+                    await uiTime.Update();
                     if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_RUNO)
                     {
                         await uiChannelsManagment.Update();
@@ -352,6 +355,7 @@ namespace UniconGS
                 if (isModuleRequestsTabSelected)
                 {
                     await _semaphoreSlim.WaitAsync();
+                    await uiTime.Update();
                     await Picon2ModuleRequest.Update();
                     _semaphoreSlim.Release();
 
@@ -1196,6 +1200,12 @@ namespace UniconGS
         {
             System.Windows.MessageBox.Show(message, caption, MessageBoxButton.OK, image);
         }
+
+        private void PiconGSUpdateExecuted()
+        {
+            this.Close();
+        }
+
         private void SetAllDisable()
         {
             this.uiTime.Value = null;

@@ -101,6 +101,13 @@
                         Margin="5,0,0,0"
                         Text="{Binding APNSettings, Mode=TwoWay}"
                         TextWrapping="Wrap" />
+                    <CheckBox x:Name="uiGSMSyncCheckBox"
+                              Height="23"
+                              Margin="5"
+                              Content="Синхронизация по GSM"
+                              IsChecked="{Binding IsGSMSync, Mode=TwoWay}"
+                              Visibility="Hidden"
+                              />
                 </StackPanel>
                 <Border
                     Height="79"

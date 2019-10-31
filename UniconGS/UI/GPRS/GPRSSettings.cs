@@ -14,6 +14,8 @@ namespace UniconGS.UI.GPRS
         private string _userPassword = string.Empty;
         private string _callingNumber = string.Empty;
         private string _apnSettings = string.Empty;
+        private bool _isGSMSync = false;
+
         public string UserName
         {
             get
@@ -81,20 +83,33 @@ namespace UniconGS.UI.GPRS
             }
         }
 
+        public bool IsGSMSync
+        {
+            get { return this._isGSMSync; }
+            set
+            {
+                this._isGSMSync = value;
+                this.OnPropertyChanged("IsGSMSync");
+            }
+        }
+
+
         public GPRSSettings()
         {
             this._apnSettings = string.Empty;
             this._callingNumber = string.Empty;
             this._userName = string.Empty;
             this._userPassword = string.Empty;
+            this._isGSMSync = false;
         }
 
-        public GPRSSettings(string userName, string userPassword, string callingNumber, string apnSettings)
+        public GPRSSettings(string userName, string userPassword, string callingNumber, string apnSettings, bool gsmSync)
         {
             this.UserPassword = userPassword;
             this.UserName = userName;
             this.CallingNumber = callingNumber;
             this.APNSettings = apnSettings;
+            this.IsGSMSync = gsmSync;
         }
 
         #region Get/Set data
@@ -106,6 +121,7 @@ namespace UniconGS.UI.GPRS
             this.CallingNumber = Converter.GetStringFromWords(value.ToList().GetRange(32, 32).ToArray());
             this.UserName = Converter.GetStringFromWords(value.ToList().GetRange(64, 32).ToArray());
             this.UserPassword = Converter.GetStringFromWords(value.ToList().GetRange(96, 32).ToArray());
+            this.IsGSMSync = GetBoolFromWord(value.Last());
         }
 
         public ushort[] GetValue()
@@ -116,9 +132,25 @@ namespace UniconGS.UI.GPRS
             tmp.AddRange(Converter.GetWordsFromString(this.CallingNumber, 32));
             tmp.AddRange(Converter.GetWordsFromString(this.UserName, 32));
             tmp.AddRange(Converter.GetWordsFromString(this.UserPassword, 32));
+            tmp.Add(GetWordFromBool(this.IsGSMSync));
             return tmp.ToArray();
         }
         #endregion
+
+        #region [Helper]
+        private ushort GetWordFromBool(bool word)
+        {
+            if (word) return 1;
+            else return 0;
+        }
+
+        private bool GetBoolFromWord(ushort word)
+        {
+            if (word == 1) return true;
+            else return false;
+        }
+        #endregion
+
 
         #region INotifyPropertyChanged Members
 

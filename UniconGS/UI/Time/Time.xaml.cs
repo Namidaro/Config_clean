@@ -35,7 +35,7 @@ namespace UniconGS.UI.Time
 
         #endregion
 
-        //private static SemaphoreSlim _semaphoreSlim = new SemaphoreSlim(1, 1);
+        private static SemaphoreSlim _semaphoreSlim = new SemaphoreSlim(1, 1);
 
 
         private DateTime[] _clock = new DateTime[2];
@@ -47,8 +47,8 @@ namespace UniconGS.UI.Time
         public Time()
         {
             InitializeComponent();
-            //if (_semaphoreSlim.CurrentCount == 0)
-            //    _semaphoreSlim.Release();
+            if (_semaphoreSlim.CurrentCount == 0)
+                _semaphoreSlim.Release();
         }
 
         #region IQueryMember
@@ -56,8 +56,8 @@ namespace UniconGS.UI.Time
         public async Task Update()
 
         {
-            //if (_semaphoreSlim.CurrentCount == 0) return;
-            //await _semaphoreSlim.WaitAsync();
+            if (_semaphoreSlim.CurrentCount == 0) return;
+            await _semaphoreSlim.WaitAsync();
             if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
             {
 
@@ -82,16 +82,20 @@ namespace UniconGS.UI.Time
             {
                 //ushort[] value = await RTUConnectionGlobal.GetDataByAddress(1, 0x1000, 16);
                 ushort[] value = await RTUConnectionGlobal.GetDataByAddress(1, 0x1000, 8);
+
+                //ushort[] gsmSync = await RTUConnectionGlobal.GetDataByAddress(1, 0x21, 1);
                 Application.Current.Dispatcher.Invoke(() =>
                         {
                             SetTime(value);
                             uiChangeTime.IsEnabled = uiSystemTime.IsEnabled = true;
+
+                            //SetUIGsmSync(gsmSync);
                         });
             }
-            //if (_semaphoreSlim.CurrentCount == 0)
-            //{
-            //    _semaphoreSlim.Release();
-            //}
+            if (_semaphoreSlim.CurrentCount == 0)
+            {
+                _semaphoreSlim.Release();
+            }
 
         }
 
@@ -459,5 +463,43 @@ namespace UniconGS.UI.Time
             this.uiSystemTime.IsEnabled = true;
             Update();
         }
+
+        //private void GSMSyncCheckBox_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    ChangeGSMSyncCheckboxValue();
+        //}
+
+        //private void ChangeGSMSyncCheckboxValue()
+        //{
+        //    GSMSyncSetWord(uiGSMSyncCheckBox.IsChecked);
+        //}
+
+        //private async void GSMSyncSetWord(bool? word)
+        //{
+        //    try
+        //    {
+        //        await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x21, GetWordFromBool(word));
+        //    }
+        //    catch { }
+        //}
+
+        //private ushort[] GetWordFromBool(bool? word)
+        //{
+        //    if (!word.HasValue) return new ushort[1] { 0 };
+
+        //    if ((bool)word) return new ushort[1] { 1 };
+        //    else return new ushort[1] { 0 };
+        //}
+
+        //private bool GetBoolFromWord(ushort word)
+        //{
+        //    if (word == 1) return true;
+        //    else return false;
+        //}
+
+        //private void SetUIGsmSync(ushort[] _syncValue)
+        //{
+        //    uiGSMSyncCheckBox.IsChecked = GetBoolFromWord(_syncValue[0]);
+        //}
     }
 }
