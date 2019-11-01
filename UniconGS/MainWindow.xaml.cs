@@ -713,6 +713,7 @@ namespace UniconGS
         private void ClearCompleted()
         {
             this.Cursor = Cursors.Arrow;
+           
         }
 
         #endregion

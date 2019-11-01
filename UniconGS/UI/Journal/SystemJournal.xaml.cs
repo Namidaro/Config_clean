@@ -131,6 +131,7 @@ namespace UniconGS.UI.Journal
                 try
                 {
                     uiImport.IsEnabled = false;
+                    uiClear.IsEnabled = false;
                     var valFromDevice = await ReadJournalValue();
                     SetJournalValue(valFromDevice);
                     this.ShowMessage("Чтение журнала системы завершено", "Чтение журнала системы",
@@ -142,6 +143,7 @@ namespace UniconGS.UI.Journal
                 }
                 finally
                 {
+                    uiClear.IsEnabled = true;
                     uiImport.IsEnabled = true;
                 }
             }
@@ -164,7 +166,7 @@ namespace UniconGS.UI.Journal
 
             for (int i = 0; i < Picon2JournalReportCountLOByte; i++)
             {
-                this.Picon2EventsCollection.Add(new Picon2JournalEventRecord(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x4300 + i), 8)));
+                this.Picon2EventsCollection.Add(new Picon2JournalEventRecord((await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x4300 + i), 8))));
             }
             //todo: попробовать подогнать записи журнала под одни правила для всех устройств(не получится скорее всего)
         }
@@ -389,10 +391,13 @@ namespace UniconGS.UI.Journal
 
                 if (DeviceSelection.SelectedDevice == (byte)DeviceSelectionEnum.DEVICE_PICON2)
                 {
-                    await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x4000, new ushort[] { 0 });
-                    ClearCompleted.Invoke();
-                    MessageBox.Show("Журнал очищен", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                    try
+                    {
+                        await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x4000, new ushort[] { 0 });
+                        ClearCompleted.Invoke();
+                        MessageBox.Show("Журнал очищен", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch { }
                 }
                 else if (DeviceSelection.SelectedDevice == (byte)DeviceSelectionEnum.DEVICE_PICON_GS)
                 {
@@ -413,53 +418,80 @@ namespace UniconGS.UI.Journal
         }
         private async void ClearRunoJournal()
         {
-            uiClear.IsEnabled = false;
-            uiClear.Content = "Ожидайте";
 
-            await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x2000, new ushort[] { 1 });
-
-            ushort[] zeros = new ushort[23];
-            int i = 0;
-            for (ushort j = 0; j < _runoJournalSize; j++)
+            try
             {
-                await RTUConnectionGlobal.SendDataByAddressAsync(1, (ushort)(0x2001 + i), zeros);
-                i += 23;
+                uiClear.IsEnabled = false;
+                uiImport.IsEnabled = false;
+                uiClear.Content = "Ожидайте";
+
+                await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x2000, new ushort[] { 1 });
+
+                ushort[] zeros = new ushort[23];
+                int i = 0;
+                for (ushort j = 0; j < _runoJournalSize; j++)
+                {
+                    await RTUConnectionGlobal.SendDataByAddressAsync(1, (ushort)(0x2001 + i), zeros);
+                    i += 23;
+                }
+                ClearCompleted.Invoke();
+                ShowMessage("Очистка журнала завершена", "Выполнено", MessageBoxImage.Information);
             }
+            catch { }
+            finally
+            {
+                ClearCompleted.Invoke();
+                uiClear.IsEnabled = true;
+                uiImport.IsEnabled = true;
+                uiClear.Content = "Очистить";
 
-            uiClear.IsEnabled = true;
-            uiClear.Content = "Очистить";
-
-            ClearCompleted.Invoke();
+            }
 
         }
         private async void ClearPiconGSJournal()
         {
-            uiClear.IsEnabled = false;
-            uiClear.Content = "Ожидайте";
-            bool _easyClear = await GetPiconGSSignature();
-            if (_easyClear)
+            try
             {
-                try
+                uiClear.IsEnabled = false;
+                uiImport.IsEnabled = false;
+                uiClear.Content = "Ожидайте";
+                bool _easyClear = await GetPiconGSSignature();
+                if (_easyClear)
                 {
-                    await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x2000, new ushort[] { 0 });
-                    return;
+                    try
+                    {
+                        await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x2000, new ushort[] { 0 });
+                        return;
+                    }
+                    catch { }
                 }
-                catch { }
+                await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x2000, new ushort[] { 1 });
+                _runoJournalSize = 199;
+                ushort[] zeros = new ushort[23];
+                int i = 0;
+                for (ushort j = 0; j < _runoJournalSize; j++)
+                {
+                    await RTUConnectionGlobal.SendDataByAddressAsync(1, (ushort)(0x2001 + i), zeros);
+                    i += 23;
+                }
+                ClearCompleted.Invoke();
+                ShowMessage("Очистка журнала завершена", "Выполнено", MessageBoxImage.Information);
             }
-            await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x2000, new ushort[] { 1 });
-            _runoJournalSize = 199;
-            ushort[] zeros = new ushort[23];
-            int i = 0;
-            for (ushort j = 0; j < _runoJournalSize; j++)
+            catch { }
+            finally
             {
-                await RTUConnectionGlobal.SendDataByAddressAsync(1, (ushort)(0x2001 + i), zeros);
-                i += 23;
+                ClearCompleted.Invoke();
+                uiClear.IsEnabled = true;
+                uiImport.IsEnabled = true;
+                uiClear.Content = "Очистить";
             }
 
-            uiClear.IsEnabled = true;
-            uiClear.Content = "Очистить";
 
-            ClearCompleted.Invoke();
+
+
+
+
+
         }
 
         private void uiToggleJournalSize_Click(object sender, RoutedEventArgs e)
@@ -543,13 +575,11 @@ namespace UniconGS.UI.Journal
             if (DeviceSelection.SelectedDevice == (byte)DeviceSelectionEnum.DEVICE_RUNO)
                 _deviceName = "Runo";
 
-
             SaveFileDialog sfd = new SaveFileDialog();
-            //sfd.InitialDirectory = Directory.GetCurrentDirectory();
             sfd.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             sfd.RestoreDirectory = false;
             sfd.FileName = DateTime.Now.ToShortDateString() + " " + _deviceName;
-            if(sfd.ShowDialog().Value)
+            if (sfd.ShowDialog().Value)
             {
                 try
                 {
