@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using System.Linq;
 using NModbus4.Message;
 using NModbus4.Unme.Common;
 
@@ -17,7 +18,7 @@ namespace NModbus4.IO
         private int _retries = Modbus.DefaultRetries;
         private int _waitToRetryMilliseconds = Modbus.DefaultWaitToRetryMilliseconds;
         private IStreamResource _streamResource;
-     
+
         /// <summary>
         ///     This constructor is called by the NullTransport.
         /// </summary>
@@ -185,7 +186,7 @@ namespace NModbus4.IO
 
                         if (attempt++ > _retries)
                         {
-                             throw;
+                            throw;
                         }
                     }
                     else
@@ -199,7 +200,7 @@ namespace NModbus4.IO
             return (T)response;
         }
 
-        
+
 
         internal virtual IModbusMessage CreateResponse<T>(byte[] frame)
             where T : IModbusMessage, new()
@@ -211,6 +212,18 @@ namespace NModbus4.IO
             if (functionCode > Modbus.ExceptionOffset)
             {
                 response = ModbusMessageFactory.CreateModbusMessage<SlaveExceptionResponse>(frame);
+            }
+            else if (functionCode == Modbus.RetranslateFunction)
+            {
+                byte[] modbusRetranslatedFrame = new byte[frame.Length - 3];
+                int numBytes = 0;
+                if (frame[5] == 0)
+                    numBytes = 4;
+                else
+                    numBytes = frame[5];
+
+                    modbusRetranslatedFrame = frame.Skip(3).Take(numBytes + 3).ToArray();
+                response = ModbusMessageFactory.CreateModbusMessage<T>(modbusRetranslatedFrame);
             }
             else
             {

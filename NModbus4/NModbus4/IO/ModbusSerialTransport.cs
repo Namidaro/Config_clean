@@ -47,7 +47,7 @@ namespace NModbus4.IO
 
 
             // compare checksum
-            if (CheckFrame && !ChecksumsMatch(response, frame) && frame[1] != Modbus.Function12)
+            if (CheckFrame && !ChecksumsMatch(response, frame) && frame[1] != Modbus.Function12 && frame[1] != Modbus.RetranslateFunction)
             {
                 string msg = $"Checksums failed to match {string.Join(", ", response.MessageFrame)} != {string.Join(", ", frame)}";
                 Debug.WriteLine(msg);

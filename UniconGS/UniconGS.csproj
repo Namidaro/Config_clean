@@ -603,7 +603,7 @@
     <Compile Include="Source\CRC16.cs" />
     <Compile Include="Source\DataTransfer.cs" />
     <Compile Include="Source\IQuery.cs" />
-    <Compile Include="Source\Modbus.cs" />
+    <Compile Include="Source\ModbusFunction.cs" />
     <Compile Include="Source\Slot.cs" />
     <Compile Include="UI\DiscretModules\AllStates.xaml.cs">
       <DependentUpon>AllStates.xaml</DependentUpon>

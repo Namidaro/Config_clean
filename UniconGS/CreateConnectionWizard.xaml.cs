@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using UniconGS.Source;
 using UniconGS.Enums;
+using NModbus4;
 
 namespace UniconGS
 {
@@ -81,8 +82,9 @@ namespace UniconGS
                             MessageBoxImage.Error);
                         throw new ArgumentException();
                     }
-
-                    //  this.ResultDialog.KNNumber = int.Parse(this.uiKNNumber.Text);
+                    if (byte.Parse(this.uiKNNumber.Text) != 0)
+                        Modbus.KNNumber = byte.Parse(this.uiKNNumber.Text);
+                    //this.ResultDialog.KNNumber = int.Parse(this.uiKNNumber.Text);
                     DeviceConnected = 1;
                     ResultDialog.DeviceNumber = int.Parse(uiDeviceNumber.Text);
                     ResultDialog.PortSpeed =

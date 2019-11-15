@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace UniconGS.Source
 {
@@ -45,7 +46,7 @@ namespace UniconGS.Source
                         }
                         else
                         {
-                            byte[] query = Modbus.CreateReadWordsArray(_connector.KNNumber, _connector.DeviceNumber, slot.Start, slot.Size);
+                            byte[] query = ModbusFunction.CreateReadWordsArray(_connector.KNNumber, _connector.DeviceNumber, slot.Start, slot.Size);
                             querys.Add(query);
                             byte[] answer = _connector.ReadWrite(query);
                             if (answer[2] != /*5 +*/ slot.Size * 2)
@@ -99,6 +100,82 @@ namespace UniconGS.Source
             }
         }
 
+        public static async Task<ushort[]> ReadWords(ushort startAddress, ushort count, string name)
+        {
+            lock (typeof(DataTransfer))
+            {
+                ushort[] result = new ushort[count];
+                bool res = false;
+                List<byte[]> querys = new List<byte[]>();
+                List<byte[]> answers = new List<byte[]>();
+                List<ushort[]> values = new List<ushort[]>();
+
+                try
+                {
+                    if (_connector.Connect())
+                    {
+
+                        //if (count >= 120)
+                        //{
+                        //    PrepareListReadWords(ref querys, ref answers, slot);
+                        //}
+                        //else
+                        //{
+                            byte[] query = ModbusFunction.CreateReadWordsArray(_connector.KNNumber, _connector.DeviceNumber, startAddress, count);
+                            querys.Add(query);
+                            byte[] answer = _connector.ReadWrite(query);
+                            if (answer[2] != /*5 +*/ count * 2)
+                            {
+                                throw new Exception("Считано неверное количество байт");
+                            }
+                            answers.Add(answer);
+                        //}
+
+                        for (int i = 0; i < answers.Count; i++)
+                        {
+                            List<byte> mbVals = new List<byte>(answers[i][2]);
+                            mbVals = answers[i].ToList().Skip(3).Take(answers[i][2]).ToList();
+                            ushort[] value = new ushort[(mbVals.Count) / 2];
+                            for (int j = 0; j < mbVals.Count; j += 2)
+                            {
+                                value[(j) / 2] = Common.TOWORD(mbVals[j], mbVals[j + 1]);
+                            }
+                            values.Add(value);
+                        }
+
+                        //ushort[] result = new ushort[count];
+                        int lastByteIndex = 0;
+                        for (int i = 0; i < values.Count; i++)
+                        {
+                            Array.ConstrainedCopy(values[i], 0, result, lastByteIndex, values[i].Length);
+                            lastByteIndex += values[i].Length;
+                        }
+
+                        //slot.Value = result;
+                        //slot.Loaded = true;
+                        res = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //res = false;
+                    //if (slot != null)
+                    //{
+                    //    slot.Loaded = false;
+                    //}
+                }
+                finally
+                {
+                    //if (_connector.Disconnect() || !res)
+                    //{
+                    //    res = false;
+                    //}
+                }
+                //return res ? slot.Value : null;
+
+                return result;
+            }
+        }
         public static bool WriteWords(Slot slot)
         {
             lock (typeof(DataTransfer))
@@ -117,7 +194,7 @@ namespace UniconGS.Source
                         }
                         else
                         {
-                            byte[] query = Modbus.CreateWriteWordsArray(_connector.KNNumber, _connector.DeviceNumber,
+                            byte[] query = ModbusFunction.CreateWriteWordsArray(_connector.KNNumber, _connector.DeviceNumber,
                                 slot.Start, slot.Value);
                             querys.Add(query);
                             byte[] answer = _connector.ReadWrite(query);
@@ -157,7 +234,7 @@ namespace UniconGS.Source
                 {
                     if (_connector.Connect())
                     {
-                        byte[] query = Modbus.CreateWriteWordArray(_connector.KNNumber, _connector.DeviceNumber,
+                        byte[] query = ModbusFunction.CreateWriteWordArray(_connector.KNNumber, _connector.DeviceNumber,
                             slot.Start, slot.Value[0]);
                         byte[] answer = _connector.ReadWrite(query);
                         //if (answer[2] != 4)
@@ -206,7 +283,7 @@ namespace UniconGS.Source
                 {
                     if (temp == 0)
                     {
-                        byte[] query = Modbus.CreateReadWordsArray(_connector.KNNumber, _connector.DeviceNumber,
+                        byte[] query = ModbusFunction.CreateReadWordsArray(_connector.KNNumber, _connector.DeviceNumber,
                             addressTmp, oneSlotSize);
                         querys.Add(query);
                         addressTmp += oneSlotSize;
@@ -215,21 +292,21 @@ namespace UniconGS.Source
                     {
                         if (i == queryCount + temp - 2)
                         {
-                            byte[] query = Modbus.CreateReadWordsArray(_connector.KNNumber, _connector.DeviceNumber,
+                            byte[] query = ModbusFunction.CreateReadWordsArray(_connector.KNNumber, _connector.DeviceNumber,
                                 addressTmp, oneSlotSize);
                             querys.Add(query);
                             addressTmp += oneSlotSize;
                         }
                         else if (i == queryCount + temp - 1)
                         {
-                            byte[] query = Modbus.CreateReadWordsArray(_connector.KNNumber, _connector.DeviceNumber,
+                            byte[] query = ModbusFunction.CreateReadWordsArray(_connector.KNNumber, _connector.DeviceNumber,
                                 addressTmp, lastQuerySize);
                             querys.Add(query);
                             addressTmp += oneSlotSize;
                         }
                         else
                         {
-                            byte[] query = Modbus.CreateReadWordsArray(_connector.KNNumber, _connector.DeviceNumber,
+                            byte[] query = ModbusFunction.CreateReadWordsArray(_connector.KNNumber, _connector.DeviceNumber,
                                 addressTmp, oneSlotSize);
                             querys.Add(query);
                             addressTmp += oneSlotSize;
@@ -316,21 +393,21 @@ namespace UniconGS.Source
                 {
                     if (i == queryCount + temp - 2 && temp == 1)
                     {
-                        byte[] query = Modbus.CreateWriteWordsArray(_connector.KNNumber, _connector.DeviceNumber,
+                        byte[] query = ModbusFunction.CreateWriteWordsArray(_connector.KNNumber, _connector.DeviceNumber,
                             addressTmp, values[i]);
                         querys.Add(query);
                         addressTmp += oneSlotSize;
                     }
                     else if (i == queryCount + temp - 1 && temp == 1)
                     {
-                        byte[] query = Modbus.CreateWriteWordsArray(_connector.KNNumber, _connector.DeviceNumber,
+                        byte[] query = ModbusFunction.CreateWriteWordsArray(_connector.KNNumber, _connector.DeviceNumber,
                             addressTmp, values[i]);
                         querys.Add(query);
                         addressTmp += oneSlotSize;
                     }
                     else
                     {
-                        byte[] query = Modbus.CreateWriteWordsArray(_connector.KNNumber, _connector.DeviceNumber,
+                        byte[] query = ModbusFunction.CreateWriteWordsArray(_connector.KNNumber, _connector.DeviceNumber,
                             addressTmp, values[i]);
                         querys.Add(query);
                         addressTmp += oneSlotSize;
@@ -375,7 +452,7 @@ namespace UniconGS.Source
             {
                 if (_connector.Connect())
                 {
-                    var queryKn = Modbus.CreateWriteBitArray(_connector.KNNumber, _connector.DeviceNumber, addrbit, value);
+                    var queryKn = ModbusFunction.CreateWriteBitArray(_connector.KNNumber, _connector.DeviceNumber, addrbit, value);
                     var answerKn = _connector.ReadWrite(queryKn);
 
                     var query = queryKn.Skip(2).Take(8).ToArray();

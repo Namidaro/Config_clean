@@ -167,11 +167,6 @@ namespace UniconGS
                            "Чтение настроек", MessageBoxImage.Information);
 
                 }
-                //this.ShowMessage("Чтение настроек из устройства прошло успешно." + Environment.NewLine + "Чтение конфигурации прошло успешно." + Environment.NewLine +
-                //    "Чтение графика освещения прошло успешно." + Environment.NewLine + "Чтение графика подсветки прошло успешно." + Environment.NewLine + "Чтение графика иллюминации прошло успешно."
-                //    + Environment.NewLine + "Чтение графика энергосбережения прошло успешно." + Environment.NewLine + "Чтение графика обогрева прошло успешно.",
-
-                //           "Чтение настроек", MessageBoxImage.Information);
                 this.uiSettings.uiOpenSettings.IsEnabled = true;
                 this.uiSettings.uiSaveSettings.IsEnabled = true;
             };
@@ -276,10 +271,10 @@ namespace UniconGS
             try
             {
 
-                if (_semaphoreSlim.CurrentCount == 0)
-                {
-                    return;
-                }
+                //if (_semaphoreSlim.CurrentCount == 0)
+                //{
+                //    return;
+                //}
                 
                 //await _semaphoreSlim.WaitAsync();
                 var isDiagTabSelected = false;
@@ -290,7 +285,7 @@ namespace UniconGS
                 });
                 if (isDiagTabSelected)
                 {
-                    await _semaphoreSlim.WaitAsync();
+                    //await _semaphoreSlim.WaitAsync();
                     await uiTime.Update();
                     if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
                     {
@@ -563,7 +558,6 @@ namespace UniconGS
                 catch (SocketException ex)
 
                 {
-                    //MessageBoxResult res = MessageBox.Show("Не удалось подключиться по GSM-каналу", "Ошибка");
                     MessageBoxResult res = MessageBox.Show(ex.Message + Environment.NewLine +
                                                             "Ошибка сокета: " + ex.SocketErrorCode.ToString() + Environment.NewLine +
                                                             "Код ошибки: " + ex.ErrorCode.ToString(), "Ошибка");
@@ -575,14 +569,16 @@ namespace UniconGS
 
         }
 
+
         private void uiConnectBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            NModbus4.Modbus.KNNumber = 0;
             CreateConnectionWizard.Result result = null;
             CreateConnectionWizard ccw = new CreateConnectionWizard();
             ccw.Owner = this;
             if (Convert.ToBoolean(ccw.ShowDialog()))
             {
+                int timerDelay;
                 result = ccw.ResultDialog;
 
                 IStreamResource streamResource = Connector.GetSerialPortAdapter(result.PortName, result.DeviceNumber, result.PortSpeed, result.Timeout);
@@ -594,12 +590,17 @@ namespace UniconGS
                 // DataTransfer.InitConnector(new Connector(result.PortName, result.KNNumber, result.DeviceNumber,
                 //    result.PortSpeed, result.Timeout));
                 //todo: test timer trigger
+                this.Title = this.Title + " " + result.PortName;
                 try
                 {
+                    if (NModbus4.Modbus.KNNumber != 0)
+                        timerDelay = 10000;
+                    else
+                        timerDelay = 500;
                     _uiUpdateTimer = new Timer((obj) =>
                     {
                         UiUpdateTimerTriggered();
-                    }, null, 500, 500);
+                    }, null, timerDelay, timerDelay);
                 }
                 catch (Exception ex)
                 {
@@ -1351,6 +1352,6 @@ namespace UniconGS
 
         }
 
-
+       
     }
 }

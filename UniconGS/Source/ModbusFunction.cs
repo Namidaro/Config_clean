@@ -5,7 +5,7 @@ namespace UniconGS.Source
     /// <summary>
     /// Класс для создания modbus-запросов
     /// </summary>
-    public static class Modbus
+    public static class ModbusFunction
     {
         #region Реализованные 16,6,3,4,5 функции
         /// <summary>

@@ -105,8 +105,8 @@
                                 TextWrapping="Wrap" />
                         </StackPanel>
                         <StackPanel Margin="5">
-                            <!--<Label Content="Номер КН"/>
-                            <TextBox x:Name="uiKNNumber" Text="0" TextWrapping="Wrap"/>-->
+                            <Label Content="Номер КН"/>
+                            <TextBox x:Name="uiKNNumber" Text="0" TextWrapping="Wrap"/>
                             <Label Content="Ожидание чтения, мс"/>
                             <TextBox
                                 x:Name="uiReadTimeout"

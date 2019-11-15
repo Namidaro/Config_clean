@@ -3,7 +3,7 @@
     /// <summary>
     ///     Defines constants related to the Modbus protocol.
     /// </summary>
-    internal static class Modbus
+    public static class Modbus
     {
         // supported function codes
         public const byte ReadCoils = 1;
@@ -17,7 +17,9 @@
         public const byte WriteMultipleCoils = 15;
         public const byte WriteMultipleRegisters = 16;
         public const byte ReadWriteMultipleRegisters = 23;
+        public const byte RetranslateFunction = 17;
         public const byte Function12 = 18;
+        public static byte KNNumber = 0;
 
         public const int MaximumDiscreteRequestResponseSize = 2040;
         public const int MaximumRegisterRequestResponseSize = 127;

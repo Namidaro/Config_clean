@@ -324,6 +324,7 @@ namespace UniconGS.UI.Time
                 else
                 {
                     await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x1000, timeUshorts);
+                    //await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x2200, timeUshorts);
                 }
 
 

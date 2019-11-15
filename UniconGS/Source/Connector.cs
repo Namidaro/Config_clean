@@ -34,7 +34,7 @@ namespace UniconGS.Source
         public Connector(string portName,int knNumber, int deviceNumber, int portSpeed, int timeOut)
         {
             _port = new SerialPort(portName, portSpeed, Parity.None, 8);
-            _knNumber = 0; /*knNumber;*/
+            _knNumber = knNumber; /*knNumber;*/
             _deviceNumber = deviceNumber;
             _port.ReadTimeout = timeOut;
             _port.WriteTimeout = timeOut;

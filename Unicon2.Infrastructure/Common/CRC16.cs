@@ -43,7 +43,7 @@ namespace Unicon2.Infrastructure.Common
             }
             return (ushort)(uchCRCHi << 8 | uchCRCLo);
         }
-
+        
 
         static readonly byte[] auchCRCLo =
         {

@@ -14,7 +14,8 @@ namespace NModbus4.IO
     {
         public const int RequestFrameStartLength = 7;
 
-        public const int ResponseFrameStartLength = 4;
+        public const int ResponseFrameStartLengthShort = 4;
+        public const int ResponseFrameStartLengthLong = 6;
 
         internal ModbusRtuTransport(IStreamResource streamResource)
             : base(streamResource)
@@ -81,6 +82,21 @@ namespace NModbus4.IO
                 case Modbus.Function12:
                     numBytes = frameStart[2];
                     break;
+                case Modbus.RetranslateFunction:
+                    switch(frameStart[4])
+                    {
+                        case Modbus.WriteSingleCoil:
+                        case Modbus.WriteSingleRegister:
+                        case Modbus.WriteMultipleCoils:
+                        case Modbus.WriteMultipleRegisters:
+                        case Modbus.Diagnostics:
+                            numBytes = 7;
+                            break;
+                        default:
+                            numBytes = frameStart[5];
+                            break;
+                    }
+                    break;
 
                 default:
                     string msg = $"Function code {functionCode} not supported.";
@@ -108,12 +124,26 @@ namespace NModbus4.IO
         {
             var messageFrame = message.MessageFrame;
             var crc = ModbusUtility.CalculateCrc(messageFrame);
-            var messageBody = new MemoryStream(messageFrame.Length + crc.Length);
 
-            messageBody.Write(messageFrame, 0, messageFrame.Length);
-            messageBody.Write(crc, 0, crc.Length);
+            if (Modbus.KNNumber != 0)
+            {
+                var messageBody = new MemoryStream(messageFrame.Length + crc.Length + 4);
+                messageBody.Write(new byte[] { Modbus.KNNumber }, 0, 1);
+                messageBody.Write(new byte[] { 17 }, 0, 1);
+                messageBody.Write(messageFrame, 0, messageFrame.Length);
+                messageBody.Write(crc, 0, crc.Length);
+                var crc2 = ModbusUtility.CalculateCrc(messageBody.ToArray());
+                messageBody.Write(crc2, 0, crc2.Length);
+                return messageBody.ToArray();
+            }
+            else
+            {
+                var messageBody = new MemoryStream(messageFrame.Length + crc.Length);
+                messageBody.Write(messageFrame, 0, messageFrame.Length);
+                messageBody.Write(crc, 0, crc.Length);
+                return messageBody.ToArray();
+            }
 
-            return messageBody.ToArray();
         }
 
         internal override bool ChecksumsMatch(IModbusMessage message, byte[] messageFrame)
@@ -124,7 +154,15 @@ namespace NModbus4.IO
 
         internal override IModbusMessage ReadResponse<T>()
         {
-            byte[] frameStart = Read(ResponseFrameStartLength);
+            byte[] frameStart;
+            if (Modbus.KNNumber != 0)
+            {
+                frameStart = Read(ResponseFrameStartLengthLong);
+            }
+            else
+            {
+                frameStart = Read(ResponseFrameStartLengthShort);
+            }
             byte[] frameEnd = Read(ResponseBytesToRead(frameStart));
             byte[] frame = Enumerable.Concat(frameStart, frameEnd).ToArray();
             Debug.WriteLine($"RX: {string.Join(", ", frame)}");
