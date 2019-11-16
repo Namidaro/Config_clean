@@ -32,20 +32,20 @@ namespace UniconGS.UI.Picon2.ViewModel
         private const int RUNO_VERSION_LENGHT = 10;
 
         private const string NO = "Нет";
-        private const string SHEDULE1 = "Гр. 1";
-        private const string SHEDULE1EK1 = "Гр. 1 + Ек. 1";
-        private const string SHEDULE1EK2 = "Гр. 1 + Ек. 2";
-        private const string SHEDULE1EK3 = "Гр. 1 + Ек. 3";
-        private const string SHEDULE2 = "Гр. 2";
-        private const string SHEDULE2EK1 = "Гр. 2 + Ек. 1";
-        private const string SHEDULE2EK2 = "Гр. 2 + Ек. 2";
-        private const string SHEDULE2EK3 = "Гр. 2 + Ек. 3";
+        private const string SHEDULE1 = "График 1";
+        private const string SHEDULE1EK1 = "График 1 + Экономия 1";
+        private const string SHEDULE1EK2 = "График 1 + Экономия 2";
+        private const string SHEDULE1EK3 = "График 1 + Экономия 3";
+        private const string SHEDULE2 = "График 2";
+        private const string SHEDULE2EK1 = "График 2 + Экономия 1";
+        private const string SHEDULE2EK2 = "График 2 + Экономия 2";
+        private const string SHEDULE2EK3 = "График 2 + Экономия 3";
 
-        private const string SHEDULE3 = "Гр. 3";
-        private const string SHEDULE3EK1 = "Гр. 3 + Ек. 1";
-        private const string SHEDULE3EK2 = "Гр. 3 + Ек. 2";
-        private const string SHEDULE3EK3 = "Гр. 3 + Ек. 3";
-        private const string SHEDULE4 = "Гр. 4";
+        private const string SHEDULE3 = "График 3";
+        private const string SHEDULE3EK1 = "График 3 + Экономия 1";
+        private const string SHEDULE3EK2 = "График 3 + Экономия 2";
+        private const string SHEDULE3EK3 = "График 3 + Экономия 3";
+        private const string SHEDULE4 = "График 4";
 
 
 
@@ -154,6 +154,7 @@ namespace UniconGS.UI.Picon2.ViewModel
         private ICommand _sendConfiguration;
         private ICommand _getConfiguration;
         private ICommand _getConfigurationFromFileCommand;
+        private ICommand _verifyConfigCommand;
         private ICommand _saveConfigurationInFileCommand;
         private ICommand _backToSchemeCommand;
         private ObservableCollection<PICON2ConfigCheckBoxControlViewModel> _faultCanals;
@@ -794,6 +795,15 @@ namespace UniconGS.UI.Picon2.ViewModel
             }
         }
 
+        public ICommand VerifyConfigCommand
+        {
+            get
+            {
+                return this._verifyConfigCommand ??
+                    (this._verifyConfigCommand = new DelegateCommand(
+                        OnVerifyConfigCommand));
+            }
+        }
 
 
         #endregion [IRunoConfigurationModeViewModel]
@@ -868,6 +878,42 @@ namespace UniconGS.UI.Picon2.ViewModel
         private const string DECLARATION_VERSION = "1.0";
         private const string DECLARATION_ENCODING = "utf-8";
 
+        private async void OnVerifyConfigCommand()
+        {
+            try
+            {
+                byte[] _bytesFromDevice = await this.ReadConfigurationDataFromDevice();
+                OnGetConfigurationFromFileCommand();
+                byte[] _bytesFromFile = CreateDataPackage();
+
+
+                if (Verify(_bytesFromDevice, _bytesFromFile))
+                    MessageBox.Show("Верификация прошла успешна", "Успех");
+                else MessageBox.Show("Верификация не успешна", "Ошибка");
+
+            }
+            catch { }
+        }
+
+        private bool Verify(byte[] _fromFile, byte[] _fromDevice)
+        {
+            bool result = false;
+            if (_fromFile.Count() == _fromDevice.Count())
+            {
+                for (int i = 0; i < _fromDevice.Count(); i++)
+                {
+                    if (_fromFile[i] == _fromDevice[i])
+                        result = true;
+                    else
+                    {
+                        result = false;
+                        break;
+                    }
+                }
+            }
+            return result;
+
+        }
         private void OnSaveConfigurationInFileCommand()
         {
             var fileDialog = new System.Windows.Forms.SaveFileDialog()
@@ -1398,8 +1444,6 @@ namespace UniconGS.UI.Picon2.ViewModel
             }
         }
 
-
-
         /// <summary>
         ///     Создает пакет данных из выбранных позиций на вьюке
         ///     сделал пабликом для общего файла
@@ -1423,7 +1467,6 @@ namespace UniconGS.UI.Picon2.ViewModel
             {
                 InitailizeDataFromMaskUnit(FaultCanals[i], 0x3040 + i * 8 / 2, result);
             }
-
 
             InitializeDataFromShedules(result);
 
@@ -1515,6 +1558,7 @@ namespace UniconGS.UI.Picon2.ViewModel
             }
 
         }
+
 
         #endregion [Help Members]
 

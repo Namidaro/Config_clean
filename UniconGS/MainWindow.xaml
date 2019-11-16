@@ -483,7 +483,7 @@
                                     Grid.RowSpan="2"
                                     Grid.ColumnSpan="2"
                                     Margin="0,20,0,0"
-                                    Header="Индексация состояния">
+                                    Header="Индикация состояния">
                                     <Grid Margin="0,5,0,0">
                                         <ScrollViewer Margin="0">
                                             <discretModules:AllStates x:Name="uiStates" Height="Auto" />

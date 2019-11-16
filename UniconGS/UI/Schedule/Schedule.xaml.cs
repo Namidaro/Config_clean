@@ -327,28 +327,10 @@ namespace UniconGS.UI.Schedule
 
         private void ImportComplete(ushort[] value)
         {
-            //    if (value != null)
-            //    {
-            //if (value.First() == 0xFF)
-            //{
-            //    this.ShowMessage("График пуст",
-            //           "Чтение графика", MessageBoxImage.Information);
-            //}
-            //else
-            //{
+
             this._value = GraphicValue.SetValue(this.InitializeGraphic(), value);
             this.UpdateBinding();
 
-            //}
-            //}
-            //else
-            //{
-            //    if (this.ShowMessage != null)
-            //    {
-            //        this.ShowMessage("Во время чтения графика из устройства произошла ошибка.",
-            //            "Чтение графика", MessageBoxImage.Error);
-            //    }
-            //}
             uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
         }
         public async void uiExport_Click(object sender, RoutedEventArgs e)
@@ -555,45 +537,34 @@ namespace UniconGS.UI.Schedule
             return this._value.GetValue();
         }
 
-        private void UpdateBinding()
+        private void UpdateBinding(bool _isCleared = false)
         {
             if (this.uiDayter != null && this.PART_TURNOFFDATE != null &&
                 this.PART_TURNONDATE != null && this.PART_TURNOFFTIME != null &&
                 this.PART_TURNONTIME != null && this.uiSaving != null &&
                 this._value != null && this.uiMonther.SelectedIndex != -1)
             {
-                //if (this.StartWork != null)
-                //try
-                //{
-                //    StartWork();
-                //}
-                //catch(Exception ex)
-
-                //{
-                //    throw;
-                //}
-
-
 
                 this.uiDayter.DataContext = this._value.Month[this.uiMonther.SelectedIndex].Days.Where((w) =>
                 { return w.isVisible; }).Select((s) => { return s; }).ToList();
-                this.PART_TURNOFFDATE.DataContext = this._value.YearSaving;
-                this.PART_TURNONDATE.DataContext = this._value.YearSaving;
-                /*Заглушка на экономию*/
-                this.PART_TURNOFFTIME.DataContext = this._value.MonthSaving.TurnOffTime;
-                this.PART_TURNONTIME.DataContext = this._value.MonthSaving.TurnOnTime;
+                if (_isCleared)
+                {
+                    this.PART_TURNOFFDATE.DataContext = null;
+                    this.PART_TURNONDATE.DataContext = null;
+                    /*Заглушка на экономию*/
+                    this.PART_TURNOFFTIME.DataContext = null;
+                    this.PART_TURNONTIME.DataContext = null;
+                }
+                else
+                {
+                    this.PART_TURNOFFDATE.DataContext = this._value.YearSaving;
+                    this.PART_TURNONDATE.DataContext = this._value.YearSaving;
+                    /*Заглушка на экономию*/
+                    this.PART_TURNOFFTIME.DataContext = this._value.MonthSaving.TurnOffTime;
+                    this.PART_TURNONTIME.DataContext = this._value.MonthSaving.TurnOnTime;
 
-                this.uiSaving.DataContext = this._value;
-
-
-
-                //this.uiLatitude.DataContext = this.Latitude;
-                //this.uiLongitude.DataContext = this.Longitude;
-                //this.uiCityList.DataContext = this.CityList;
-                //this.uiCityList.SelectedValue = this.SelectedCity;
-                //this.uiCalculateButton.DataContext = this.CalculateScheduleCommand;
-                //if (this.StopWork != null)
-                //    this.StopWork();
+                    this.uiSaving.DataContext = this._value;
+                }
             }
         }
         #endregion
@@ -664,7 +635,7 @@ namespace UniconGS.UI.Schedule
 
 
                     await ReadScheduleData(baseAddr);
-                    UpdateBinding();
+                    UpdateBinding(true);
                     await UpdateState();
                     ExportComplete(true);
                 }
@@ -740,6 +711,48 @@ namespace UniconGS.UI.Schedule
             Longitude = cc.Longitude;
             uiLatitude.Text = cc.Latitude.ToString();
             uiLongitude.Text = cc.Longitude.ToString();
+        }
+
+        private void uiVerifySchedule_Click(object sender, RoutedEventArgs e)
+        {
+            VerifyScheduleWithFile();
+        }
+
+        private async void VerifyScheduleWithFile()
+        {
+            try
+            {
+                await this.UpdateState();
+                if (this.OpenFromFile != null)
+                {
+                    var result = this.OpenFromFile(typeof(GraphicValue));
+                    if (Verify((result as GraphicValue).GetValue(), GetGraphicValue()))
+                        ShowMessage("Верификация прошла успешна", "Успех", MessageBoxImage.Information);
+                    else ShowMessage("Верификация не успешна", "Ошибка", MessageBoxImage.Error);
+
+                }
+            }
+            catch { }
+        }
+
+        private bool Verify(ushort[] _fromFile, ushort[] _fromDevice)
+        {
+            bool result = false;
+            if (_fromFile.Count() == _fromDevice.Count())
+            {
+                for (int i = 0; i < _fromDevice.Count(); i++)
+                {
+                    if (_fromFile[i] == _fromDevice[i])
+                        result = true;
+                    else
+                    {
+                        result = false;
+                        break;
+                    }
+                }
+            }
+            return result;
+
         }
     }
 }

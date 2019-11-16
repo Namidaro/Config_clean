@@ -23,7 +23,7 @@ namespace UniconGS.UI.MRNetworking.ViewModel
         public ModbusMemorySettingsViewModel()
         {
             NumberOfPointsCollection = new ObservableCollection<int>() { 8, 12, 16, 32 };
-            NumberOfPoints = NumberOfPointsCollection[1];
+            NumberOfPoints = NumberOfPointsCollection[2];
             AddressStepDownCommand = new DelegateCommand(OnAddressStepDownExecute);
             AddressStepUpCommand = new DelegateCommand(OnAddressStepUpExecute);
             _modbusMemorySettings=new ModbusMemorySettings();

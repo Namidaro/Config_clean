@@ -590,7 +590,7 @@ namespace UniconGS
                 // DataTransfer.InitConnector(new Connector(result.PortName, result.KNNumber, result.DeviceNumber,
                 //    result.PortSpeed, result.Timeout));
                 //todo: test timer trigger
-                this.Title = this.Title + " " + result.PortName;
+                this.Title = this.Title + " [" + result.PortName + "]";
                 try
                 {
                     if (NModbus4.Modbus.KNNumber != 0)

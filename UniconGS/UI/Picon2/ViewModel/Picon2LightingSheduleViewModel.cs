@@ -64,6 +64,7 @@ namespace UniconGS.UI.Picon2.ViewModel
         private string _deviceName;
         private ICommand _sendLightingShedule;
         private ICommand _backToSchemeCommand;
+        private ICommand _verifySchedule;
         private ICommand _getLightingSheduleCommand;
         private ICommand _navigateToLightingShedule;
         private ICommand _navigateToBackLightShedule;
@@ -457,6 +458,16 @@ namespace UniconGS.UI.Picon2.ViewModel
             }
         }
 
+        public ICommand VerifySchedule
+        {
+
+            get
+            {
+                return this._verifySchedule ??
+                       (this._verifySchedule = new DelegateCommand(OnVerifySchedule));
+            }
+        }
+
         #endregion
 
         #region [INavigationAware]
@@ -587,6 +598,38 @@ namespace UniconGS.UI.Picon2.ViewModel
         public async Task ReadAllSchedules()
         {
             OnGetLightningSchedule();
+        }
+
+        private void OnVerifySchedule()
+        {
+            OnGetScheduleFromFileCommand();
+            byte[] _bytesFromFile = GetCachedSchedule(Title);
+            OnGetLightningSchedule();
+            byte[] _bytesFromDevice = GetCachedSchedule(Title);
+
+            if (Verify(_bytesFromDevice, _bytesFromFile))
+                MessageBox.Show("Верификация прошла успешна", "Успех");
+            else MessageBox.Show("Верификация не успешна", "Ошибка");
+        }
+
+        private bool Verify(byte[] _fromFile, byte[] _fromDevice)
+        {
+            bool result = false;
+            if (_fromFile.Count() == _fromDevice.Count())
+            {
+                for (int i = 0; i < _fromDevice.Count(); i++)
+                {
+                    if (_fromFile[i] == _fromDevice[i])
+                        result = true;
+                    else
+                    {
+                        result = false;
+                        break;
+                    }
+                }
+            }
+            return result;
+
         }
 
         private async void OnGetLightningSchedule()

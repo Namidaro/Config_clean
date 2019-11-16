@@ -807,6 +807,13 @@
                         SelectionChanged="_cbManagemnt_SelectionChanged" Height="25" />
                 </Grid>
             </GroupBox>
+            <Button
+                Grid.Row="1"
+                    Width="Auto"
+                    Margin="2"
+                    HorizontalAlignment="Left"
+                    Command="{Binding VerifyConfigCommand}"
+                    Content="Верифицировать" />
             <UniformGrid
                 Grid.Row="1"
                 Margin="2"

@@ -8,6 +8,7 @@ using UniconGS.Annotations;
 using UniconGS.Interfaces;
 using UniconGS.Source;
 using UniconGS.Enums;
+using System.Linq;
 
 namespace UniconGS.UI.Configuration
 {
@@ -716,5 +717,46 @@ namespace UniconGS.UI.Configuration
             }
         }
 
+        private void uiVerifyConfig_Click(object sender, RoutedEventArgs e)
+        {
+            VerifyConfigWithFile();
+        }
+
+        private async void VerifyConfigWithFile()
+        {
+            try
+            {
+                await this.UpdateState();
+                if (this.OpenFromFile != null)
+                {
+                    var result = this.OpenFromFile(typeof(ChannelManagment));
+                    if (Verify((result as ChannelManagment).GetValue(), this._value.GetValue()))
+                        ShowMessage("Верификация прошла успешна", "Успех", MessageBoxImage.Information);
+                    else ShowMessage("Верификация не успешна", "Ошибка", MessageBoxImage.Error);
+
+                }
+            }
+            catch { }
+        }
+
+        private bool Verify(ushort[] _fromFile, ushort[] _fromDevice)
+        {
+            bool result = false;
+            if (_fromFile.Count() == _fromDevice.Count())
+            {
+                for (int i = 0; i < _fromDevice.Count(); i++)
+                {
+                    if (_fromFile[i] == _fromDevice[i])
+                        result = true;
+                    else
+                    {
+                        result = false;
+                        break;
+                    }
+                }
+            }
+            return result;
+
+        }
     }
 }

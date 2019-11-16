@@ -388,6 +388,14 @@
                 </ItemsControl>
             </GroupBox>
         </ScrollViewer>
+        <Button
+               Margin="3"
+                Command="{Binding VerifySchedule}"
+                IsEnabled="{Binding IsAutonomus, Converter={StaticResource BooleanReverceConverter}}"
+                Content="Верифицировать"
+            HorizontalAlignment="Left"
+            Grid.Row="3"
+            Grid.Column="1"/>
         <UniformGrid
             Grid.Row="3"
             Grid.Column="1"

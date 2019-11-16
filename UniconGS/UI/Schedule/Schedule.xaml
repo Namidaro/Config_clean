@@ -810,5 +810,6 @@
         <Button x:Name="uiSave" HorizontalAlignment="Right" Margin="0,0,169,0" VerticalAlignment="Top" Width="75" Content="Сохранить" Grid.Row="4" Grid.Column="1" d:LayoutOverrides="GridBox" Click="uiSave_Click"/>
         <Button x:Name="uiOpen" HorizontalAlignment="Right" Margin="0,0,250,0" VerticalAlignment="Top" Width="75" Content="Открыть" Grid.Row="4" Grid.Column="1" d:LayoutOverrides="GridBox" Click="uiOpen_Click"/>
         <Button x:Name ="uiClearAll" HorizontalAlignment="Right" Margin="0,0,331,0" VerticalAlignment="Top" Width="100" Content="Очистить график" Grid.Row="4" Grid.Column="1" d:LayoutOverrides="GridBox" Click="uiClearAll_Click" />
+        <Button x:Name="uiVerifySchedule" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="100" Content="Верифицировать" Grid.Row="4" Grid.Column="1" d:LayoutOverrides="GridBox" Click="uiVerifySchedule_Click"/>
     </Grid>
 </UserControl>

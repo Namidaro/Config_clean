@@ -437,6 +437,15 @@
                 </ScrollViewer>
             </Grid>
         </GroupBox>
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+                x:Name="uiVerifyConfig"
+                Width="100"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                Click="uiVerifyConfig_Click"
+                Content="Верифицировать" />
         <StackPanel
             Grid.Row="2"
             Grid.Column="1"
