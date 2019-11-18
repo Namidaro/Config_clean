@@ -14,6 +14,7 @@ using UniconGS.UI.Picon2;
 using System.Text;
 using System.IO;
 using Microsoft.Win32;
+using System.Threading;
 
 namespace UniconGS.UI.Journal
 {
@@ -51,6 +52,9 @@ namespace UniconGS.UI.Journal
         private ObservableCollection<Picon2JournalEventRecord> _picon2EventsCollection = new ObservableCollection<Picon2JournalEventRecord>();
 
         private int _runoJournalSize;
+
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private CancellationToken _token;
 
         #endregion
 
@@ -93,6 +97,9 @@ namespace UniconGS.UI.Journal
         public SystemJournal()
         {
             InitializeComponent();
+            _token = this._cancellationTokenSource.Token;
+            uiCancelImport.IsEnabled = false;
+
             if (DeviceSelection.SelectedDevice == (byte)DeviceSelectionEnum.DEVICE_PICON2)
             {
                 uiJournal.Visibility = Visibility.Collapsed;
@@ -121,18 +128,29 @@ namespace UniconGS.UI.Journal
 
         private void uiImport_Click(object sender, RoutedEventArgs e)
         {
-            ImportJournal();
+            ImportJournal(_token);
         }
 
-        private async void ImportJournal()
+        private void CancelImport()
         {
+            _cancellationTokenSource.Cancel();
+            ShowMessage("Чтение журнала прервано.", "Внимание", MessageBoxImage.Information);
+            _cancellationTokenSource = new CancellationTokenSource();
+            _token = _cancellationTokenSource.Token;
+            uiCancelImport.IsEnabled = false;
+        }
+
+        private async Task ImportJournal(CancellationToken token)
+        {
+            uiCancelImport.IsEnabled = true;
+
             if (DeviceSelection.SelectedDevice != (int)DeviceSelectionEnum.DEVICE_PICON2)
             {
                 try
                 {
                     uiImport.IsEnabled = false;
                     uiClear.IsEnabled = false;
-                    var valFromDevice = await ReadJournalValue();
+                    var valFromDevice = await ReadJournalValue(token);
                     SetJournalValue(valFromDevice);
                     this.ShowMessage("Чтение журнала системы завершено", "Чтение журнала системы",
                             MessageBoxImage.Information);
@@ -150,13 +168,13 @@ namespace UniconGS.UI.Journal
             else
             {
 
-                await ReadJournalPicon2();
+                await ReadJournalPicon2(token);
             }
         }
 
         #region Privtaes
 
-        public async Task ReadJournalPicon2()
+        public async Task ReadJournalPicon2(CancellationToken token)
         {
             Picon2EventsCollection.Clear();
             ushort[] Picon2JournalReportCountUshort = new ushort[1];
@@ -166,13 +184,17 @@ namespace UniconGS.UI.Journal
 
             for (int i = 0; i < Picon2JournalReportCountLOByte; i++)
             {
+                if (token.IsCancellationRequested)
+                {
+                    return;
+                }
                 this.Picon2EventsCollection.Add(new Picon2JournalEventRecord((await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x4300 + i), 8))));
             }
             //todo: попробовать подогнать записи журнала под одни правила для всех устройств(не получится скорее всего)
         }
 
 
-        public async Task<ushort[]> ReadJournalValue()
+        public async Task<ushort[]> ReadJournalValue(CancellationToken token)
         {
             if (DeviceSelection.SelectedDevice == (byte)DeviceSelectionEnum.DEVICE_RUNO)
             {
@@ -180,6 +202,11 @@ namespace UniconGS.UI.Journal
                 List<ushort> ushorts = new List<ushort>();
                 for (ushort j = 0; j < _runoJournalSize; j++)
                 {
+                    if (token.IsCancellationRequested)
+                    {
+                        return ushorts.ToArray();
+                    }
+
                     ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
                     SetJournalValue(ushorts.ToArray());
                     i += 23;
@@ -195,6 +222,10 @@ namespace UniconGS.UI.Journal
                 List<ushort> ushorts = new List<ushort>();
                 for (ushort j = 0; j < _runoJournalSize; j++)
                 {
+                    if (token.IsCancellationRequested)
+                    {
+                        return ushorts.ToArray();
+                    }
                     ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
                     SetJournalValue(ushorts.ToArray());
                     i += 23;
@@ -350,7 +381,7 @@ namespace UniconGS.UI.Journal
 
                     });
 
-                    this.ReadJournalValue();
+                    this.ReadJournalValue(_token);
                 }
                 catch (Exception ex)
                 {
@@ -615,6 +646,11 @@ namespace UniconGS.UI.Journal
                     ShowMessage("Журнал сохранен.", "", MessageBoxImage.Information);
                 }
             }
+        }
+
+        private void uiCancelImport_Click(object sender, RoutedEventArgs e)
+        {
+            CancelImport();
         }
     }
 

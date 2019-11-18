@@ -180,9 +180,10 @@ namespace UniconGS
                 await this.uiHeatingSchedule.WriteAll();
                 this.ShowMessage("Запись настроек в устройство прошла успешно" + Environment.NewLine + "Запись конфигурации прошла успешно." + Environment.NewLine +
                  "Запись графика освещения прошла успешно." + Environment.NewLine + "Запись графика подстветки прошла успешно." + Environment.NewLine + "Запись графика иллюминации прошла успешно."
-                 + Environment.NewLine + "Запись графика энергосбережения прошла успешно." + Environment.NewLine + "Запись графика обогрева прошла успешно.",
+                 + Environment.NewLine + "Запись графика энергосбережения прошла успешно." + Environment.NewLine + "Запись графика обогрева прошла успешно." + Environment.NewLine + "Запись точки доступа прошла успешно.",
 
                         "Запись настроек", MessageBoxImage.Information);
+
             };
             this.uiLogicConfig.ShowMessage += new LogicConfig.ShowMessageEventHandler(ShowMessage);
             this.uiLogicConfig.SaveInFile += new LogicConfig.SaveInFileEventHandler(uiLogicConfig_SaveInFile);

@@ -325,8 +325,6 @@ namespace UniconGS.UI.Settings
                     this.Config.AllSettingsImportInitialFilePath = ofd.FileName;
                     SetControlsValue(_settings);
                     ShowMessage("Файл открыт успешно", "Открытие настроек", MessageBoxImage.Information);
-                    //_isWriteSettings = true;
-                    //this.ApplySettings();
                 }
                 else
                 {
@@ -470,7 +468,7 @@ namespace UniconGS.UI.Settings
         private void WriteAllConfig()
         {
             MessageBoxResult res = MessageBox.Show(
-                "Внимание! Проверьте графики и конфигурацию перед записью в устройство. Вы уверены, что хотите совершить запись графиков и конфигурации в устройство?",
+                "Внимание! Проверьте графики, конфигурацию и точку доступа перед записью в устройство. Вы уверены, что хотите совершить запись графиков, конфигурации и точки доступа в устройство?",
                 "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (res == MessageBoxResult.Yes)
