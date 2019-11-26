@@ -21,7 +21,7 @@
     Width="1020"
     Height="822.05"
     MinWidth="980"
-    MinHeight="635"
+    MinHeight="750"
     Closing="MainWindow_Closing"
     
     Icon="Images/Application.ico"
@@ -130,7 +130,7 @@
                                                 Height="106"
                                                 Margin="0,0,25,0"
                                                 BorderThickness="0"
-                                                ToolTip="Подключиться">
+                                                ToolTip="Подключение по USB">
                                                 <Image
                                                     Width="100"
                                                     Height="100"

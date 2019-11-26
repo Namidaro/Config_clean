@@ -115,9 +115,9 @@ namespace UniconGS.UI.Journal
             }
             if (DeviceSelection.SelectedDevice == (byte)DeviceSelectionEnum.DEVICE_RUNO)
             {
-                _runoJournalSize = 169;
-                uiJournalLengthTextBlock.Visibility = Visibility.Visible;
-                uiToggleJournalSize.Visibility = Visibility.Visible;
+                //_runoJournalSize = 169;
+                uiJournalLengthTextBlock.Visibility = Visibility.Collapsed;
+                uiToggleJournalSize.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -211,6 +211,7 @@ namespace UniconGS.UI.Journal
                 //    SetJournalValue(ushorts.ToArray());
                 //    i += 23;
                 //}
+                _runoJournalSize = await GetRunoJournalSize();
 
                 int i = 0;
                 List<ushort> ushorts = new List<ushort>();
@@ -219,17 +220,22 @@ namespace UniconGS.UI.Journal
                 bool cycled = false;
                 try
                 {
-                    ushort[] _journalLastRecordAboveCount = await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2000 + _journalCount[0]), 23);
-                    if ((_journalLastRecordAboveCount.All(o => o == 0) || _journalLastRecordAboveCount.All(o => o == 0xffff)))
-                        cycled = false;
-                    else cycled = true;
+                    if (_runoJournalSize == (_journalCount[0] - 1) / 23)
+                        cycled = true;
+                    else
+                    {
+                        ushort[] _journalLastRecordAboveCount = await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2000 + _journalCount[0]), 23);
+                        if ((_journalLastRecordAboveCount.All(o => o == 0) || _journalLastRecordAboveCount.All(o => o == 0xffff)))
+                            cycled = false;
+                        else cycled = true;
+                    }
                 }
                 catch { lastRecord = true; }
 
                 if (cycled)
                 {
                     ushort startAddress = (ushort)(0x2000 + _journalCount[0]);
-                    int journalDelta = _runoJournalSize - (_runoJournalSize - (_journalCount[0] - 1) / 23);
+                    int journalDelta = Math.Abs(_runoJournalSize - (_runoJournalSize - (_journalCount[0] - 1) / 23));
 
                     for (int j = journalDelta; j < _runoJournalSize; j++)
                     {
@@ -252,12 +258,10 @@ namespace UniconGS.UI.Journal
                         SetJournalValue(ushorts.ToArray());
                         i += 23;
                     }
-
-
                 }
                 else
                 {
-                    int journalDelta = _runoJournalSize - (_journalCount[0] - 1) / 23;
+                    int journalDelta = Math.Abs(_runoJournalSize - (_journalCount[0] - 1) / 23);
                     for (int j = 0; j < journalDelta; j++)
                     {
                         if (token.IsCancellationRequested)
@@ -285,17 +289,19 @@ namespace UniconGS.UI.Journal
                 bool cycled = false;
                 try
                 {
+
                     ushort[] _journalLastRecordAboveCount = await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2000 + _journalCount[0]), 23);
                     if ((_journalLastRecordAboveCount.All(o => o == 0) || _journalLastRecordAboveCount.All(o => o == 0xffff)))
                         cycled = false;
                     else cycled = true;
+
                 }
                 catch { lastRecord = true; }
 
                 if (cycled)
                 {
                     ushort startAddress = (ushort)(0x2000 + _journalCount[0]);
-                    int journalDelta = _runoJournalSize - (_runoJournalSize - (_journalCount[0] - 1) / 23);
+                    int journalDelta = Math.Abs(_runoJournalSize - (_runoJournalSize - (_journalCount[0] - 1) / 23));
 
                     for (int j = journalDelta; j < _runoJournalSize; j++)
                     {
@@ -323,7 +329,7 @@ namespace UniconGS.UI.Journal
                 }
                 else
                 {
-                    int journalDelta = _runoJournalSize - (_runoJournalSize - (_journalCount[0] - 1) / 23);
+                    int journalDelta = Math.Abs(_runoJournalSize - (_runoJournalSize - (_journalCount[0] - 1) / 23));
                     for (int j = 0; j < journalDelta; j++)
                     {
                         if (token.IsCancellationRequested)
@@ -670,6 +676,30 @@ namespace UniconGS.UI.Journal
                 return false;
             }
         }
+        private async Task<ushort[]> GetSignature()
+        {
+            try
+            {
+                ushort[] res = await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x0400), 20);
+                return res;
+            }
+            catch (Exception exception)
+            {
+                return null;
+            }
+        }
+
+        private bool ReadSignatureCompleteRUNO(ushort[] value)
+        {
+            if (value == null)
+            {
+                return false;
+            }
+            else
+            {
+                return GetSignatureString((value).ToList());
+            }
+        }
 
         private bool ReadSignatureComplete(ushort[] value)
         {
@@ -696,6 +726,41 @@ namespace UniconGS.UI.Journal
                 (byte)(version[1] >> 8),
                 ((byte)version[1])
                                                 );
+        }
+
+        private async Task<int> GetRunoJournalSize()
+        {
+            ushort[] sig = await GetSignature();
+            return GetSignatureStringRUNO(sig.ToList());
+
+
+        }
+
+        private int GetSignatureStringRUNO(List<ushort> value)
+        {
+            ushort[] deviceName = value.GetRange(0, 5).ToArray();
+            //убираем лишний символ
+            deviceName[4] = (ushort)(LOBYTE(deviceName[4]));
+            ushort[] version = value.GetRange(8, 3).ToArray();
+
+            var devName = "Имя устройства: " + Converter.GetStringFromWords(deviceName) + ";\r\n";
+
+            return ReturnRunoJournalSize(
+                (byte)(version[1] >> 8),
+                ((byte)version[0])
+                                                );
+        }
+
+        private int ReturnRunoJournalSize(byte versionFirstByte, byte versionLastByte)
+        {
+            byte workingByte = versionFirstByte != 0 ? versionFirstByte : versionLastByte;
+            if (Convert.ToInt16(workingByte) == 2) return 169;
+            else if (Convert.ToInt16(workingByte) >= 20 && Convert.ToInt16(workingByte) < 30)
+            {
+                return 169;
+            }
+            else return 249;
+
         }
 
         private bool CheckVersionUpdateAvailability(string deviceName, byte versionFirstByte, byte versionSecondByte)
