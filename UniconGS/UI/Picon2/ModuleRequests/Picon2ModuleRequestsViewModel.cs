@@ -363,6 +363,13 @@ namespace UniconGS.UI.Picon2.ModuleRequests
         #region [Ctor]
         public Picon2ModuleRequestsViewModel()
         {
+            InitializeViewModel();
+        }
+        #endregion
+
+        #region [Methods]
+        private void InitializeViewModel()
+        {
             this._moduleTypes = new ModuleTypeList();
             this._moduleList = new ObservableCollection<string>();
             this._moduleListForUI = new ObservableCollection<string>();
@@ -384,9 +391,7 @@ namespace UniconGS.UI.Picon2.ModuleRequests
             InitializeImageList();
             InitializeModuleErrors();
         }
-        #endregion
 
-        #region [Methods]
         /// <summary>
         /// инициализация коллекции ошибок модулей
         /// </summary>
@@ -516,8 +521,16 @@ namespace UniconGS.UI.Picon2.ModuleRequests
             IsAutonomus = true;
             try
             {
+                //this.InitializeViewModel();
+
                 this.RequestsFromDevice.Clear();
+                this.RequestsToWrite.Clear();
                 this.ModuleRequestsForUIList.Clear();
+                for (byte i = 0; i < 16; i++)
+                {
+                    ModuleListForUI[i] = ModuleTypes.ModuleList.Keys.First();
+                }
+
                 // число запросов к модулям хранится по адресу 0х300Е, читаем 1 слово(2 байта)
                 ushort[] RC = await RTUConnectionGlobal.GetDataByAddress(1, REQUEST_COUNT_ADDRESS, 1);
                 RequestCountFromDevice = RC[0];
@@ -618,6 +631,7 @@ namespace UniconGS.UI.Picon2.ModuleRequests
             {
                 this.ModuleListForUI[RequestsFromDevice[i].CrateAddress - _firstModulePos] = GetModuleNameFromType(RequestsFromDevice[i].Type, RequestsFromDevice[i].ParameterCount);
             }
+            RaisePropertyChanged();
             ///верх
 
 
