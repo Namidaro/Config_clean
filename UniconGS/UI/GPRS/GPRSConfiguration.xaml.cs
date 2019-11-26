@@ -44,10 +44,7 @@ namespace UniconGS.UI.GPRS
         public GPRSConfiguration()
         {
             InitializeComponent();
-            if (DeviceSelection.SelectedDevice == (byte)DeviceSelectionEnum.DEVICE_PICON_GS)
-            {
-                CheckPiconGSVersion();
-            }
+            
 
             this.UpdateBinding();
         }
@@ -166,7 +163,7 @@ namespace UniconGS.UI.GPRS
 
         private bool CheckVersionUpdateAvailability(string deviceName, byte versionFirstByte, byte versionSecondByte)
         {
-            if (!deviceName.ToLower().Contains("gs")) return false;
+            if (!deviceName.ToLower().Contains("gs") && !deviceName.ToLower().Contains("runo")) return false;
 
             if (Convert.ToInt16(versionFirstByte) > 5) return true;
             else if (Convert.ToInt16(versionFirstByte) == 5)
@@ -204,6 +201,10 @@ namespace UniconGS.UI.GPRS
 
         private void ImportComplete(ushort[] value)
         {
+            if (DeviceSelection.SelectedDevice != (byte)DeviceSelectionEnum.DEVICE_PICON2)
+            {
+                CheckPiconGSVersion();
+            }
             if (value != null)
             {
 

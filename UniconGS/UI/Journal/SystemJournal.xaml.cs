@@ -198,19 +198,79 @@ namespace UniconGS.UI.Journal
         {
             if (DeviceSelection.SelectedDevice == (byte)DeviceSelectionEnum.DEVICE_RUNO)
             {
+                //int i = 0;
+                //List<ushort> ushorts = new List<ushort>();
+                //for (ushort j = 0; j < _runoJournalSize; j++)
+                //{
+                //    if (token.IsCancellationRequested)
+                //    {
+                //        return ushorts.ToArray();
+                //    }
+
+                //    ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
+                //    SetJournalValue(ushorts.ToArray());
+                //    i += 23;
+                //}
+
                 int i = 0;
                 List<ushort> ushorts = new List<ushort>();
-                for (ushort j = 0; j < _runoJournalSize; j++)
+                ushort[] _journalCount = await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2000), 1);
+                bool lastRecord = false;
+                bool cycled = false;
+                try
                 {
-                    if (token.IsCancellationRequested)
+                    ushort[] _journalLastRecordAboveCount = await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2000 + _journalCount[0]), 23);
+                    if ((_journalLastRecordAboveCount.All(o => o == 0) || _journalLastRecordAboveCount.All(o => o == 0xffff)))
+                        cycled = false;
+                    else cycled = true;
+                }
+                catch { lastRecord = true; }
+
+                if (cycled)
+                {
+                    ushort startAddress = (ushort)(0x2000 + _journalCount[0]);
+                    int journalDelta = _runoJournalSize - (_runoJournalSize - (_journalCount[0] - 1) / 23);
+
+                    for (int j = journalDelta; j < _runoJournalSize; j++)
                     {
-                        return ushorts.ToArray();
+                        if (token.IsCancellationRequested)
+                        {
+                            return ushorts.ToArray();
+                        }
+                        ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(startAddress + i), 23));
+                        SetJournalValue(ushorts.ToArray());
+                        i += 23;
+                    }
+                    i = 0;
+                    for (int j = 0; j < journalDelta; j++)
+                    {
+                        if (token.IsCancellationRequested)
+                        {
+                            return ushorts.ToArray();
+                        }
+                        ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
+                        SetJournalValue(ushorts.ToArray());
+                        i += 23;
                     }
 
-                    ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
-                    SetJournalValue(ushorts.ToArray());
-                    i += 23;
+
                 }
+                else
+                {
+                    int journalDelta = _runoJournalSize - (_journalCount[0] - 1) / 23;
+                    for (int j = 0; j < journalDelta; j++)
+                    {
+                        if (token.IsCancellationRequested)
+                        {
+                            return ushorts.ToArray();
+                        }
+                        ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
+                        SetJournalValue(ushorts.ToArray());
+                        i += 23;
+                    }
+
+                }
+
 
                 return ushorts.ToArray();
 
@@ -220,19 +280,82 @@ namespace UniconGS.UI.Journal
                 _runoJournalSize = 199;
                 int i = 0;
                 List<ushort> ushorts = new List<ushort>();
-                for (ushort j = 0; j < _runoJournalSize; j++)
+                ushort[] _journalCount = await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2000), 1);
+                bool lastRecord = false;
+                bool cycled = false;
+                try
                 {
-                    if (token.IsCancellationRequested)
-                    {
-                        return ushorts.ToArray();
-                    }
-                    ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
-                    SetJournalValue(ushorts.ToArray());
-                    i += 23;
+                    ushort[] _journalLastRecordAboveCount = await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2000 + _journalCount[0]), 23);
+                    if ((_journalLastRecordAboveCount.All(o => o == 0) || _journalLastRecordAboveCount.All(o => o == 0xffff)))
+                        cycled = false;
+                    else cycled = true;
                 }
+                catch { lastRecord = true; }
+
+                if (cycled)
+                {
+                    ushort startAddress = (ushort)(0x2000 + _journalCount[0]);
+                    int journalDelta = _runoJournalSize - (_runoJournalSize - (_journalCount[0] - 1) / 23);
+
+                    for (int j = journalDelta; j < _runoJournalSize; j++)
+                    {
+                        if (token.IsCancellationRequested)
+                        {
+                            return ushorts.ToArray();
+                        }
+                        ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(startAddress + i), 23));
+                        SetJournalValue(ushorts.ToArray());
+                        i += 23;
+                    }
+                    i = 0;
+                    for (int j = 0; j < journalDelta; j++)
+                    {
+                        if (token.IsCancellationRequested)
+                        {
+                            return ushorts.ToArray();
+                        }
+                        ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
+                        SetJournalValue(ushorts.ToArray());
+                        i += 23;
+                    }
+
+
+                }
+                else
+                {
+                    int journalDelta = _runoJournalSize - (_runoJournalSize - (_journalCount[0] - 1) / 23);
+                    for (int j = 0; j < journalDelta; j++)
+                    {
+                        if (token.IsCancellationRequested)
+                        {
+                            return ushorts.ToArray();
+                        }
+                        ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
+                        SetJournalValue(ushorts.ToArray());
+                        i += 23;
+                    }
+
+                }
+
+
+                //for (ushort j = 0; j < _runoJournalSize; j++)
+                //{
+                //    if (token.IsCancellationRequested)
+                //    {
+                //        return ushorts.ToArray();
+                //    }
+                //    ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
+                //    SetJournalValue(ushorts.ToArray());
+                //    i += 23;
+                //}
 
                 return ushorts.ToArray();
             }
+        }
+
+        private void ReadJournalExecute(int size = 0)
+        {
+
         }
 
         private void SetJournalValue(ushort[] value)
@@ -249,17 +372,17 @@ namespace UniconGS.UI.Journal
                 {
                     tmp.Add(new EventJournalItem(new String(longMessage.GetRange(i * 46, 46).ToArray())));
                 }
-                tmp.Sort(delegate (EventJournalItem first, EventJournalItem second)
-                {
-                    if ((double)first.JournalDateTime.Ticks / TimeSpan.TicksPerSecond >
-                        (double)second.JournalDateTime.Ticks / TimeSpan.TicksPerSecond)
-                        return -1;
-                    if ((double)first.JournalDateTime.Ticks / TimeSpan.TicksPerSecond <
-                        (double)second.JournalDateTime.Ticks / TimeSpan.TicksPerSecond)
-                        return 1;
-                    else
-                        return 0;
-                });
+                //tmp.Sort(delegate (EventJournalItem first, EventJournalItem second)
+                //{
+                //    if ((double)first.JournalDateTime.Ticks / TimeSpan.TicksPerSecond >
+                //        (double)second.JournalDateTime.Ticks / TimeSpan.TicksPerSecond)
+                //        return -1;
+                //    if ((double)first.JournalDateTime.Ticks / TimeSpan.TicksPerSecond <
+                //        (double)second.JournalDateTime.Ticks / TimeSpan.TicksPerSecond)
+                //        return 1;
+                //    else
+                //        return 0;
+                //});
                 foreach (var item in tmp)
                 {
                     //если из памяти читает нули - в eventmessage пишется "null", ее мы не выводим

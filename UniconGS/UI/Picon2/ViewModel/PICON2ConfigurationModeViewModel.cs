@@ -897,6 +897,8 @@ namespace UniconGS.UI.Picon2.ViewModel
 
         private bool Verify(byte[] _fromFile, byte[] _fromDevice)
         {
+            if (_fromDevice == null || _fromFile == null)
+                return false;
             bool result = false;
             if (_fromFile.Count() == _fromDevice.Count())
             {

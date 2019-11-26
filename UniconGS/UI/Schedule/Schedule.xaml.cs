@@ -737,6 +737,8 @@ namespace UniconGS.UI.Schedule
 
         private bool Verify(ushort[] _fromFile, ushort[] _fromDevice)
         {
+            if (_fromDevice == null || _fromFile == null)
+                return false;
             bool result = false;
             if (_fromFile.Count() == _fromDevice.Count())
             {
