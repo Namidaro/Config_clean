@@ -605,8 +605,8 @@ namespace UniconGS.UI.Picon2.ViewModel
             OnGetScheduleFromFileCommand();
             byte[] _bytesFromFile = GetDeviceDataFromView();
 
-            //await OnGetLightningSchedule();
-            byte[] _bytesFromDevice = await this.GetLightingSheduleDataFromDeviceAsync();
+            await OnGetLightningSchedule();
+            byte[] _bytesFromDevice = GetDeviceDataFromView();
 
             if (Verify(_bytesFromDevice, _bytesFromFile))
                 MessageBox.Show("Верификация прошла успешна", "Успех");
