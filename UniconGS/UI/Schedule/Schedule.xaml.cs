@@ -234,6 +234,7 @@ namespace UniconGS.UI.Schedule
             this.uiExport.IsEnabled = false;
             this.uiImport.IsEnabled = false;
             this.uiClearAll.IsEnabled = false;
+            this.uiVerifySchedule.IsEnabled = false;
 
 
         }
@@ -243,6 +244,8 @@ namespace UniconGS.UI.Schedule
             this.uiExport.IsEnabled = true;
             this.uiImport.IsEnabled = true;
             this.uiClearAll.IsEnabled = true;
+            this.uiVerifySchedule.IsEnabled = true;
+
         }
 
         private async void uiImport_Click(object sender, RoutedEventArgs e)

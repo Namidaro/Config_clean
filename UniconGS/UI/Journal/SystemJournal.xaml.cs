@@ -190,6 +190,8 @@ namespace UniconGS.UI.Journal
                 }
                 this.Picon2EventsCollection.Add(new Picon2JournalEventRecord((await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x4300 + i), 8))));
             }
+            this.ShowMessage("Чтение журнала системы завершено", "Чтение журнала системы",
+                            MessageBoxImage.Information);
             //todo: попробовать подогнать записи журнала под одни правила для всех устройств(не получится скорее всего)
         }
 
@@ -230,50 +232,53 @@ namespace UniconGS.UI.Journal
                         else cycled = true;
                     }
                 }
-                catch { lastRecord = true; }
-
-                if (cycled)
+                catch { throw; }
+                try
                 {
-                    ushort startAddress = (ushort)(0x2000 + _journalCount[0]);
-                    int journalDelta = Math.Abs(_runoJournalSize - (_runoJournalSize - (_journalCount[0] - 1) / 23));
+                    if (cycled)
+                    {
+                        ushort startAddress = (ushort)(0x2000 + _journalCount[0]);
+                        int journalDelta = Math.Abs(_runoJournalSize - (_runoJournalSize - (_journalCount[0] - 1) / 23));
 
-                    for (int j = journalDelta; j < _runoJournalSize; j++)
-                    {
-                        if (token.IsCancellationRequested)
+                        for (int j = journalDelta; j < _runoJournalSize; j++)
                         {
-                            return ushorts.ToArray();
+                            if (token.IsCancellationRequested)
+                            {
+                                return ushorts.ToArray();
+                            }
+                            ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(startAddress + i), 23));
+                            SetJournalValue(ushorts.ToArray());
+                            i += 23;
                         }
-                        ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(startAddress + i), 23));
-                        SetJournalValue(ushorts.ToArray());
-                        i += 23;
+                        i = 0;
+                        for (int j = 0; j < journalDelta; j++)
+                        {
+                            if (token.IsCancellationRequested)
+                            {
+                                return ushorts.ToArray();
+                            }
+                            ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
+                            SetJournalValue(ushorts.ToArray());
+                            i += 23;
+                        }
                     }
-                    i = 0;
-                    for (int j = 0; j < journalDelta; j++)
+                    else
                     {
-                        if (token.IsCancellationRequested)
+                        int journalDelta = Math.Abs(_runoJournalSize - (_runoJournalSize - (_journalCount[0] - 1) / 23));
+                        for (int j = 0; j < journalDelta; j++)
                         {
-                            return ushorts.ToArray();
+                            if (token.IsCancellationRequested)
+                            {
+                                return ushorts.ToArray();
+                            }
+                            ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
+                            SetJournalValue(ushorts.ToArray());
+                            i += 23;
                         }
-                        ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
-                        SetJournalValue(ushorts.ToArray());
-                        i += 23;
+
                     }
                 }
-                else
-                {
-                    int journalDelta = Math.Abs(_runoJournalSize - (_journalCount[0] - 1) / 23);
-                    for (int j = 0; j < journalDelta; j++)
-                    {
-                        if (token.IsCancellationRequested)
-                        {
-                            return ushorts.ToArray();
-                        }
-                        ushorts.AddRange(await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2001 + i), 23));
-                        SetJournalValue(ushorts.ToArray());
-                        i += 23;
-                    }
-
-                }
+                catch { throw; }
 
 
                 return ushorts.ToArray();
@@ -393,8 +398,9 @@ namespace UniconGS.UI.Journal
                 {
                     //если из памяти читает нули - в eventmessage пишется "null", ее мы не выводим
                     if (!item.EventMessage.Equals("null"))
-                        this.EventJournal.Add(item);
+                        this.EventJournal.Insert(0, item);
                 }
+
             }
             catch (Exception e)
             {
@@ -584,15 +590,28 @@ namespace UniconGS.UI.Journal
                 uiClear.IsEnabled = false;
                 uiImport.IsEnabled = false;
                 uiClear.Content = "Ожидайте";
+                _runoJournalSize = await GetRunoJournalSize();
+                bool _easyClear = await GetPiconGSSignature();
 
-                await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x2000, new ushort[] { 1 });
-
-                ushort[] zeros = new ushort[23];
-                int i = 0;
-                for (ushort j = 0; j < _runoJournalSize; j++)
+                if(_easyClear)
                 {
-                    await RTUConnectionGlobal.SendDataByAddressAsync(1, (ushort)(0x2001 + i), zeros);
-                    i += 23;
+                    try
+                    {
+                        await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x2000, new ushort[] { 0 });
+                    }
+                    catch { }
+                }
+                else
+                {
+                    await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x2000, new ushort[] { 1 });
+
+                    ushort[] zeros = new ushort[23];
+                    int i = 0;
+                    for (ushort j = 0; j < _runoJournalSize; j++)
+                    {
+                        await RTUConnectionGlobal.SendDataByAddressAsync(1, (ushort)(0x2001 + i), zeros);
+                        i += 23;
+                    }
                 }
                 ClearCompleted.Invoke();
                 ShowMessage("Очистка журнала завершена", "Выполнено", MessageBoxImage.Information);
@@ -621,7 +640,6 @@ namespace UniconGS.UI.Journal
                     try
                     {
                         await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x2000, new ushort[] { 0 });
-                        return;
                     }
                     catch { }
                 }
@@ -645,12 +663,6 @@ namespace UniconGS.UI.Journal
                 uiImport.IsEnabled = true;
                 uiClear.Content = "Очистить";
             }
-
-
-
-
-
-
 
         }
 
@@ -724,7 +736,8 @@ namespace UniconGS.UI.Journal
             return CheckVersionUpdateAvailability(
                 Converter.GetStringFromWords(deviceName),
                 (byte)(version[1] >> 8),
-                ((byte)version[1])
+                ((byte)version[1]),
+                ((byte)version[0])
                                                 );
         }
 
@@ -763,17 +776,26 @@ namespace UniconGS.UI.Journal
 
         }
 
-        private bool CheckVersionUpdateAvailability(string deviceName, byte versionFirstByte, byte versionSecondByte)
+        private bool CheckVersionUpdateAvailability(string deviceName, byte versionFirstByte, byte versionSecondByte, byte versionLastByte)
         {
-            if (!deviceName.ToLower().Contains("gs")) return false;
+            if (!deviceName.ToLower().Contains("gs") && !deviceName.ToLower().Contains("runo")) return false;
 
-            if (Convert.ToInt16(versionFirstByte) > 5) return true;
-            else if (Convert.ToInt16(versionFirstByte) == 5)
+            if (deviceName.ToLower().Contains("gs"))
             {
-                if (Convert.ToInt16(versionSecondByte) > 0) return true;
+                if (Convert.ToInt16(versionFirstByte) > 5) return true;
+                else if (Convert.ToInt16(versionFirstByte) == 5)
+                {
+                    if (Convert.ToInt16(versionSecondByte) > 0) return true;
+                    else return false;
+                }
                 else return false;
             }
-            else return false;
+            else
+            {
+                byte workingByte = versionFirstByte != 0 ? versionFirstByte : versionLastByte;
+                if (Convert.ToInt16(workingByte) >= 3 && Convert.ToInt16(workingByte) <= 20) return true;
+                else return false;
+            }
 
         }
 

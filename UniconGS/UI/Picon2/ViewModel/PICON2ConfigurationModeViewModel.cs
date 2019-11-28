@@ -882,17 +882,17 @@ namespace UniconGS.UI.Picon2.ViewModel
         {
             try
             {
-                byte[] _bytesFromDevice = await this.ReadConfigurationDataFromDevice();
                 OnGetConfigurationFromFileCommand();
                 byte[] _bytesFromFile = CreateDataPackage();
-
+                byte[] _bytesFromDevice = await this.ReadConfigurationDataFromDevice();
+                this.InitializeFromReadingData(_bytesFromDevice);
 
                 if (Verify(_bytesFromDevice, _bytesFromFile))
                     MessageBox.Show("Верификация прошла успешна", "Успех");
                 else MessageBox.Show("Верификация не успешна", "Ошибка");
-
+                
             }
-            catch { }
+            catch { MessageBox.Show("При верификации произошла обишка, проверьте файл конфигурации.", "Ошибка"); }
         }
 
         private bool Verify(byte[] _fromFile, byte[] _fromDevice)

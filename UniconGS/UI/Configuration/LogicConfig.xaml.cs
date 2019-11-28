@@ -101,12 +101,15 @@ namespace UniconGS.UI.Configuration
         {
             this.uiLogicExport.IsEnabled = false;
             this.uiLogicImport.IsEnabled = false;
+            this.uiVerifyConfig.IsEnabled = false;
         }
 
         public void DisableAutonomous()
         {
             this.uiLogicExport.IsEnabled = true;
             this.uiLogicImport.IsEnabled = true;
+            this.uiVerifyConfig.IsEnabled = true;
+
         }
 
         public bool ValidateAutomationTime()
@@ -397,8 +400,9 @@ namespace UniconGS.UI.Configuration
                         "Чтение конфигурации логики", MessageBoxImage.Error);
                 }
             }
-            uiLogicConfigOpen.IsEnabled =
-                uiLogicConfigSave.IsEnabled = uiLogicExport.IsEnabled = uiLogicImport.IsEnabled = true;
+            if (MainWindow.isAutonomus)
+                uiLogicConfigOpen.IsEnabled =
+                    uiLogicConfigSave.IsEnabled = uiLogicExport.IsEnabled = uiLogicImport.IsEnabled = true;
         }
         public async void uiLogicExport_Click(object sender, RoutedEventArgs e)
         {

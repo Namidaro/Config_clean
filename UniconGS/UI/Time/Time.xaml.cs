@@ -206,12 +206,6 @@ namespace UniconGS.UI.Time
 
 
 
-        //public async Task<bool> WriteContextPicon2()
-        //{
-
-
-        //    var timeToWritePicon = 
-        //}
 
         public void DateTimeTypePicon2()
         {
@@ -220,7 +214,6 @@ namespace UniconGS.UI.Time
 
            {
                    
-                //Picon2.Converters.BytesToInt16FormatterForPicon2(this._clock[1].Year),
                 Convert.ToUInt16(0),
 
                 Convert.ToUInt16(_clock[1].Year % 100),

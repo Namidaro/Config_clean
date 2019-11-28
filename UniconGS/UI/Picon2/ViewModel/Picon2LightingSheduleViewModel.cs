@@ -454,7 +454,7 @@ namespace UniconGS.UI.Picon2.ViewModel
             get
             {
                 return this._getLightingSheduleCommand ??
-                       (this._getLightingSheduleCommand = new DelegateCommand(OnGetLightningSchedule));
+                       (this._getLightingSheduleCommand = new DelegateCommand(async () => await OnGetLightningSchedule()));
             }
         }
 
@@ -600,12 +600,13 @@ namespace UniconGS.UI.Picon2.ViewModel
             OnGetLightningSchedule();
         }
 
-        private void OnVerifySchedule()
+        private async void OnVerifySchedule()
         {
             OnGetScheduleFromFileCommand();
-            byte[] _bytesFromFile = GetCachedSchedule(Title);
-            OnGetLightningSchedule();
-            byte[] _bytesFromDevice = GetCachedSchedule(Title);
+            byte[] _bytesFromFile = GetDeviceDataFromView();
+
+            //await OnGetLightningSchedule();
+            byte[] _bytesFromDevice = await this.GetLightingSheduleDataFromDeviceAsync();
 
             if (Verify(_bytesFromDevice, _bytesFromFile))
                 MessageBox.Show("Верификация прошла успешна", "Успех");
@@ -634,7 +635,7 @@ namespace UniconGS.UI.Picon2.ViewModel
 
         }
 
-        private async void OnGetLightningSchedule()
+        private async Task OnGetLightningSchedule()
         {
             if (MainWindow.isAutonomus == false)
             {
@@ -726,7 +727,7 @@ namespace UniconGS.UI.Picon2.ViewModel
                 }
                 else
                 {
-                    this.InitializeOnNavigateTo();
+                    await this.InitializeOnNavigateTo();
                 }
 
 
@@ -1344,7 +1345,7 @@ namespace UniconGS.UI.Picon2.ViewModel
             return arrayResult;
         }
 
-        private async void InitializeOnNavigateTo(byte[] data = null)
+        private async Task InitializeOnNavigateTo(byte[] data = null)
         {
             bool res = false;
 
