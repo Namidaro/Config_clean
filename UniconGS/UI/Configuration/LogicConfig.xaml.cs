@@ -322,7 +322,6 @@ namespace UniconGS.UI.Configuration
             }
 
             ImportComplete(value);
-
             uiLogicConfigOpen.IsEnabled =
                 uiLogicConfigSave.IsEnabled = uiLogicExport.IsEnabled = uiLogicImport.IsEnabled = true;
         }
@@ -400,7 +399,7 @@ namespace UniconGS.UI.Configuration
                         "Чтение конфигурации логики", MessageBoxImage.Error);
                 }
             }
-            if (MainWindow.isAutonomus)
+            if (!MainWindow.isAutonomus)
                 uiLogicConfigOpen.IsEnabled =
                     uiLogicConfigSave.IsEnabled = uiLogicExport.IsEnabled = uiLogicImport.IsEnabled = true;
         }
@@ -493,8 +492,7 @@ namespace UniconGS.UI.Configuration
 
         private void uiLogicConfigOpen_Click(object sender, RoutedEventArgs e)
         {
-            uiLogicConfigOpen.IsEnabled =
-                uiLogicConfigSave.IsEnabled = uiLogicExport.IsEnabled = uiLogicImport.IsEnabled = false;
+            uiLogicExport.IsEnabled = uiLogicImport.IsEnabled = uiVerifyConfig.IsEnabled = false;
             if (this.OpenFromFile != null)
             {
                 var result = this.OpenFromFile(typeof(ChannelManagment));
@@ -503,15 +501,9 @@ namespace UniconGS.UI.Configuration
                     SetOpenedConfig((ChannelManagment)result);
                 }
             }
-            if (MainWindow.isAutonomus == true)
+            if (!MainWindow.isAutonomus)
             {
-                uiLogicConfigOpen.IsEnabled = uiLogicConfigSave.IsEnabled = true;
-                uiLogicExport.IsEnabled = uiLogicImport.IsEnabled = false;
-            }
-            else
-            {
-                uiLogicConfigOpen.IsEnabled =
-                    uiLogicConfigSave.IsEnabled = uiLogicExport.IsEnabled = uiLogicImport.IsEnabled = true;
+                uiLogicExport.IsEnabled = uiVerifyConfig.IsEnabled = uiLogicImport.IsEnabled = true;
             }
 
         }

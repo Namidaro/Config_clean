@@ -487,6 +487,7 @@ namespace UniconGS
         private void uiAutonomousBtn_Click(object sender, RoutedEventArgs e)
         {
             SetAutonomusMode();
+            isAutonomus = true;
         }
         private void uiConnect_Click(object sender, RoutedEventArgs e)
         {

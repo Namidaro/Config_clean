@@ -439,7 +439,7 @@ namespace UniconGS.UI.Schedule
 
         private void uiOpen_Click(object sender, RoutedEventArgs e)
         {
-            uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = false;
+            uiExport.IsEnabled = uiImport.IsEnabled = uiClearAll.IsEnabled = uiVerifySchedule.IsEnabled = false;
             if (this.OpenFromFile != null)
             {
                 var result = this.OpenFromFile(typeof(GraphicValue));
@@ -453,14 +453,9 @@ namespace UniconGS.UI.Schedule
                         this.StopWork();
                 }
             }
-            if (MainWindow.isAutonomus == true)
+            if (!MainWindow.isAutonomus)
             {
-                uiClearAll.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = false;
-                uiOpen.IsEnabled = uiSave.IsEnabled = true;
-            }
-            else
-            {
-                uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
+                uiExport.IsEnabled = uiImport.IsEnabled = uiVerifySchedule.IsEnabled = uiClearAll.IsEnabled = true;
             }
 
 
