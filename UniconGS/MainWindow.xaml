@@ -19,7 +19,7 @@
     xmlns:moduleRequests="clr-namespace:UniconGS.UI.Picon2.ModuleRequests"
     Title="БЭМН Конфигуратор Минск ГОРСВЕТ"
     Width="1020"
-    Height="822.05"
+    Height="750"
     MinWidth="980"
     MinHeight="750"
     Closing="MainWindow_Closing"

@@ -294,12 +294,15 @@ namespace UniconGS.UI.Journal
                 bool cycled = false;
                 try
                 {
-
-                    ushort[] _journalLastRecordAboveCount = await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2000 + _journalCount[0]), 23);
-                    if ((_journalLastRecordAboveCount.All(o => o == 0) || _journalLastRecordAboveCount.All(o => o == 0xffff)))
-                        cycled = false;
-                    else cycled = true;
-
+                    if (_runoJournalSize == (_journalCount[0] - 1) / 23)
+                        cycled = true;
+                    else
+                    {
+                        ushort[] _journalLastRecordAboveCount = await RTUConnectionGlobal.GetDataByAddress(1, (ushort)(0x2000 + _journalCount[0]), 23);
+                        if ((_journalLastRecordAboveCount.All(o => o == 0) || _journalLastRecordAboveCount.All(o => o == 0xffff)))
+                            cycled = false;
+                        else cycled = true;
+                    }
                 }
                 catch { lastRecord = true; }
 
@@ -593,7 +596,7 @@ namespace UniconGS.UI.Journal
                 _runoJournalSize = await GetRunoJournalSize();
                 bool _easyClear = await GetPiconGSSignature();
 
-                if(_easyClear)
+                if (_easyClear)
                 {
                     try
                     {
@@ -643,14 +646,17 @@ namespace UniconGS.UI.Journal
                     }
                     catch { }
                 }
-                await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x2000, new ushort[] { 1 });
-                _runoJournalSize = 199;
-                ushort[] zeros = new ushort[23];
-                int i = 0;
-                for (ushort j = 0; j < _runoJournalSize; j++)
+                else
                 {
-                    await RTUConnectionGlobal.SendDataByAddressAsync(1, (ushort)(0x2001 + i), zeros);
-                    i += 23;
+                    await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x2000, new ushort[] { 1 });
+                    _runoJournalSize = 199;
+                    ushort[] zeros = new ushort[23];
+                    int i = 0;
+                    for (ushort j = 0; j < _runoJournalSize; j++)
+                    {
+                        await RTUConnectionGlobal.SendDataByAddressAsync(1, (ushort)(0x2001 + i), zeros);
+                        i += 23;
+                    }
                 }
                 ClearCompleted.Invoke();
                 ShowMessage("Очистка журнала завершена", "Выполнено", MessageBoxImage.Information);

@@ -57,6 +57,11 @@
                                 x:Name="uiWriteTimeout"
                                 Text="5000"
                                 TextWrapping="Wrap" />
+                <Label Content="Обновление, мс"/>
+                <TextBox
+                                x:Name="uiTimerTick"
+                                Text="5000"
+                                TextWrapping="Wrap" />
             </StackPanel>
             <StackPanel Margin="5">
                 <Label Content="Повторов"/>

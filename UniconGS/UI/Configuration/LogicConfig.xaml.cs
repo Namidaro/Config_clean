@@ -337,6 +337,7 @@ namespace UniconGS.UI.Configuration
 
         }
 
+
         private void ImportComplete(ushort[] value)
         {
             if (value != null)
@@ -358,6 +359,22 @@ namespace UniconGS.UI.Configuration
                             }
                         }
                     }
+                    for (int i = 0; i < 11; i++)
+                    {
+                        if (!this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
+                                item.SetEnabled(i);
+                            }
+                        }
+                        else
+                            foreach (var item in this._maswks)
+                            {
+                                if (item.isChecked(i))
+                                    item.SetEnabled(i);
+                            }
+                    }
                 }
                 else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS)
                 {
@@ -370,8 +387,25 @@ namespace UniconGS.UI.Configuration
                             {
                                 if (!item.isChecked(i))
                                     item.SetDisable(i);
+
                             }
                         }
+                    }
+                    for (int i = 0; i < 11; i++)
+                    {
+                        if (!this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
+                                item.SetEnabled(i);
+                            }
+                        }
+                        else
+                            foreach (var item in this._maswks)
+                            {
+                                if (item.isChecked(i))
+                                    item.SetEnabled(i);
+                            }
                     }
                 }
                 else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
@@ -525,8 +559,26 @@ namespace UniconGS.UI.Configuration
                         {
                             if (!item.isChecked(i))
                                 item.SetDisable(i);
+                            else
+                                item.SetEnabled(i);
                         }
                     }
+                }
+                for (int i = 0; i < 11; i++)
+                {
+                    if (!this.uiErrorMatrix.isChecked(i))
+                    {
+                        foreach (var item in this._maswks)
+                        {
+                            item.SetEnabled(i);
+                        }
+                    }
+                    else
+                        foreach (var item in this._maswks)
+                        {
+                            if (item.isChecked(i))
+                                item.SetEnabled(i);
+                        }
                 }
             }
             else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS)
@@ -541,6 +593,22 @@ namespace UniconGS.UI.Configuration
                                 item.SetDisable(i);
                         }
                     }
+                }
+                for (int i = 0; i < 11; i++)
+                {
+                    if (!this.uiErrorMatrix.isChecked(i))
+                    {
+                        foreach (var item in this._maswks)
+                        {
+                            item.SetEnabled(i);
+                        }
+                    }
+                    else
+                        foreach (var item in this._maswks)
+                        {
+                            if (item.isChecked(i))
+                                item.SetEnabled(i);
+                        }
                 }
             }
             else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
@@ -557,6 +625,7 @@ namespace UniconGS.UI.Configuration
                         }
                     }
                 }
+
             }
             if (this.StopWork != null)
                 this.StopWork();

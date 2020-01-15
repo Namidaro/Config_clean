@@ -812,6 +812,7 @@
                     Width="Auto"
                     Margin="2"
                     HorizontalAlignment="Left"
+                    IsEnabled="{Binding IsAutonomus, Converter={StaticResource BooleanReverceConverter}}"
                     Command="{Binding VerifyConfigCommand}"
                     Content="Верифицировать" />
             <UniformGrid
@@ -867,15 +868,15 @@
                         <ContentControl Content="{Binding SheduleDates[0]}" />
                         <ContentControl Content="{Binding SheduleDates[1]}" />
 
-                        <Label Margin="3">ЕК 1</Label>
+                        <Label Margin="3">Экономия 1</Label>
                         <ContentControl Content="{Binding SheduleDates[2]}" />
                         <ContentControl Content="{Binding SheduleDates[3]}" />
 
-                        <Label Margin="3">ЕК 2</Label>
+                        <Label Margin="3">Экономия 2</Label>
                         <ContentControl Content="{Binding SheduleDates[4]}" />
                         <ContentControl Content="{Binding SheduleDates[5]}" />
 
-                        <Label Margin="3">ЕК 3</Label>
+                        <Label Margin="3">Экономия 3</Label>
                         <ContentControl Content="{Binding SheduleDates[6]}" />
                         <ContentControl Content="{Binding SheduleDates[7]}" />
                     </UniformGrid>

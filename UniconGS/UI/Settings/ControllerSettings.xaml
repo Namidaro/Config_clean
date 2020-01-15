@@ -26,13 +26,15 @@
                     <Button
                         x:Name="uiOpenSettings"
                         Width="155"
-                        Height="21"  Margin="1"
+                        Height="21" 
+                        Margin="1"
                         Click="uiOpenSettings_Click"
                         Content="Открыть"
                         ToolTip="Открытие настроек устройства" />
                     <Button
                         x:Name="uiSaveSettings"
-                        Width="155"  Margin="1"
+                        Width="155" 
+                        Margin="1"
                         Height="21"
                         Click="uiSaveSettings_Click"
                         Content="Сохранить"
@@ -40,7 +42,8 @@
                     <Button
                         x:Name="uiReadAll"
                         Height="21"
-                        Width="155"  Margin="1"
+                        Width="155"  
+                        Margin="1"
                         Click="uiReadAll_Click"
                         Content="Прочитать"
                         ToolTip="Чтение конфигурации и графиков из устройства" />
@@ -69,14 +72,16 @@
                     <Button
                         Grid.Row="1"
                         x:Name="uiPicon2ModuleInfo"
-                        Height="21"  Margin="1"
+                        Height="21" 
+                        Margin="1"
                         Click="uiPicon2ModuleInfo_Click"
                         Content="Инф. по модулю связи"
                         ToolTip="Получить информацию по модулю связи" 
                         Visibility="{Binding IsPicon2, Converter={StaticResource BoolToVisibilityRevertConverter}}"/>
                     <Button
                         x:Name="uiWriteAll"
-                        Height="21"  Margin="1"
+                        Height="21" 
+                        Margin="1"
                         Click="uiWriteAll_Click"
                         Content="Записать"
                         ToolTip="Запись конфигурации и графиков в устройствo" />

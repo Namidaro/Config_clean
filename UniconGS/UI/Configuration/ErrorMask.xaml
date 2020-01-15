@@ -156,7 +156,8 @@
             VerticalAlignment="Center"
             Click="CheckBox_Click"
             Content=""
-            IsChecked="{Binding Path=.[0], Mode=TwoWay}" />
+            IsChecked="{Binding Path=.[0], Mode=TwoWay}" 
+            IsEnabled="{Binding IsEnabled, ElementName=userControl, Mode=Default}" />
         <CheckBox
             x:Name="ui_1"
             Grid.Row="1"

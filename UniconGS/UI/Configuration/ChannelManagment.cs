@@ -18,7 +18,7 @@ namespace UniconGS.UI.Configuration
         private ObservableCollection<Channel> _channels;
         private ObservableCollection<Mask> _channelMasks;
 
-        private ushort _automationTime = 100;
+        private ushort _automationTime = 300;
 
         [XmlElement]
         public ushort AutomationTime
@@ -123,7 +123,7 @@ namespace UniconGS.UI.Configuration
 
         public void InitializeChannelByDefault()
         {
-            this.AutomationTime = 100;
+            this.AutomationTime = 300;
             this.ChannelMasks = new ObservableCollection<Mask>();
             this.Channels = new ObservableCollection<Channel>();
             for (int i = 0; i < 8; i++)

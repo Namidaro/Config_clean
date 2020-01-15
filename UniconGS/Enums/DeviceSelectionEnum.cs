@@ -10,6 +10,8 @@ namespace UniconGS.Enums
     {
         DEVICE_RUNO = 1,
         DEVICE_PICON_GS = 2,
-        DEVICE_PICON2 = 3
+        DEVICE_PICON2 = 3,
+        DEVICE_PICONGS_LIDA_4DISCRET = 4,
+        DEVICE_PICONGS_LIDA_2DISCRET = 5
     }
 }

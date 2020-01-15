@@ -276,7 +276,7 @@ namespace UniconGS
                 //{
                 //    return;
                 //}
-                
+
                 //await _semaphoreSlim.WaitAsync();
                 var isDiagTabSelected = false;
                 Application.Current.Dispatcher.Invoke(() =>
@@ -537,16 +537,18 @@ namespace UniconGS
                         MessageBox.Show("Не удалось подключиться по GSM-каналу. Введен неправильный IP-адрес.", "Ошибка");
                         return;
                     }
-
+                
 
                     TcpClient client = new TcpClient(ResultGSM.IPAdress, ResultGSM.PortNumber);
                     client.ReceiveTimeout = 10000;
                     client.SendTimeout = 10000;
                     ModbusIpMaster.CreateIp(client);
+                    if (ResultGSM.TimerTick == 0)
+                        ResultGSM.TimerTick = 5000;
                     _uiUpdateTimer = new Timer((obj) =>
                     {
                         UiUpdateTimerTriggered();
-                    }, null, 5000, 5000);
+                    }, null, ResultGSM.TimerTick, ResultGSM.TimerTick);
                     this.Start();
                     this.uiDisconnect.IsEnabled = true;
                     this.uiConnect.IsEnabled = false;
@@ -716,7 +718,7 @@ namespace UniconGS
         private void ClearCompleted()
         {
             this.Cursor = Cursors.Arrow;
-           
+
         }
 
         #endregion
@@ -956,9 +958,7 @@ namespace UniconGS
                 }
                 else
                 {
-
                     this.Close();
-
                 }
             }
             else
@@ -1121,8 +1121,16 @@ namespace UniconGS
         {
             uiSettings.uiPLCReset.IsEnabled = true;
             uiSettings.uiSignature.IsEnabled = true;
-            uiSettings.uiWriteAll.IsEnabled = true;
-            uiSettings.uiReadAll.IsEnabled = true;
+            if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
+            {
+                uiSettings.uiWriteAll.IsEnabled = false;
+                uiSettings.uiReadAll.IsEnabled = false;
+            }
+            else
+            {
+                uiSettings.uiWriteAll.IsEnabled = true;
+                uiSettings.uiReadAll.IsEnabled = true;
+            }
             uiSystemJournal.uiImport.IsEnabled = true;
             uiSystemJournal.uiClear.IsEnabled = true;
             uiLightingSchedule.uiClearAll.IsEnabled = true;
@@ -1354,6 +1362,6 @@ namespace UniconGS
 
         }
 
-       
+
     }
 }

@@ -114,6 +114,8 @@ namespace UniconGS
                 ResultGSM.ModbusRetries= int.Parse(uiRetries.Text);
                 ResultGSM.ModbusWaitUntilRetry= int.Parse(uiWaitUntilRetry.Text);
 
+                ResultGSM.TimerTick = int.Parse(uiTimerTick.Text);
+
                 DialogResult = true;
                 Close();
             }
@@ -144,9 +146,11 @@ namespace UniconGS
                 ModbusWriteTimeout = 0;
                 ModbusRetries = 0;
                 ModbusWaitUntilRetry = 0;
+
+                TimerTick = 0;
             }
 
-
+            public static int TimerTick { get; set; }
             public static int PortNumber { get; set; }
             public static string IPAdress { get; set; }
 

@@ -19,6 +19,8 @@ namespace UniconGS
             uiRunoSelection.Click += uiRunoSelection_Click;
             uiPiconGSSelection.Click += uiPiconGSSelection_Click;
             uiPicon2Selection.Click += uiPicon2Selection_Click;
+            uiPiconGSLida4DSelection.Click += uiPiconGSLida4DSelection_Click;
+            uiPiconGSLida2DSelection.Click += uiPiconGSLida2DSelection_Click;
             //uiLuxometr.Click += uiLuxometr_Click;
         }
 
@@ -85,6 +87,32 @@ namespace UniconGS
             var mainWindow = new MainWindow
             {
                 Title = "БЭМН Конфигуратор Минск ГОРСВЕТ - ПИКОН2"
+            };
+            this.Hide();
+
+            mainWindow.Show();
+            mainWindow.Closed += this.ChildWindowClosed;
+        }
+
+        private void uiPiconGSLida4DSelection_Click(object sender, RoutedEventArgs e)
+        {
+            DeviceSelection.SelectedDevice = (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET;
+            var mainWindow = new MainWindow
+            {
+                Title = "БЭМН Конфигуратор Минск ГОРСВЕТ - ПИКОН ГС2 (Лида, 4 дискретных модуля)"
+            };
+            this.Hide();
+
+            mainWindow.Show();
+            mainWindow.Closed += this.ChildWindowClosed;
+        }
+
+        private void uiPiconGSLida2DSelection_Click(object sender, RoutedEventArgs e)
+        {
+            DeviceSelection.SelectedDevice = (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET;
+            var mainWindow = new MainWindow
+            {
+                Title = "БЭМН Конфигуратор Минск ГОРСВЕТ - ПИКОН ГС2 (Лида, 2 дискретных модуля)"
             };
             this.Hide();
 

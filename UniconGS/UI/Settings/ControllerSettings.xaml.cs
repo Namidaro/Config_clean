@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.ComponentModel;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media.Media3D;
@@ -49,6 +50,7 @@ namespace UniconGS.UI.Settings
         private Picon2Settings _picon2Settings;
         private bool _isWriteSettings;
         private bool _isUpdateable = false;
+        private bool _isPicon2;
         //private ushort[] _logicConfig;
         //private ushort[] _lightingSchedule;
         //private ushort[] _backlightSchedule;
@@ -59,7 +61,16 @@ namespace UniconGS.UI.Settings
         #endregion
 
         public bool IsAutonomous { get; set; }
-        public bool IsPicon2 { get; set; }
+
+        public bool IsPicon2
+        {
+            get { return _isPicon2; }
+            set
+            {
+                this._isPicon2 = value;
+                this.OnPropertyChanged("IsPicon2");
+            }
+        }
         public Config Config { get; set; }
 
         public ControllerSettings()
@@ -71,8 +82,9 @@ namespace UniconGS.UI.Settings
                 uiSignature.Visibility = Visibility.Collapsed;
                 uiPicon2ModuleInfo.Visibility = Visibility.Visible;
                 uiWriteAll.IsEnabled = false;
-                uiReadAll.IsEnabled = true;
-                IsPicon2 = true;
+                uiOpenSettings.IsEnabled = false;
+                uiReadAll.IsEnabled = false;
+                uiSaveSettings.IsEnabled = false;
             }
             else
             {
@@ -82,7 +94,6 @@ namespace UniconGS.UI.Settings
                 uiPicon2ModuleInfo.Visibility = Visibility.Collapsed;
                 uiWriteAll.IsEnabled = true;
                 uiReadAll.IsEnabled = true;
-                IsPicon2 = false;
             }
 
 
@@ -130,7 +141,7 @@ namespace UniconGS.UI.Settings
             ushort[] version = value.GetRange(8, 3).ToArray();
             ushort[] date = value.GetRange(16, 5).ToArray();
 
-            
+
 
             var devName = "Имя устройства: " + Converter.GetStringFromWords(deviceName) + ";\r\n";
             var v = "Версия:  " + ((byte)(version[1] >> 8)).ToString() + "."
@@ -506,13 +517,25 @@ namespace UniconGS.UI.Settings
 
         public void DisableAutonomus()
         {
-            this.uiPLCReset.IsEnabled = true;
-            this.uiSignature.IsEnabled = true;
-            this.uiPicon2ModuleInfo.IsEnabled = true;
-            //            this.uiReadAll.IsEnabled = false;
-
-            this.uiReadAll.IsEnabled = true;
-            this.uiWriteAll.IsEnabled = true;
+            if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
+            {
+                uiPLCReset.IsEnabled = false;
+                uiSignature.Visibility = Visibility.Collapsed;
+                uiPicon2ModuleInfo.Visibility = Visibility.Visible;
+                uiWriteAll.IsEnabled = false;
+                uiOpenSettings.IsEnabled = false;
+                uiReadAll.IsEnabled = false;
+                uiSaveSettings.IsEnabled = false;
+            }
+            else
+            {
+                uiPLCReset.IsEnabled = true;
+                uiSignature.IsEnabled = true;
+                uiSignature.Visibility = Visibility.Visible;
+                uiPicon2ModuleInfo.Visibility = Visibility.Collapsed;
+                uiWriteAll.IsEnabled = true;
+                uiReadAll.IsEnabled = true;
+            }
         }
 
         private void uiPicon2ModuleInfo_Click(object sender, RoutedEventArgs e)
@@ -536,6 +559,15 @@ namespace UniconGS.UI.Settings
         public static byte HIBYTE(long v)
         {
             return (byte)(v >> 8);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string fieldName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(fieldName));
+            }
         }
     }
 }
