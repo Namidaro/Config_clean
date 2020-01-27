@@ -77,9 +77,11 @@ namespace UniconGS
             }
         }
 
+        public static bool IsLida { get; set; }
+
+
         public MainWindow()
         {
-
             InitializeComponent();
 
             _semaphoreSlim = new SemaphoreSlim(1, 1);
@@ -115,8 +117,12 @@ namespace UniconGS
                 uiFuseErrors.Visibility = Visibility.Collapsed;
                 uiTurnOnError.Visibility = Visibility.Collapsed;
                 uiPicon2ChannelManagement.Visibility = Visibility.Visible;
+
+
+
+                IsLida = false;
             }
-            else
+            if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS || DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_RUNO)
             {
                 uiPicon2ConfigurationViewTab.Visibility = Visibility.Collapsed;
                 picon2ScheduleTab.Visibility = Visibility.Collapsed;
@@ -126,6 +132,21 @@ namespace UniconGS
                 uiFuseErrors.Visibility = Visibility.Visible;
                 uiTurnOnError.Visibility = Visibility.Visible;
                 uiPicon2ChannelManagement.Visibility = Visibility.Collapsed;
+
+                IsLida = false;
+            }
+            if ((DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET || DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET))
+            {
+                uiPicon2ConfigurationViewTab.Visibility = Visibility.Collapsed;
+                picon2ScheduleTab.Visibility = Visibility.Collapsed;
+                uiPicon2ConfigurationView.Visibility = Visibility.Collapsed;
+                uiPicon2ModuleRequests.Visibility = Visibility.Collapsed;
+
+                uiFuseErrors.Visibility = Visibility.Visible;
+                uiTurnOnError.Visibility = Visibility.Visible;
+                uiPicon2ChannelManagement.Visibility = Visibility.Collapsed;
+
+                IsLida = true;
             }
             InitSlots();
 
@@ -294,9 +315,25 @@ namespace UniconGS
                         //await uiTime.Update();
                         await uiSignalGSMLevel.Update();
                     }
-                    else
+                    else if(DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS || DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_RUNO)
                     {
                         await uiPiconDiagnostics.Update();
+                        //await uiTime.Update();
+                        await uiSignalGSMLevel.Update();
+                        await uiRuno3Diagnostics.Update();
+                        await uiDiagnosticsErrors.Update();
+                    }
+                    else if(DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
+                    {
+                        await uiPiconGSDiagnosticsLida4D.Update();
+                        //await uiTime.Update();
+                        await uiSignalGSMLevel.Update();
+                        await uiRuno3Diagnostics.Update();
+                        await uiDiagnosticsErrors.Update();
+                    }
+                    else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET)
+                    {
+                        await uiPiconGSDiagnosticsLida2D.Update();
                         //await uiTime.Update();
                         await uiSignalGSMLevel.Update();
                         await uiRuno3Diagnostics.Update();
@@ -323,6 +360,24 @@ namespace UniconGS
                         await uiMeter.Update();
                     }
                     if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS)
+                    {
+                        await uiChannelsManagment.Update();
+                        await uiErrors.Update();
+                        await uiFuseErrors.Update();
+                        await uiTurnOnError.Update();
+                        await uiStates.Update();
+                        await uiMeter.Update();
+                    }
+                    if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
+                    {
+                        await uiChannelsManagment.Update();
+                        await uiErrors.Update();
+                        await uiFuseErrors.Update();
+                        await uiTurnOnError.Update();
+                        await uiStates.Update();
+                        await uiMeter.Update();
+                    }
+                    if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET)
                     {
                         await uiChannelsManagment.Update();
                         await uiErrors.Update();
@@ -422,7 +477,7 @@ namespace UniconGS
 
         private void RunDCOMInfo()
         {
-            this.RunProcess(new FileInfo(Directory.GetCurrentDirectory() + @"\Minsk2.chm"));
+            this.RunProcess(new FileInfo(Directory.GetCurrentDirectory() + @"\Minsk3.chm"));
         }
 
         private bool RunProcess(FileInfo processFileInfo)
@@ -537,7 +592,7 @@ namespace UniconGS
                         MessageBox.Show("Не удалось подключиться по GSM-каналу. Введен неправильный IP-адрес.", "Ошибка");
                         return;
                     }
-                
+
 
                     TcpClient client = new TcpClient(ResultGSM.IPAdress, ResultGSM.PortNumber);
                     client.ReceiveTimeout = 10000;
@@ -1020,6 +1075,29 @@ namespace UniconGS
                     uiPicon2Diagnostics.Visibility = Visibility.Hidden;
 
                 }
+                else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
+                {
+                    uiRuno3Diagnostics.Visibility = Visibility.Hidden;
+                    uiScroll.Visibility = Visibility.Hidden;
+                    uiScrollViewerLida4D.Visibility = Visibility.Visible;
+                    uiDiagnosticsErrors.Visibility = Visibility.Visible;
+                    uiPiconGSDiagnosticsLida4D.Visibility = Visibility.Visible;
+                    uiScrollViewerPicon2.Visibility = Visibility.Hidden;
+                    uiPicon2Diagnostics.Visibility = Visibility.Hidden;
+                    uiSheduleEconomy.Visibility = Visibility.Collapsed;
+                }
+                else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET)
+                {
+                    uiRuno3Diagnostics.Visibility = Visibility.Hidden;
+                    uiScroll.Visibility = Visibility.Hidden;
+                    uiScrollViewerLida2D.Visibility = Visibility.Visible;
+                    uiDiagnosticsErrors.Visibility = Visibility.Visible;
+                    uiPiconGSDiagnosticsLida2D.Visibility = Visibility.Visible;
+                    uiScrollViewerPicon2.Visibility = Visibility.Hidden;
+                    uiPicon2Diagnostics.Visibility = Visibility.Hidden;
+                    uiSheduleEconomy.Visibility = Visibility.Collapsed;
+
+                }
                 else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
                 {
 
@@ -1041,6 +1119,8 @@ namespace UniconGS
                 this.uiSettings.IsAutonomous = _isAutonomous;
                 this.uiTime.SetAutonomus();
                 this.uiPiconDiagnostics.SetAutonomus();
+                this.uiPiconGSDiagnosticsLida2D.SetAutonomus();
+                this.uiPiconGSDiagnosticsLida4D.SetAutonomus();
                 this.uiPicon2DiagnosticsErrors.SetAutonomus();
                 this.uiRuno3Diagnostics.SetAutonomus();
                 this.uiSystemJournal.SetAutonomous();
@@ -1121,7 +1201,7 @@ namespace UniconGS
         {
             uiSettings.uiPLCReset.IsEnabled = true;
             uiSettings.uiSignature.IsEnabled = true;
-            if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
+            if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2 || DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET || DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
             {
                 uiSettings.uiWriteAll.IsEnabled = false;
                 uiSettings.uiReadAll.IsEnabled = false;
@@ -1161,6 +1241,8 @@ namespace UniconGS
                 uiScrollViewer.Visibility = Visibility.Hidden;
                 uiDiagnosticsErrors.Visibility = Visibility.Hidden;
                 uiPiconDiagnostics.Visibility = Visibility.Hidden;
+                uiPiconGSDiagnosticsLida2D.Visibility = Visibility.Hidden;
+                uiPiconGSDiagnosticsLida4D.Visibility = Visibility.Hidden;
 
                 //uiDiscretScroll.Visibility = Visibility.Hidden;
             }
@@ -1171,8 +1253,34 @@ namespace UniconGS
                 uiScrollViewer.Visibility = Visibility.Visible;
                 uiDiagnosticsErrors.Visibility = Visibility.Visible;
                 uiPiconDiagnostics.Visibility = Visibility.Visible;
+                uiPiconGSDiagnosticsLida2D.Visibility = Visibility.Hidden;
+                uiPiconGSDiagnosticsLida4D.Visibility = Visibility.Hidden;
 
 
+            }
+            else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
+            {
+                uiRuno3Diagnostics.Visibility = Visibility.Hidden;
+                uiScroll.Visibility = Visibility.Hidden;
+                uiScrollViewerLida4D.Visibility = Visibility.Visible;
+                uiDiagnosticsErrors.Visibility = Visibility.Visible;
+                uiPiconDiagnostics.Visibility = Visibility.Hidden;
+                uiPiconGSDiagnosticsLida2D.Visibility = Visibility.Hidden;
+                uiPiconGSDiagnosticsLida4D.Visibility = Visibility.Visible;
+
+                uiSheduleEconomy.Visibility = Visibility.Collapsed;
+            }
+            else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET)
+            {
+                uiRuno3Diagnostics.Visibility = Visibility.Hidden;
+                uiScroll.Visibility = Visibility.Hidden;
+                uiScrollViewerLida2D.Visibility = Visibility.Visible;
+                uiDiagnosticsErrors.Visibility = Visibility.Visible;
+                uiPiconDiagnostics.Visibility = Visibility.Hidden;
+                uiPiconGSDiagnosticsLida2D.Visibility = Visibility.Visible;
+                uiPiconGSDiagnosticsLida4D.Visibility = Visibility.Hidden;
+
+                uiSheduleEconomy.Visibility = Visibility.Collapsed;
             }
             else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
             {
@@ -1181,6 +1289,8 @@ namespace UniconGS
                 //uiScrollViewer.Visibility = Visibility.Visible;
                 uiPicon2Diagnostics.Visibility = Visibility.Visible;
                 uiPicon2DiagnosticsErrors.Visibility = Visibility.Visible;
+                uiPiconGSDiagnosticsLida2D.Visibility = Visibility.Hidden;
+                uiPiconGSDiagnosticsLida4D.Visibility = Visibility.Hidden;
 
             }
             (this.uiMainControl.Items[0] as TabItem).Visibility = Visibility.Collapsed;

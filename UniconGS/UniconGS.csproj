@@ -246,6 +246,9 @@
     <Compile Include="UI\Picon2\ViewModel\PICON2ConfigCheckBoxControlViewModel.cs" />
     <Compile Include="UI\Picon2\ViewModel\PICON2ConfigurationModeViewModel.cs" />
     <Compile Include="UI\Picon2\ViewModel\Picon2LightingSheduleViewModel.cs" />
+    <Compile Include="UI\PiconGSDiagnosticsLida2D.xaml.cs">
+      <DependentUpon>PiconGSDiagnosticsLida2D.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Schedule\SolarSchedule\CityCoordinates.cs" />
     <Compile Include="UI\Schedule\SolarSchedule\Solar.cs" />
     <Compile Include="UI\Picon2ChannelManagement.xaml.cs">
@@ -351,6 +354,10 @@
     <Page Include="UI\Picon2\Picon2LightingSheduleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\PiconGSDiagnosticsLida2D.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Runo3Diagnostics.xaml">
       <SubType>Designer</SubType>

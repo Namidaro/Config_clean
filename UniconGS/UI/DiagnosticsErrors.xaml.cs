@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using UniconGS.Interfaces;
 using System.Threading;
+using UniconGS.Enums;
 
 namespace UniconGS.UI
 {
@@ -29,6 +30,16 @@ namespace UniconGS.UI
         public DiagnosticsErrors()
         {
             InitializeComponent();
+            if (!(DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET))
+            {
+                this.uiModule4Fail.Visibility = Visibility.Visible;
+                this.uiModule5Fail.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.uiModule4Fail.Visibility = Visibility.Collapsed;
+                this.uiModule5Fail.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void DisableAll()
@@ -39,6 +50,7 @@ namespace UniconGS.UI
                         this.uiModule3Fail.Value =
                             this.uiModule4Fail.Value =
                                 this.uiModule5Fail.Value = null;
+           
             this.SetInfo();
         }
 
@@ -48,9 +60,18 @@ namespace UniconGS.UI
             this.uiModule1Fail.Value = value[7]; // - реле
             this.uiModule2Fail.Value = value[8]; // - дискрет 1
             this.uiModule3Fail.Value = value[9]; // - дискрет 2 
-            this.uiModule4Fail.Value = value[10]; // - дискрет 3
-            this.uiModule5Fail.Value = value[11]; // - дискрет 4 
-            this.SetInfo();
+            if (!(DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET))
+            {
+                this.uiModule4Fail.Value = value[10]; // - дискрет 3
+                this.uiModule5Fail.Value = value[11]; // - дискрет 4 
+            }
+            else
+            {
+                this.uiModule4Fail.Visibility = Visibility.Collapsed;
+                this.uiModule5Fail.Visibility = Visibility.Collapsed;
+            }
+
+                this.SetInfo();
 
         }
 

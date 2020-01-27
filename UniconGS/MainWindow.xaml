@@ -305,6 +305,30 @@
                                         <uniconGsUi:PiconGSDiagnostics x:Name="uiPiconDiagnostics" 
                                                                        Visibility="Collapsed" />
                                     </ScrollViewer>
+                                    <ScrollViewer
+                                        x:Name="uiScrollViewerLida4D"
+                                        Grid.Column="3"
+                                        Grid.ColumnSpan="2"
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        HorizontalScrollBarVisibility="Auto"
+                                        VerticalScrollBarVisibility="Disabled"
+                                        Visibility="Collapsed">
+                                        <uniconGsUi:PiconGSDiagnostics x:Name="uiPiconGSDiagnosticsLida4D" 
+                                                                       Visibility="Collapsed" />
+                                    </ScrollViewer>
+                                    <ScrollViewer
+                                        x:Name="uiScrollViewerLida2D"
+                                        Grid.Column="3"
+                                        Grid.ColumnSpan="2"
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        HorizontalScrollBarVisibility="Auto"
+                                        VerticalScrollBarVisibility="Disabled"
+                                        Visibility="Collapsed">
+                                        <uniconGsUi:PiconGSDiagnosticsLida2D x:Name="uiPiconGSDiagnosticsLida2D" 
+                                                                       Visibility="Collapsed" />
+                                    </ScrollViewer>
 
                                     <ScrollViewer
                                         x:Name="uiScrollViewerPicon2"

@@ -391,7 +391,71 @@ namespace UniconGS.UI.Configuration
                             }
                         }
                     }
-                    for (int i = 0; i < 11; i++)
+                    for (int i = 0; i < 44; i++)
+                    {
+                        if (!this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
+                                item.SetEnabled(i);
+                            }
+                        }
+                        else
+                            foreach (var item in this._maswks)
+                            {
+                                if (item.isChecked(i))
+                                    item.SetEnabled(i);
+                            }
+                    }
+                }
+                else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET)
+                {
+
+                    for (int i = 0; i < 22; i++)
+                    {
+                        if (this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
+                                if (!item.isChecked(i))
+                                    item.SetDisable(i);
+
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 22; i++)
+                    {
+                        if (!this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
+                                item.SetEnabled(i);
+                            }
+                        }
+                        else
+                            foreach (var item in this._maswks)
+                            {
+                                if (item.isChecked(i))
+                                    item.SetEnabled(i);
+                            }
+                    }
+                }
+                else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
+                {
+
+                    for (int i = 0; i < 44; i++)
+                    {
+                        if (this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
+                                if (!item.isChecked(i))
+                                    item.SetDisable(i);
+
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 44; i++)
                     {
                         if (!this.uiErrorMatrix.isChecked(i))
                         {
@@ -591,10 +655,76 @@ namespace UniconGS.UI.Configuration
                         {
                             if (!item.isChecked(i))
                                 item.SetDisable(i);
+                            else
+                                item.SetEnabled(i);
                         }
                     }
                 }
-                for (int i = 0; i < 11; i++)
+                for (int i = 0; i < 44; i++)
+                {
+                    if (!this.uiErrorMatrix.isChecked(i))
+                    {
+                        foreach (var item in this._maswks)
+                        {
+                            item.SetEnabled(i);
+                        }
+                    }
+                    else
+                        foreach (var item in this._maswks)
+                        {
+                            if (item.isChecked(i))
+                                item.SetEnabled(i);
+                        }
+                }
+            }
+            else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
+            {
+                for (int i = 0; i < 44; i++)
+                {
+                    if (this.uiErrorMatrix.isChecked(i))
+                    {
+                        foreach (var item in this._maswks)
+                        {
+                            if (!item.isChecked(i))
+                                item.SetDisable(i);
+                            else
+                                item.SetEnabled(i);
+                        }
+                    }
+                }
+                for (int i = 0; i < 44; i++)
+                {
+                    if (!this.uiErrorMatrix.isChecked(i))
+                    {
+                        foreach (var item in this._maswks)
+                        {
+                            item.SetEnabled(i);
+                        }
+                    }
+                    else
+                        foreach (var item in this._maswks)
+                        {
+                            if (item.isChecked(i))
+                                item.SetEnabled(i);
+                        }
+                }
+            }
+            else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET)
+            {
+                for (int i = 0; i < 22; i++)
+                {
+                    if (this.uiErrorMatrix.isChecked(i))
+                    {
+                        foreach (var item in this._maswks)
+                        {
+                            if (!item.isChecked(i))
+                                item.SetDisable(i);
+                            else
+                                item.SetEnabled(i);
+                        }
+                    }
+                }
+                for (int i = 0; i < 22; i++)
                 {
                     if (!this.uiErrorMatrix.isChecked(i))
                     {
@@ -613,7 +743,6 @@ namespace UniconGS.UI.Configuration
             }
             else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
             {
-
                 for (int i = 0; i < 44; i++)
                 {
                     if (this.uiErrorMatrix.isChecked(i))
@@ -625,7 +754,6 @@ namespace UniconGS.UI.Configuration
                         }
                     }
                 }
-
             }
             if (this.StopWork != null)
                 this.StopWork();

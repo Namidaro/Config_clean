@@ -86,7 +86,7 @@ namespace UniconGS.UI.Settings
                 uiReadAll.IsEnabled = false;
                 uiSaveSettings.IsEnabled = false;
             }
-            else
+            else if(DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS || DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_RUNO)
             {
                 uiPLCReset.IsEnabled = true;
                 uiSignature.IsEnabled = true;
@@ -94,6 +94,17 @@ namespace UniconGS.UI.Settings
                 uiPicon2ModuleInfo.Visibility = Visibility.Collapsed;
                 uiWriteAll.IsEnabled = true;
                 uiReadAll.IsEnabled = true;
+            }
+            else
+            {
+                uiPLCReset.IsEnabled = true;
+                uiSignature.IsEnabled = true;
+                uiSignature.Visibility = Visibility.Visible;
+                uiPicon2ModuleInfo.Visibility = Visibility.Collapsed;
+                uiWriteAll.IsEnabled = false;
+                uiOpenSettings.IsEnabled = false;
+                uiReadAll.IsEnabled = false;
+                uiSaveSettings.IsEnabled = false;
             }
 
 
@@ -527,7 +538,7 @@ namespace UniconGS.UI.Settings
                 uiReadAll.IsEnabled = false;
                 uiSaveSettings.IsEnabled = false;
             }
-            else
+            else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS || DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_RUNO)
             {
                 uiPLCReset.IsEnabled = true;
                 uiSignature.IsEnabled = true;
@@ -535,6 +546,17 @@ namespace UniconGS.UI.Settings
                 uiPicon2ModuleInfo.Visibility = Visibility.Collapsed;
                 uiWriteAll.IsEnabled = true;
                 uiReadAll.IsEnabled = true;
+            }
+            else
+            {
+                uiPLCReset.IsEnabled = true;
+                uiSignature.IsEnabled = true;
+                uiSignature.Visibility = Visibility.Visible;
+                uiPicon2ModuleInfo.Visibility = Visibility.Collapsed;
+                uiWriteAll.IsEnabled = false;
+                uiOpenSettings.IsEnabled = false;
+                uiReadAll.IsEnabled = false;
+                uiSaveSettings.IsEnabled = false;
             }
         }
 

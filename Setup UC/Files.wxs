@@ -20,7 +20,7 @@
 	      <File Id='SystemWindowsInteractivitydll' DiskId='1' Name='System.Windows.Interactivity.dll'/>
 	      <File Id='Prismdll' DiskId='1' Name='Prism.dll'/>
 	      <File Id='MicrosoftPracticesServiceLocationdll' DiskId='1' Name='Microsoft.Practices.ServiceLocation.dll'/>
-        <File Id='Minsk2chm' DiskId='1' Name='Minsk2.chm'/>
+        <File Id='Minsk2chm' DiskId='1' Name='Minsk3.chm'/>
 
         <File Id='InnovativeGeometryAngle' DiskId='1' Name='Innovative.Geometry.Angle.dll' />
         <File Id='InnovativeSolarCalculator' DiskId='1' Name='Innovative.SolarCalculator.dll' />

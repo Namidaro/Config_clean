@@ -313,7 +313,7 @@ namespace UniconGS.UI.Picon2.ModuleRequests
             ModbusSpeedList = new List<long>();
             InitializeModbusSpeedList();
             //SelectedSpeed = ModbusSpeedList.First();
-            SelectedSpeed = 0;
+            SelectedSpeed = ModbusSpeedList[1];//115200
             ResponseAwait = 0;
             BitValues = false;
             ParityOdd = false;
@@ -323,6 +323,7 @@ namespace UniconGS.UI.Picon2.ModuleRequests
             TransmitEnableDelay = 0;
             TransmitDisableDelay = 0;
             Config = new ushort[PACKAGE_LENGTH];
+            RaisePropertyChanged();
         }
         #endregion
 

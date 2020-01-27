@@ -78,6 +78,97 @@ namespace UniconGS.UI.Channels
             uiChannel8.Value = null;
         }
 
+        private void SetChannelsValueLida(ushort[] value)
+        {
+            var outErrorsBits = Converter.GetBitsFromWords(new[] { value[2], value[3] });
+            var localCommandsBits = Converter.GetBitsFromWords(new[] { value[0], value[1] });
+
+            var controls = new BitArray(new[] { (byte)BitConverter.GetBytes(value[4]).GetValue(1) }).OfType<bool>()
+                .ToArray();
+
+            uiChannel1.Value = new List<bool>
+            {
+                outErrorsBits[0],
+                outErrorsBits[1],
+                outErrorsBits[2],
+                localCommandsBits[0],
+                localCommandsBits[1],
+                localCommandsBits[2],
+                controls[0]
+            };
+            uiChannel2.Value = new List<bool>
+            {
+                outErrorsBits[4],
+                outErrorsBits[5],
+                outErrorsBits[6],
+                localCommandsBits[4],
+                localCommandsBits[5],
+                localCommandsBits[6],
+                controls[1]
+            };
+            uiChannel3.Value = new List<bool>
+            {
+                outErrorsBits[8],
+                outErrorsBits[9],
+                outErrorsBits[10],
+                localCommandsBits[8],
+                localCommandsBits[9],
+                localCommandsBits[10],
+                controls[2]
+            };
+            uiChannel4.Value = new List<bool>
+            {
+                outErrorsBits[12],
+                outErrorsBits[13],
+                outErrorsBits[14],
+                localCommandsBits[12],
+                localCommandsBits[13],
+                localCommandsBits[14],
+                controls[3]
+            };
+            uiChannel5.Value = new List<bool>
+            {
+                outErrorsBits[16],
+                outErrorsBits[17],
+                outErrorsBits[18],
+                localCommandsBits[16],
+                localCommandsBits[17],
+                localCommandsBits[18],
+                controls[4]
+            };
+            uiChannel6.Value = new List<bool>
+            {
+                outErrorsBits[20],
+                outErrorsBits[21],
+                outErrorsBits[22],
+                localCommandsBits[20],
+                localCommandsBits[21],
+                localCommandsBits[22],
+                controls[5]
+            };
+            uiChannel7.Value = new List<bool>
+            {
+                outErrorsBits[24],
+                outErrorsBits[25],
+                outErrorsBits[26],
+                localCommandsBits[24],
+                localCommandsBits[25],
+                localCommandsBits[26],
+                controls[6]
+            };
+            uiChannel8.Value = new List<bool>
+            {
+                outErrorsBits[28],
+                outErrorsBits[29],
+                outErrorsBits[30],
+                localCommandsBits[28],
+                localCommandsBits[29],
+                localCommandsBits[30],
+                controls[7]
+            };
+
+        }
+
         private void SetChannelsValue(ushort[] value)
         {
             var outErrorsBits = Converter.GetBitsFromWords(new[] { value[2], value[3] });
@@ -172,10 +263,178 @@ namespace UniconGS.UI.Channels
         {
             if (IsEnabled)
             {
-                //if (_semaphoreSlim.CurrentCount == 0) return;
-                // await _semaphoreSlim.WaitAsync();
+                try
+                {
+                    await WriteValueToDevice(MainWindow.IsLida, sender, value);
+                }
+                catch (IndexOutOfRangeException ex)
+                {
+                    MessageBox.Show("Неизвестно состояние канала, дождитесь обновления.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
 
-                var tmp = new List<bool>();
+        private async Task WriteValueToDevice(bool _isLida, object sender, List<bool> value)
+        {
+            var tmp = new List<bool>();
+            if (_isLida)
+            {
+
+                if (sender.Equals(uiChannel1))
+                {
+                    var val = value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { val[0], val[1], val[2], true });
+                    var tmp1 = uiChannel2.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel3.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel4.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel5.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel6.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel7.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel8.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                }
+                else if (sender.Equals(uiChannel2))
+                {
+                    var tmp1 = uiChannel1.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    var val = value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { val[0], val[1], val[2], true });
+                    tmp1 = uiChannel3.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel4.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel5.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel6.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel7.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel8.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                }
+                else if (sender.Equals(uiChannel3))
+                {
+                    var tmp1 = uiChannel1.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel2.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    var val = value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { val[0], val[1], val[2], true });
+                    tmp1 = uiChannel4.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel5.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel6.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel7.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel8.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                }
+                else if (sender.Equals(uiChannel4))
+                {
+                    var tmp1 = uiChannel1.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel2.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel3.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    var val = value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { val[0], val[1], val[2], true });
+                    tmp1 = uiChannel5.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel6.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel7.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel8.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                }
+                else if (sender.Equals(uiChannel5))
+                {
+                    var tmp1 = uiChannel1.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel2.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel3.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel4.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    var val = value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { val[0], val[1], val[2], true });
+                    tmp1 = uiChannel6.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel7.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel8.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                }
+                else if (sender.Equals(uiChannel6))
+                {
+                    var tmp1 = uiChannel1.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel2.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel3.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel4.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel5.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    var val = value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { val[0], val[1], val[2], true });
+                    tmp1 = uiChannel7.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel8.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                }
+                else if (sender.Equals(uiChannel7))
+                {
+                    var tmp1 = uiChannel1.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel2.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel3.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel4.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel5.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel6.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    var val = value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { val[0], val[1], val[2], true });
+                    tmp1 = uiChannel8.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                }
+                else if (sender.Equals(uiChannel8))
+                {
+                    var tmp1 = uiChannel1.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel2.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel3.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel4.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel5.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel6.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    tmp1 = uiChannel7.Value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { tmp1[0], tmp1[1], tmp1[2], false });
+                    var val = value.GetRange(3, 3);
+                    tmp.AddRange(new List<bool> { val[0], val[1], val[2], true });
+                }
+            }
+            else
+            {
                 if (sender.Equals(uiChannel1))
                 {
                     var val = value.GetRange(3, 3);
@@ -309,8 +568,7 @@ namespace UniconGS.UI.Channels
                     tmp1 = uiChannel8.Value.GetRange(3, 3);
                     tmp.AddRange(new List<bool> { tmp1[0], false, tmp1[2], tmp1[1] });
                 }
-                else if
-                    (sender.Equals(uiChannel8))
+                else if (sender.Equals(uiChannel8))
                 {
                     var tmp1 = uiChannel1.Value.GetRange(3, 3);
                     tmp.AddRange(new List<bool> { tmp1[0], false, tmp1[2], tmp1[1] });
@@ -329,29 +587,23 @@ namespace UniconGS.UI.Channels
                     var val = value.GetRange(3, 3);
                     tmp.AddRange(new List<bool> { val[0], false, val[2], val[1] });
                 }
-                
-
-                await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x0000, Converter.GetWordsFromBits(tmp));
-
-
-                _writeValue = tmp;
-
-                //if (_semaphoreSlim.CurrentCount == 0)
-                //{
-                //    _semaphoreSlim.Release();
-                //}
-                //DataTransfer.SetTopInQueue(this, Accsess.Write, false);
             }
+
+
+            await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x0000, Converter.GetWordsFromBits(tmp));
+
+            _writeValue = tmp;
+
         }
 
-        private void RunWorkerCompleted(ushort[] res)
-        {
-            Value = res;
-            if (res == null)
-                DisableAll();
-            else
-                SetChannelsValue(res);
-        }
+        //private void RunWorkerCompleted(ushort[] res)
+        //{
+        //    Value = res;
+        //    if (res == null)
+        //        DisableAll();
+        //    else
+        //        SetChannelsValue(res);
+        //}
 
 
         private void CommandSetted(bool res)
@@ -390,14 +642,12 @@ namespace UniconGS.UI.Channels
             //if (_semaphoreSlim.CurrentCount == 0) return;
             //await _semaphoreSlim.WaitAsync();
 
-            if (DeviceSelection.SelectedDevice == (byte)DeviceSelectionEnum.DEVICE_PICON2)
+            if (MainWindow.IsLida)
             {
                 ushort[] value = await RTUConnectionGlobal.GetDataByAddress(1, 0x0000, 5);
-                //var res = DataTransfer.ReadWords(Querer);
-                //Dispatcher.BeginInvoke(new ReadComplete(RunWorkerCompleted), DispatcherPriority.SystemIdle, res);
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    SetChannelsValue(value);
+                    SetChannelsValueLida(value);
                 });
 
 
@@ -406,8 +656,6 @@ namespace UniconGS.UI.Channels
             else
             {
                 ushort[] value = await RTUConnectionGlobal.GetDataByAddress(1, 0x0000, 5);
-                //var res = DataTransfer.ReadWords(Querer);
-                //Dispatcher.BeginInvoke(new ReadComplete(RunWorkerCompleted), DispatcherPriority.SystemIdle, res);
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     SetChannelsValue(value);

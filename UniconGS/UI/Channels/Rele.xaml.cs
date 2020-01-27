@@ -38,8 +38,15 @@ namespace UniconGS.UI.Channels
 
         private void uiReleButton_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (this.IsEnabled && this.ValueChanged != null)
+            try
+            {
+               if (this.IsEnabled && this.ValueChanged != null)
                 this.ValueChanged(this, Convert.ToBoolean(this.uiReleButton.IsChecked));
+            }
+            catch (Exception ex)
+            {
+            }
+            
 
         }
     }

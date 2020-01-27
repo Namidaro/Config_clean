@@ -78,6 +78,20 @@ namespace UniconGS.UI.DiscretModules
                 uiPicon2State4.Visibility = Visibility.Visible;
 
             }
+            else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
+            {
+                uiGroupBox1.Visibility = Visibility.Visible;
+                uiGroupBox3.Visibility = Visibility.Visible;
+                uiGroupBox4.Visibility = Visibility.Visible;
+                uiGroupBox2.Visibility = Visibility.Visible;
+            }
+            else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET)
+            {
+                uiGroupBox1.Visibility = Visibility.Visible;
+                uiGroupBox2.Visibility = Visibility.Visible;
+                uiGroupBox4.Visibility = Visibility.Collapsed;
+                uiGroupBox3.Visibility = Visibility.Collapsed;
+            }
         }
 
 

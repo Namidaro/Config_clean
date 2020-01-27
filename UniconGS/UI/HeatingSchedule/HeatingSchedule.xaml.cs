@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using UniconGS.Enums;
 using UniconGS.Source;
 
 namespace UniconGS.UI.HeatingSchedule
@@ -27,6 +28,8 @@ namespace UniconGS.UI.HeatingSchedule
 
         #region Globals
         private Heating _value = new Heating();
+
+        private ushort _baseAddress;
         #endregion
 
         public Heating HeatingValue
@@ -94,7 +97,12 @@ namespace UniconGS.UI.HeatingSchedule
 
             uiExport.IsEnabled = uiImport.IsEnabled = false;
 
-            ushort[] value = await RTUConnectionGlobal.GetDataByAddress(1, 0x9108, 2);   
+            if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET || DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
+                _baseAddress = 0x8E06;
+            else
+                _baseAddress = 0x9108;
+
+            ushort[] value = await RTUConnectionGlobal.GetDataByAddress(1, _baseAddress, 2);   
 
            
             ImportComplete(value);
@@ -136,7 +144,12 @@ namespace UniconGS.UI.HeatingSchedule
         {
             uiExport.IsEnabled = uiImport.IsEnabled = false;
             {
-               await RTUConnectionGlobal.SendDataByAddressAsync(1, 0x9108, Value);             
+                if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET || DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
+                    _baseAddress = 0x8E06;
+                else
+                    _baseAddress = 0x9108;
+
+                await RTUConnectionGlobal.SendDataByAddressAsync(1, _baseAddress, Value);             
             }
             ExportComplete(true);
             uiExport.IsEnabled = uiImport.IsEnabled = true;
