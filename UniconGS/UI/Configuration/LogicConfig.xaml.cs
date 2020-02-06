@@ -924,7 +924,7 @@ namespace UniconGS.UI.Configuration
                 {
                     var result = this.OpenFromFile(typeof(ChannelManagment));
                     if (Verify((result as ChannelManagment).GetValue(), this._value.GetValue()))
-                        ShowMessage("Верификация прошла успешна", "Успех", MessageBoxImage.Information);
+                        ShowMessage("Верификация прошла успешна", "Выполнено", MessageBoxImage.Information);
                     else ShowMessage("Верификация не успешна", "Ошибка", MessageBoxImage.Error);
 
                 }

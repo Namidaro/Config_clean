@@ -888,7 +888,7 @@ namespace UniconGS.UI.Picon2.ViewModel
                 this.InitializeFromReadingData(_bytesFromDevice);
 
                 if (Verify(_bytesFromDevice, _bytesFromFile))
-                    MessageBox.Show("Верификация прошла успешна", "Успех");
+                    MessageBox.Show("Верификация прошла успешна", "Выполнено");
                 else MessageBox.Show("Верификация не успешна", "Ошибка");
                 
             }

@@ -397,20 +397,22 @@
             Grid.Row="3"
             Grid.Column="1"/>
         <UniformGrid
+            Width="700"
             Grid.Row="3"
             Grid.Column="1"
-            Margin="15,3"
+            Margin="3"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
-            Columns="5"
+            Columns="6"
             Rows="1">
             <Button
+                Width="100"
                Margin="3"
                 Command="{Binding ClearSchedule}"
                 IsEnabled="{Binding IsAutonomus, Converter={StaticResource BooleanReverceConverter}}"
-                Content="Очистить график" />
+                Content="Очистить" />
             <Button
-               Margin="3"
+               Margin="3,3,-3,3"
                 Command="{Binding GetSheduleFromFileCommand}"
                 Content="Прочитать из файла" />
             <Button
@@ -418,18 +420,26 @@
                 Command="{Binding SaveToFileCommand}"
                 Content="Сохранить в файл" />
             <Button
+                x:Name ="uiWritePicon2SchduleByMonth"
+                IsEnabled="{Binding IsAutonomus, Converter={StaticResource BooleanReverceConverter}}"
+                Margin="3"
+                Command="{Binding SendLightningScheduleByMonth}"
+                Content="Записать месяц" />
+            <Button
+                Width="100"
                 x:Name ="uiWritePicon2Schdule"
                 IsEnabled="{Binding IsAutonomus, Converter={StaticResource BooleanReverceConverter}}"
                 Margin="3"
                 Command="{Binding SendLightingShedule}"
                 Content="Записать" />
             <Button
+                Width="100"
                 x:Name ="uiReadPicon2Schdule"
                 IsEnabled="{Binding IsAutonomus, Converter={StaticResource BooleanReverceConverter}}"
                 Margin="3"
                 Command="{Binding GetLightingShedule}"
                 Content="Прочитать" />
-            
+
         </UniformGrid>
 
     </Grid>

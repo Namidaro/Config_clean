@@ -438,9 +438,6 @@
                   Margin="20,0,0,0" 
                   Visibility ="Visible" />
 
-
-
-
         <ListBox x:Name="uiDayter" Background="White"
     		     ItemContainerStyle="{DynamicResource ListBoxItemStyle}"
     		     ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
@@ -476,12 +473,19 @@
                         <RowDefinition Height="15"/>
                         <RowDefinition Height="27.667"/>
                         <RowDefinition Height="27.667"/>
+                        <RowDefinition Height="27.667"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="4" Foreground="Black" Text="Время" TextWrapping="Wrap"/>
                     <StackPanel x:Name="PART_TURNOFFDATE" DataContext="{Binding}" Margin="0" Grid.Row="1" Orientation="Horizontal" d:LayoutOverrides="GridBox" VerticalAlignment="Center">
-                        <Label Margin="4,0,11,0" VerticalAlignment="Center" Width="31" Height="22" Content="Вкл." HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
-
+                        <Label Margin="4,0,11,0" 
+                               VerticalAlignment="Center" 
+                               Width="31"
+                               Height="22" 
+                               Content="Вкл." 
+                               HorizontalContentAlignment="Left"
+                               VerticalContentAlignment="Center"
+                               HorizontalAlignment="Left"/>
                         <ComboBox x:Name="uiTurnOffDay" Style="{DynamicResource ComboBoxStyle}" Margin="0,0,0,0" Height="22"
     						HorizontalAlignment="Left" Width="45.334"
     						SelectedIndex="{Binding TurnOffDay, Mode=TwoWay, Converter={StaticResource IndexToValueConverter}}" MaxDropDownHeight="150">
@@ -517,12 +521,12 @@
                             <ComboBoxItem Content="30"/>
                             <ComboBoxItem Content="31"/>
                         </ComboBox>
-
-                        <Label Margin="4,0,0,0" VerticalAlignment="Center" Height="22" Content="/" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
-
-
-
-
+                        <Label Margin="4,0,0,0"
+                               VerticalAlignment="Center"
+                               Height="22" Content="/" 
+                               HorizontalContentAlignment="Right"
+                               VerticalContentAlignment="Center"
+                               HorizontalAlignment="Left"/>
                         <ComboBox x:Name="uiTurnOffMonth" Style="{DynamicResource ComboBoxStyle}" Margin="4,0,0,0" Height="22" 
     						HorizontalAlignment="Left" Width="45.334"
     						SelectedIndex="{Binding TurnOffMonth, Mode=TwoWay, Converter={StaticResource IndexToValueConverter}}" MaxDropDownHeight="150">
@@ -539,10 +543,16 @@
                             <ComboBoxItem Content="11"/>
                             <ComboBoxItem Content="12"/>
                         </ComboBox>
-
                     </StackPanel>
                     <StackPanel x:Name="PART_TURNOFFTIME" Margin="0" Grid.Row="6" Orientation="Horizontal" DataContext="{Binding}">
-                        <Label Margin="4,0,16,0" VerticalAlignment="Center" Height="22" Content="По" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                        <Label Margin="4,0,16,0" 
+                               VerticalAlignment="Center"
+                               Height="22" 
+                               Content="По"
+                               HorizontalContentAlignment="Right"
+                               VerticalContentAlignment="Center"
+                               HorizontalAlignment="Left"/>
+                      
 
                         <ComboBox x:Name="uiTurnOffHour" Style="{DynamicResource ComboBoxStyle}" Margin="11,0,0,0" Height="22" HorizontalAlignment="Left" Width="45.334"
     						SelectedIndex="{Binding Hour, Mode=TwoWay}" MaxDropDownHeight="150">
@@ -637,8 +647,15 @@
                             <ComboBoxItem Content="58"/>
                             <ComboBoxItem Content="59"/>
                         </ComboBox>
+
+                        
                     </StackPanel>
-                    <TextBlock Margin="0" Foreground="Black" Text="Дата" TextWrapping="Wrap" HorizontalAlignment="Center" d:LayoutOverrides="Height"/>
+                    <TextBlock Margin="0" 
+                               Foreground="Black" 
+                               Text="Дата" 
+                               TextWrapping="Wrap"
+                               HorizontalAlignment="Center" 
+                               d:LayoutOverrides="Height"/>
 
                     <StackPanel x:Name="PART_TURNONDATE" Margin="0" Grid.Row="2" Orientation="Horizontal" DataContext="{Binding}" VerticalAlignment="Center">
                         <Label Margin="4,0,2,0" VerticalAlignment="Center" Width="40" Height="22" Content="Выкл." HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
@@ -702,8 +719,18 @@
 
                     </StackPanel>
 
-                    <StackPanel x:Name="PART_TURNONTIME" Margin="0" Grid.Row="5" Orientation="Horizontal" DataContext="{Binding}">
-                        <Label Margin="4,0,23,0" VerticalAlignment="Center" Height="22" Content="С" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                    <StackPanel x:Name="PART_TURNONTIME"
+                                Margin="0" 
+                                Grid.Row="5"
+                                Orientation="Horizontal"
+                                DataContext="{Binding}">
+                        <Label Margin="4,0,23,0" 
+                               VerticalAlignment="Center"
+                               Height="22"
+                               Content="С"
+                               HorizontalContentAlignment="Right"
+                               VerticalContentAlignment="Center"
+                               HorizontalAlignment="Left"/>
 
                         <ComboBox x:Name="uiTurnOnHour" Style="{DynamicResource ComboBoxStyle}" Margin="12,2.833,0,2.833" Height="22"
     						HorizontalAlignment="Left" Width="45.334"
@@ -734,7 +761,13 @@
                             <ComboBoxItem Content="23"/>
                         </ComboBox>
 
-                        <Label Margin="5,0,1,0" VerticalAlignment="Center" Height="22" Content=":" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                        <Label Margin="5,0,1,0"
+                               VerticalAlignment="Center" 
+                               Height="22"
+                               Content=":" 
+                               HorizontalContentAlignment="Right"
+                               VerticalContentAlignment="Center" 
+                               HorizontalAlignment="Left"/>
 
                         <ComboBox x:Name="uiTurnOnMinute" Style="{DynamicResource ComboBoxStyle}" Margin="4,0,0,0" Height="22"
     						HorizontalAlignment="Left" Width="45.334"
@@ -800,16 +833,96 @@
                             <ComboBoxItem Content="58"/>
                             <ComboBoxItem Content="59"/>
                         </ComboBox>
-
+                       
+                    </StackPanel>
+                    <StackPanel x:Name="EconomyButton"
+                                Margin="0" 
+                                Grid.Row="7"
+                                Orientation="Vertical"
+                                >
+                        <Button x:Name="uiWriteEconomyButton" 
+                                Margin="1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                Height="25" Width="150" 
+                                Content="Записать экономию" 
+                                Command="{Binding WriteEconomyToDeviceCommand}"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
         </Border>
-        <Button x:Name="uiImport" VerticalAlignment="Top" Width="75" Content="Прочитать" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,0,8,0" Click="uiImport_Click"/>
-        <Button x:Name="uiExport" HorizontalAlignment="Right" Margin="0,0,88,0" VerticalAlignment="Top" Width="75" Content="Записать" Grid.Row="4" Grid.Column="1" d:LayoutOverrides="GridBox" Click="uiExport_Click"/>
-        <Button x:Name="uiSave" HorizontalAlignment="Right" Margin="0,0,169,0" VerticalAlignment="Top" Width="75" Content="Сохранить" Grid.Row="4" Grid.Column="1" d:LayoutOverrides="GridBox" Click="uiSave_Click"/>
-        <Button x:Name="uiOpen" HorizontalAlignment="Right" Margin="0,0,250,0" VerticalAlignment="Top" Width="75" Content="Открыть" Grid.Row="4" Grid.Column="1" d:LayoutOverrides="GridBox" Click="uiOpen_Click"/>
-        <Button x:Name ="uiClearAll" HorizontalAlignment="Right" Margin="0,0,331,0" VerticalAlignment="Top" Width="100" Content="Очистить график" Grid.Row="4" Grid.Column="1" d:LayoutOverrides="GridBox" Click="uiClearAll_Click" />
-        <Button x:Name="uiVerifySchedule" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="100" Content="Верифицировать" Grid.Row="4" Grid.Column="1" d:LayoutOverrides="GridBox" Click="uiVerifySchedule_Click"/>
+        <Button x:Name="uiImport" 
+                VerticalAlignment="Top" 
+                Width="75" 
+                Content="Прочитать" 
+                Grid.Row="4"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Right"
+                Margin="0,0,8,0"
+                Click="uiImport_Click"/>
+        <Button x:Name="uiExport"
+                HorizontalAlignment="Right"
+                Margin="0,0,88,0" 
+                VerticalAlignment="Top"
+                Width="75" 
+                Content="Записать" 
+                Grid.Row="4" 
+                Grid.Column="1"
+                d:LayoutOverrides="GridBox" 
+                Click="uiExport_Click"/>
+        <Button x:Name="uiExportByMonth"
+                HorizontalAlignment="Right"
+                Margin="0,0,169,0"
+                VerticalAlignment="Top"
+                Width="100" 
+                Content="Записать месяц"
+                Grid.Row="4"
+                Grid.Column="1"
+                d:LayoutOverrides="GridBox" 
+                
+                Click="uiExportByMonth_Click"/>
+        <Button x:Name="uiSave" 
+                HorizontalAlignment="Right"
+                Margin="0,0,275,0"
+                VerticalAlignment="Top"
+                Width="75" 
+                Content="Сохранить" 
+                Grid.Row="4" 
+                Grid.Column="1"
+                d:LayoutOverrides="GridBox"
+                Click="uiSave_Click"/>
+        <Button x:Name="uiOpen" 
+                HorizontalAlignment="Right"
+                Margin="0,0,355,0"
+                VerticalAlignment="Top"
+                Width="75" 
+                Content="Открыть"
+                Grid.Row="4"
+                Grid.Column="1"
+                d:LayoutOverrides="GridBox" 
+                Click="uiOpen_Click"/>
+        <Button x:Name ="uiClearAll" 
+                HorizontalAlignment="Right"
+                Margin="0,0,435,0" 
+                VerticalAlignment="Top" 
+                Width="100" 
+                Content="Очистить график" 
+                Grid.Row="4" 
+                Grid.Column="1" 
+                d:LayoutOverrides="GridBox" 
+                Click="uiClearAll_Click" />
+        <Button x:Name="uiVerifySchedule" 
+                HorizontalAlignment="Left" 
+                Margin="0,0,0,0" 
+                VerticalAlignment="Top" 
+                Width="100" 
+                Content="Верифицировать"
+                Grid.Row="4" 
+                Grid.Column="1"
+                d:LayoutOverrides="GridBox" 
+                Click="uiVerifySchedule_Click"/>
+        
     </Grid>
 </UserControl>

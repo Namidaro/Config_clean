@@ -42,6 +42,7 @@ namespace UniconGS.UI.Schedule
         private double _latitude;
         private double _longitude;
         private ICommand _calculateSchedule;
+        private ICommand _writeEconomyToDeviceCommand;
         private Dictionary<string, CityCoordinates> _coordinatesDictionary;
         private List<string> _cityList;
         private string _selectedCity;
@@ -150,6 +151,15 @@ namespace UniconGS.UI.Schedule
                     (this._calculateSchedule = new DelegateCommand(OnCalculateScheduleCommand));
             }
         }
+
+        public ICommand WriteEconomyToDeviceCommand
+        {
+            get
+            {
+                return this._writeEconomyToDeviceCommand ??
+                    (this._writeEconomyToDeviceCommand = new DelegateCommand(OnWriteEconomyToDeviceCommand));
+            }
+        }
         private void InitializeCityDictionary()
         {
 
@@ -229,8 +239,8 @@ namespace UniconGS.UI.Schedule
 
         public void SetAutonomous()
         {
-
-
+            this.uiWriteEconomyButton.IsEnabled = false;
+            this.uiExportByMonth.IsEnabled = false;
             this.uiExport.IsEnabled = false;
             this.uiImport.IsEnabled = false;
             this.uiClearAll.IsEnabled = false;
@@ -241,6 +251,8 @@ namespace UniconGS.UI.Schedule
 
         public void DisableAutonomous()
         {
+            this.uiWriteEconomyButton.IsEnabled =
+            this.uiExportByMonth.IsEnabled = true;
             this.uiExport.IsEnabled = true;
             this.uiImport.IsEnabled = true;
             this.uiClearAll.IsEnabled = true;
@@ -286,7 +298,7 @@ namespace UniconGS.UI.Schedule
 
         public async Task UpdateState()
         {
-            uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = false;
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = false;
 
             if (Name == "uiLightingSchedule")
             {
@@ -311,7 +323,7 @@ namespace UniconGS.UI.Schedule
                 await this.ReadScheduleData(address);
             }
 
-            uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
         }
 
         private async Task ReadScheduleData(ushort startAddress)
@@ -334,7 +346,7 @@ namespace UniconGS.UI.Schedule
             this._value = GraphicValue.SetValue(this.InitializeGraphic(), value);
             this.UpdateBinding();
 
-            uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
         }
         public async void uiExport_Click(object sender, RoutedEventArgs e)
         {
@@ -375,7 +387,7 @@ namespace UniconGS.UI.Schedule
 
         public async Task WriteAll()
         {
-            uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiClearAll.IsEnabled = uiSave.IsEnabled = false;
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiClearAll.IsEnabled = uiSave.IsEnabled = false;
             {
                 try
                 {
@@ -417,7 +429,7 @@ namespace UniconGS.UI.Schedule
 
 
             }
-            uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
         }
 
         public void ExportComplete(bool res)
@@ -434,12 +446,12 @@ namespace UniconGS.UI.Schedule
                         "Запись графика в устройство", MessageBoxImage.Error);
                 }
             }
-            uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
         }
 
         private void uiOpen_Click(object sender, RoutedEventArgs e)
         {
-            uiExport.IsEnabled = uiImport.IsEnabled = uiClearAll.IsEnabled = uiVerifySchedule.IsEnabled = false;
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiClearAll.IsEnabled = uiVerifySchedule.IsEnabled = false;
             if (this.OpenFromFile != null)
             {
                 var result = this.OpenFromFile(typeof(GraphicValue));
@@ -455,7 +467,7 @@ namespace UniconGS.UI.Schedule
             }
             if (!MainWindow.isAutonomus)
             {
-                uiExport.IsEnabled = uiImport.IsEnabled = uiVerifySchedule.IsEnabled = uiClearAll.IsEnabled = true;
+                this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiVerifySchedule.IsEnabled = uiClearAll.IsEnabled = true;
             }
 
 
@@ -463,19 +475,19 @@ namespace UniconGS.UI.Schedule
 
         private void uiSave_Click(object sender, RoutedEventArgs e)
         {
-            uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = false;
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = false;
             if (this.SaveInFile != null)
             {
                 this.SaveInFile(this._value, typeof(GraphicValue));
             }
             if (MainWindow.isAutonomus == true)
             {
-                uiClearAll.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = false;
+                uiClearAll.IsEnabled = this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = false;
                 uiOpen.IsEnabled = uiSave.IsEnabled = true;
             }
             else
             {
-                uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
+                this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
             }
         }
 
@@ -596,7 +608,7 @@ namespace UniconGS.UI.Schedule
                 NullValue[i] = 0xFFFF;
             }
 
-            uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = false;
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = false;
             {
                 try
                 {
@@ -646,7 +658,7 @@ namespace UniconGS.UI.Schedule
 
 
             }
-            uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
         }
 
         private async void uiClearAll_Click(object sender, RoutedEventArgs e)
@@ -695,6 +707,46 @@ namespace UniconGS.UI.Schedule
             this.UpdateBinding();
         }
 
+        private async void OnWriteEconomyToDeviceCommand()
+        {
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiClearAll.IsEnabled = uiSave.IsEnabled = false;
+            {
+                try
+                {
+                    ushort baseAddr = 0;
+                    if (Name == "uiLightingSchedule")
+                    {
+                        baseAddr = 0x8500;
+                    }
+                    if (Name == "uiBacklightSchedule")
+                    {
+                        baseAddr = 0x8802;
+                    }
+                    if (Name == "uiIlluminationSchedule")
+                    {
+                        baseAddr = 0x8B04;
+                    }
+                    if (Name == "uiEnergySchedule")
+                    {
+                        baseAddr = 0x8E06;
+                    }
+
+                    ushort monthAddr = (ushort)(baseAddr + uiMonther.SelectedIndex * 64);
+                    var eco = Value.Skip(62).Take(2).ToArray();
+                    await RTUConnectionGlobal.SendDataByAddressAsync(1,
+                        (ushort)(monthAddr + 62), eco);
+                    ExportComplete(true);
+                }
+
+                catch
+                {
+                    ExportComplete(false);
+                }
+            }
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
+        }
+
+
 
         protected void OnPropertyChanged(string name)
         {
@@ -725,7 +777,7 @@ namespace UniconGS.UI.Schedule
                 {
                     var result = this.OpenFromFile(typeof(GraphicValue));
                     if (Verify((result as GraphicValue).GetValue(), GetGraphicValue()))
-                        ShowMessage("Верификация прошла успешна", "Успех", MessageBoxImage.Information);
+                        ShowMessage("Верификация прошла успешна", "Выполнено", MessageBoxImage.Information);
                     else ShowMessage("Верификация не успешна", "Ошибка", MessageBoxImage.Error);
 
                 }
@@ -753,6 +805,57 @@ namespace UniconGS.UI.Schedule
             }
             return result;
 
+        }
+
+        private async void uiExportByMonth_Click(object sender, RoutedEventArgs e)
+        {
+            await WriteScheduleByMonth();
+        }
+
+        private async Task WriteScheduleByMonth()
+        {
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiClearAll.IsEnabled = uiSave.IsEnabled = false;
+            {
+                try
+                {
+                    ushort baseAddr = 0;
+                    if (Name == "uiLightingSchedule")
+                    {
+                        baseAddr = 0x8500;
+                    }
+                    if (Name == "uiBacklightSchedule")
+                    {
+                        baseAddr = 0x8802;
+                    }
+                    if (Name == "uiIlluminationSchedule")
+                    {
+                        baseAddr = 0x8B04;
+                    }
+                    if (Name == "uiEnergySchedule")
+                    {
+                        baseAddr = 0x8E06;
+                    }
+
+                    ushort monthAddr = (ushort)(baseAddr + uiMonther.SelectedIndex * 64);
+
+                    for (ushort i = 0; i < 48; i += 16)
+                    {
+                        var r = Value.Skip(i).Take(16).ToArray();
+                        await RTUConnectionGlobal.SendDataByAddressAsync(1,
+                            (ushort)(monthAddr + i), r);
+                    }
+                    var last = Value.Skip(48).Take(14).ToArray();
+                    await RTUConnectionGlobal.SendDataByAddressAsync(1,
+                        (ushort)(monthAddr + 48), last);
+                    ExportComplete(true);
+                }
+
+                catch
+                {
+                    ExportComplete(false);
+                }
+            }
+            this.uiWriteEconomyButton.IsEnabled = uiExportByMonth.IsEnabled = uiExport.IsEnabled = uiImport.IsEnabled = uiOpen.IsEnabled = uiSave.IsEnabled = uiClearAll.IsEnabled = true;
         }
     }
 }

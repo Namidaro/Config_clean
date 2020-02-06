@@ -73,6 +73,8 @@ namespace UniconGS.UI.Picon2.ViewModel
         private ICommand _storeToFileCommand;
         private ICommand _clearScheduleCommand;
 
+        private ICommand _sendLightningScheduleByMonth;
+
         private double _latitude;
         private double _longitude;
         private ICommand _calculateScheduleCommand;
@@ -439,7 +441,17 @@ namespace UniconGS.UI.Picon2.ViewModel
                        (this._sendLightingShedule = new DelegateCommand(OnSendLightingShedule));
             }
         }
-
+        /// <summary>
+        ///      Представляет команду отправки конфигурационных данных на устройство
+        /// </summary>
+        public ICommand SendLightningScheduleByMonth
+        {
+            get
+            {
+                return this._sendLightningScheduleByMonth ??
+                       (this._sendLightningScheduleByMonth = new DelegateCommand(OnSendLightningScheduleByMonth));
+            }
+        }
 
         /// <summary>
         ///     Представляет команду считывания графика освещения с устройства
@@ -609,7 +621,7 @@ namespace UniconGS.UI.Picon2.ViewModel
             byte[] _bytesFromDevice = GetDeviceDataFromView();
 
             if (Verify(_bytesFromDevice, _bytesFromFile))
-                MessageBox.Show("Верификация прошла успешна", "Успех");
+                MessageBox.Show("Верификация прошла успешна", "Выполнено");
             else MessageBox.Show("Верификация не успешна", "Ошибка");
         }
 
@@ -1093,13 +1105,44 @@ namespace UniconGS.UI.Picon2.ViewModel
             }
         }
 
+        private async void OnSendLightningScheduleByMonth()
+        {
+            try
+            {
+                int currentMonthNumber = CurrentMothIndex;
+
+                byte[] initializingData = this.GetDeviceDataFromView();
+                byte[] writeData = initializingData.Skip(currentMonthNumber * 128).Take(128).ToArray();
+                int countMainWritePackage = 4;
+                ushort lenghtMainPackage = 0x10;
+                ushort startingAddress = (ushort)(StartAddress + currentMonthNumber * 0x40);
+
+                for (int i = 0; i < countMainWritePackage; i++)
+                {
+
+                    int startIndexPackage = i * lenghtMainPackage * 2; //*2 - т.к. здесь байты, а там слова
+                    await RTUConnectionGlobal.SendDataByAddressAsync(1,
+                        (ushort)(startingAddress + lenghtMainPackage * i),
+                        ArrayExtension.ByteArrayToUshortArray(this.GetPackageFromAllDAta(startIndexPackage, lenghtMainPackage * 2, writeData)));
+                    await Task.Delay(500);  //задержка для записи графиков,
+                                            //видимо иногда устройство не успевает обработать
+                                            //предыдущий пакет, когда в него уже запихивают новый
+                }
+                MessageBox.Show("Запись графиков прошла успешно", "Запись графиков", MessageBoxButtons.OK);
+
+            }
+            catch (Exception error)
+            {
+                this.InteractWithError(error);
+            }
+        }
 
         private async void OnSendLightingShedule()
         {
             try
             {
-                int countMainWritePachage = 12;
-                ushort lenghtMainPackage = 0x40;
+                int countMainWritePachage = 48;
+                ushort lenghtMainPackage = 0x10;
                 //var tasks = new Task[countMainWritePachage + 1];
 
 
@@ -1110,7 +1153,7 @@ namespace UniconGS.UI.Picon2.ViewModel
                     await RTUConnectionGlobal.SendDataByAddressAsync(1,
                         (ushort)(StartAddress + lenghtMainPackage * i),
                         ArrayExtension.ByteArrayToUshortArray(this.GetPackageFromAllDAta(startIndexPackage, lenghtMainPackage * 2, initializingData)));
-                    await Task.Delay(100);  //задержка для записи графиков,
+                    await Task.Delay(500);  //задержка для записи графиков,
                                             //видимо иногда устройство не успевает обработать
                                             //предыдущий пакет, когда в него уже запихивают новый
                 }
