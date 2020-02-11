@@ -70,6 +70,7 @@ namespace UniconGS.UI.Schedule
             this.uiCityList.ItemsSource = CityList.ToList();
             this.uiCityList.SelectedItem = CityList.First();
             this.uiCalculateButton.Command = CalculateScheduleCommand;
+            this.uiWriteEconomyButton.Command = WriteEconomyToDeviceCommand;
 
             //if(Name== "uiLightingSchedule")
             //{
@@ -436,7 +437,8 @@ namespace UniconGS.UI.Schedule
         {
             if (res)
             {
-
+                this.ShowMessage("Запись прошла успешно.",
+                                        "Выполнено", MessageBoxImage.Information);
             }
             else
             {
@@ -731,11 +733,28 @@ namespace UniconGS.UI.Schedule
                         baseAddr = 0x8E06;
                     }
 
-                    ushort monthAddr = (ushort)(baseAddr + uiMonther.SelectedIndex * 64);
-                    var eco = Value.Skip(62).Take(2).ToArray();
-                    await RTUConnectionGlobal.SendDataByAddressAsync(1,
+                    for (ushort i = 0; i < 12; i++)
+                    {
+                        ushort monthAddr = (ushort)(baseAddr + i * 64);
+                        var eco = Value.Skip(62).Take(2).ToArray();
+                        await RTUConnectionGlobal.SendDataByAddressAsync(1,
                         (ushort)(monthAddr + 62), eco);
+                    }
+
+                    var ecoDate = Value.Skip(768).Take(2).ToArray();
+                    await RTUConnectionGlobal.SendDataByAddressAsync(1,
+                        (ushort)(baseAddr + 768), ecoDate);
                     ExportComplete(true);
+
+                    //ushort monthAddr = (ushort)(baseAddr + uiMonther.SelectedIndex * 64);
+                    //var eco = Value.Skip(62).Take(2).ToArray();
+                    //await RTUConnectionGlobal.SendDataByAddressAsync(1,
+                    //    (ushort)(monthAddr + 62), eco);
+
+                    //var ecoDate = Value.Skip(768).Take(2).ToArray();
+                    //await RTUConnectionGlobal.SendDataByAddressAsync(1,
+                    //    (ushort)(monthAddr + 768), ecoDate);
+                    //ExportComplete(true);
                 }
 
                 catch

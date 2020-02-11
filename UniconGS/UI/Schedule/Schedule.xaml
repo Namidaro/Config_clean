@@ -848,7 +848,9 @@
                                 HorizontalContentAlignment="Center"
                                 Height="25" Width="150" 
                                 Content="Записать экономию" 
-                                Command="{Binding WriteEconomyToDeviceCommand}"/>
+                                ToolTip="Записывает только экономию в текущий месяц и общую дату начала и конца экономии для текущего графика"
+                                DataContext="{Binding}"
+                                Command="{Binding Path=WriteEconomyToDeviceCommand, Mode=TwoWay}"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
@@ -881,7 +883,7 @@
                 Grid.Row="4"
                 Grid.Column="1"
                 d:LayoutOverrides="GridBox" 
-                
+                ToolTip="Записывает только график текущего месяца БЕЗ экономии"
                 Click="uiExportByMonth_Click"/>
         <Button x:Name="uiSave" 
                 HorizontalAlignment="Right"
