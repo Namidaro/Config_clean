@@ -859,11 +859,11 @@ namespace UniconGS.UI.Schedule
 
                     for (ushort i = 0; i < 48; i += 16)
                     {
-                        var r = Value.Skip(i).Take(16).ToArray();
+                        var r = Value.Skip(uiMonther.SelectedIndex * 64 + i).Take(16).ToArray();
                         await RTUConnectionGlobal.SendDataByAddressAsync(1,
                             (ushort)(monthAddr + i), r);
                     }
-                    var last = Value.Skip(48).Take(14).ToArray();
+                    var last = Value.Skip(uiMonther.SelectedIndex * 64 + 48).Take(14).ToArray();
                     await RTUConnectionGlobal.SendDataByAddressAsync(1,
                         (ushort)(monthAddr + 48), last);
                     ExportComplete(true);
