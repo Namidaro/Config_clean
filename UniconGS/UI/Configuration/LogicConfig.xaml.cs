@@ -220,7 +220,6 @@ namespace UniconGS.UI.Configuration
                         else
                         {
                             this.MatrixUpdate();
-
                             if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_RUNO)
                             {
                                 for (int i = 0; i < 11; i++)
@@ -235,8 +234,35 @@ namespace UniconGS.UI.Configuration
                                     }
                                 }
                             }
-
                             if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS)
+                            {
+                                for (int i = 0; i < 44; i++)
+                                {
+                                    if (this.uiErrorMatrix.isChecked(i))
+                                    {
+                                        foreach (var item in this._maswks)
+                                        {
+                                            if (!item.isChecked(i))
+                                                item.SetDisable(i);
+                                        }
+                                    }
+                                }
+                            }
+                            if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET)
+                            {
+                                for (int i = 0; i < 22; i++)
+                                {
+                                    if (this.uiErrorMatrix.isChecked(i))
+                                    {
+                                        foreach (var item in this._maswks)
+                                        {
+                                            if (!item.isChecked(i))
+                                                item.SetDisable(i);
+                                        }
+                                    }
+                                }
+                            }
+                            if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
                             {
                                 for (int i = 0; i < 44; i++)
                                 {
@@ -264,8 +290,6 @@ namespace UniconGS.UI.Configuration
                                     }
                                 }
                             }
-
-
                         }
                     }
                     this._afterError = false;
@@ -330,8 +354,7 @@ namespace UniconGS.UI.Configuration
             await UpdateState();
             if (this.ShowMessage != null)
             {
-                this.ShowMessage("Чтение конфигурации логики прошло успешно",
-                       "Чтение конфигурации логики", MessageBoxImage.Information);
+                
             }
 
 
@@ -340,162 +363,181 @@ namespace UniconGS.UI.Configuration
 
         private void ImportComplete(ushort[] value)
         {
-            if (value != null)
+            try
             {
-                this.ClearAll();
-                this._value.SetData(value);
-                this.UpdateBinding();
-                this.MatrixUpdate();
-                if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_RUNO)
+                if (value != null)
                 {
-                    for (int i = 0; i < 11; i++)
+                    this.ClearAll();
+                    this._value.SetData(value);
+                    this.UpdateBinding();
+                    this.MatrixUpdate();
+                    if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_RUNO)
                     {
-                        if (this.uiErrorMatrix.isChecked(i))
+                        for (int i = 0; i < 11; i++)
                         {
-                            foreach (var item in this._maswks)
+                            if (this.uiErrorMatrix.isChecked(i))
                             {
-                                if (!item.isChecked(i))
-                                    item.SetDisable(i);
+                                foreach (var item in this._maswks)
+                                {
+                                    if (!item.isChecked(i))
+                                        item.SetDisable(i);
+                                }
                             }
                         }
-                    }
-                    for (int i = 0; i < 11; i++)
-                    {
-                        if (!this.uiErrorMatrix.isChecked(i))
+                        for (int i = 0; i < 11; i++)
                         {
-                            foreach (var item in this._maswks)
+                            if (!this.uiErrorMatrix.isChecked(i))
                             {
-                                item.SetEnabled(i);
-                            }
-                        }
-                        else
-                            foreach (var item in this._maswks)
-                            {
-                                if (item.isChecked(i))
+                                foreach (var item in this._maswks)
+                                {
                                     item.SetEnabled(i);
+                                }
                             }
-                    }
-                }
-                else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS)
-                {
-
-                    for (int i = 0; i < 44; i++)
-                    {
-                        if (this.uiErrorMatrix.isChecked(i))
-                        {
-                            foreach (var item in this._maswks)
-                            {
-                                if (!item.isChecked(i))
-                                    item.SetDisable(i);
-
-                            }
+                            else
+                                foreach (var item in this._maswks)
+                                {
+                                    if (item.isChecked(i))
+                                        item.SetEnabled(i);
+                                }
                         }
                     }
-                    for (int i = 0; i < 44; i++)
+                    else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS)
                     {
-                        if (!this.uiErrorMatrix.isChecked(i))
+
+                        for (int i = 0; i < 44; i++)
                         {
-                            foreach (var item in this._maswks)
+                            if (this.uiErrorMatrix.isChecked(i))
                             {
-                                item.SetEnabled(i);
+                                foreach (var item in this._maswks)
+                                {
+                                    if (!item.isChecked(i))
+                                        item.SetDisable(i);
+
+                                }
                             }
                         }
-                        else
-                            foreach (var item in this._maswks)
+                        for (int i = 0; i < 44; i++)
+                        {
+                            if (!this.uiErrorMatrix.isChecked(i))
                             {
-                                if (item.isChecked(i))
+                                foreach (var item in this._maswks)
+                                {
                                     item.SetEnabled(i);
+                                }
                             }
-                    }
-                }
-                else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET)
-                {
-
-                    for (int i = 0; i < 22; i++)
-                    {
-                        if (this.uiErrorMatrix.isChecked(i))
-                        {
-                            foreach (var item in this._maswks)
-                            {
-                                if (!item.isChecked(i))
-                                    item.SetDisable(i);
-
-                            }
+                            else
+                                foreach (var item in this._maswks)
+                                {
+                                    if (item.isChecked(i))
+                                        item.SetEnabled(i);
+                                }
                         }
                     }
-                    for (int i = 0; i < 22; i++)
+                    else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET)
                     {
-                        if (!this.uiErrorMatrix.isChecked(i))
+
+                        for (int i = 0; i < 22; i++)
                         {
-                            foreach (var item in this._maswks)
+                            if (this.uiErrorMatrix.isChecked(i))
                             {
-                                item.SetEnabled(i);
+                                foreach (var item in this._maswks)
+                                {
+                                    if (!item.isChecked(i))
+                                        item.SetDisable(i);
+
+                                }
                             }
                         }
-                        else
-                            foreach (var item in this._maswks)
+                        for (int i = 0; i < 22; i++)
+                        {
+                            if (!this.uiErrorMatrix.isChecked(i))
                             {
-                                if (item.isChecked(i))
+                                foreach (var item in this._maswks)
+                                {
                                     item.SetEnabled(i);
+                                }
                             }
-                    }
-                }
-                else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
-                {
-
-                    for (int i = 0; i < 44; i++)
-                    {
-                        if (this.uiErrorMatrix.isChecked(i))
-                        {
-                            foreach (var item in this._maswks)
-                            {
-                                if (!item.isChecked(i))
-                                    item.SetDisable(i);
-
-                            }
+                            else
+                                foreach (var item in this._maswks)
+                                {
+                                    if (item.isChecked(i))
+                                        item.SetEnabled(i);
+                                }
                         }
                     }
-                    for (int i = 0; i < 44; i++)
+                    else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
                     {
-                        if (!this.uiErrorMatrix.isChecked(i))
+
+                        for (int i = 0; i < 44; i++)
                         {
-                            foreach (var item in this._maswks)
+                            if (this.uiErrorMatrix.isChecked(i))
                             {
-                                item.SetEnabled(i);
+                                foreach (var item in this._maswks)
+                                {
+                                    if (!item.isChecked(i))
+                                        item.SetDisable(i);
+
+                                }
                             }
                         }
-                        else
-                            foreach (var item in this._maswks)
+                        for (int i = 0; i < 44; i++)
+                        {
+                            if (!this.uiErrorMatrix.isChecked(i))
                             {
-                                if (item.isChecked(i))
+                                foreach (var item in this._maswks)
+                                {
                                     item.SetEnabled(i);
+                                }
                             }
+                            else
+                                foreach (var item in this._maswks)
+                                {
+                                    if (item.isChecked(i))
+                                        item.SetEnabled(i);
+                                }
+                        }
                     }
-                }
-                else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
-                {
-
-                    for (int i = 0; i < 44; i++)
+                    else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
                     {
-                        if (this.uiErrorMatrix.isChecked(i))
+
+                        for (int i = 0; i < 44; i++)
                         {
-                            foreach (var item in this._maswks)
+                            if (this.uiErrorMatrix.isChecked(i))
                             {
-                                if (!item.isChecked(i))
-                                    item.SetDisable(i);
+                                foreach (var item in this._maswks)
+                                {
+                                    if (!item.isChecked(i))
+                                        item.SetDisable(i);
+                                }
                             }
                         }
                     }
+
+                }
+                else
+                {
+                    if (this.ShowMessage != null)
+                    {
+                        this.ShowMessage("Во время чтения конфигурации логики из устройства произошла ошибка.",
+                            "Чтение конфигурации логики", MessageBoxImage.Error);
+                    }
                 }
 
+                this.ShowMessage("Чтение конфигурации логики прошло успешно",
+                           "Чтение конфигурации логики", MessageBoxImage.Information);
             }
-            else
+            catch(Exception ex)
             {
-                if (this.ShowMessage != null)
+                this._value.InitializeChannelByDefault();
+                this.SetComboBoxItems();
+                this.UpdateBinding();
+                this.InitializeEvents();
+                var msg = MessageBox.Show("Провести очистку сейчас?", "Очистка", MessageBoxButton.YesNo);
+                if(msg.ToString().Equals(System.Windows.Forms.DialogResult.Yes.ToString()))
                 {
-                    this.ShowMessage("Во время чтения конфигурации логики из устройства произошла ошибка.",
-                        "Чтение конфигурации логики", MessageBoxImage.Error);
+                    WriteAll();
                 }
+                return;
             }
             if (!MainWindow.isAutonomus)
                 uiLogicConfigOpen.IsEnabled =
@@ -505,11 +547,11 @@ namespace UniconGS.UI.Configuration
         {
 
             await WriteAll();
-            if (this.ShowMessage != null)
-            {
-                this.ShowMessage("Запись конфигурации логики в устройство прошла успешно.",
-                    "Запись конфигурации логики в устройство", MessageBoxImage.Information);
-            }
+            //if (this.ShowMessage != null)
+            //{
+            //    this.ShowMessage("Запись конфигурации логики в устройство прошла успешно.",
+            //        "Запись конфигурации логики в устройство", MessageBoxImage.Information);
+            //}
 
         }
 
@@ -544,7 +586,9 @@ namespace UniconGS.UI.Configuration
         {
             if (res)
             {
-
+                this.ShowMessage(
+                   "Запись прошла успешно.",
+                   "Запись конфигурации", MessageBoxImage.Information);
             }
             else
             {
@@ -607,156 +651,175 @@ namespace UniconGS.UI.Configuration
         }
         private void SetOpenedConfig(ChannelManagment result)
         {
-            this.ClearAll();
-            if (this.StartWork != null)
-                this.StartWork();
-            this._value = result;
-            this.UpdateBinding();
-            this.MatrixUpdate();
-            if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_RUNO)
+            try
             {
-                for (int i = 0; i < 11; i++)
+                this.ClearAll();
+                if (this.StartWork != null)
+                    this.StartWork();
+                //this._value = result;
+                this._value.SetData((result as ChannelManagment).GetValue());
+                this.UpdateBinding();
+                this.MatrixUpdate();
+                if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_RUNO)
                 {
-                    if (this.uiErrorMatrix.isChecked(i))
+                    for (int i = 0; i < 11; i++)
                     {
-                        foreach (var item in this._maswks)
+                        if (this.uiErrorMatrix.isChecked(i))
                         {
-                            if (!item.isChecked(i))
-                                item.SetDisable(i);
-                            else
+                            foreach (var item in this._maswks)
+                            {
+                                if (!item.isChecked(i))
+                                    item.SetDisable(i);
+                                else
+                                    item.SetEnabled(i);
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 11; i++)
+                    {
+                        if (!this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
                                 item.SetEnabled(i);
+                            }
+                        }
+                        else
+                            foreach (var item in this._maswks)
+                            {
+                                if (item.isChecked(i))
+                                    item.SetEnabled(i);
+                            }
+                    }
+                }
+                else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS)
+                {
+                    for (int i = 0; i < 44; i++)
+                    {
+                        if (this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
+                                if (!item.isChecked(i))
+                                    item.SetDisable(i);
+                                else
+                                    item.SetEnabled(i);
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 44; i++)
+                    {
+                        if (!this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
+                                item.SetEnabled(i);
+                            }
+                        }
+                        else
+                            foreach (var item in this._maswks)
+                            {
+                                if (item.isChecked(i))
+                                    item.SetEnabled(i);
+                            }
+                    }
+                }
+                else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
+                {
+                    for (int i = 0; i < 44; i++)
+                    {
+                        if (this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
+                                if (!item.isChecked(i))
+                                    item.SetDisable(i);
+                                else
+                                    item.SetEnabled(i);
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 44; i++)
+                    {
+                        if (!this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
+                                item.SetEnabled(i);
+                            }
+                        }
+                        else
+                            foreach (var item in this._maswks)
+                            {
+                                if (item.isChecked(i))
+                                    item.SetEnabled(i);
+                            }
+                    }
+                }
+                else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET)
+                {
+                    for (int i = 0; i < 22; i++)
+                    {
+                        if (this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
+                                if (!item.isChecked(i))
+                                    item.SetDisable(i);
+                                else
+                                    item.SetEnabled(i);
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 22; i++)
+                    {
+                        if (!this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
+                                item.SetEnabled(i);
+                            }
+                        }
+                        else
+                            foreach (var item in this._maswks)
+                            {
+                                if (item.isChecked(i))
+                                    item.SetEnabled(i);
+                            }
+                    }
+                }
+                else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
+                {
+                    for (int i = 0; i < 44; i++)
+                    {
+                        if (this.uiErrorMatrix.isChecked(i))
+                        {
+                            foreach (var item in this._maswks)
+                            {
+                                if (!item.isChecked(i))
+                                    item.SetDisable(i);
+                            }
                         }
                     }
                 }
-                for (int i = 0; i < 11; i++)
-                {
-                    if (!this.uiErrorMatrix.isChecked(i))
-                    {
-                        foreach (var item in this._maswks)
-                        {
-                            item.SetEnabled(i);
-                        }
-                    }
-                    else
-                        foreach (var item in this._maswks)
-                        {
-                            if (item.isChecked(i))
-                                item.SetEnabled(i);
-                        }
-                }
+                if (this.StopWork != null)
+                    this.StopWork();
             }
-            else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON_GS)
+            catch(Exception ex)
             {
-                for (int i = 0; i < 44; i++)
-                {
-                    if (this.uiErrorMatrix.isChecked(i))
-                    {
-                        foreach (var item in this._maswks)
-                        {
-                            if (!item.isChecked(i))
-                                item.SetDisable(i);
-                            else
-                                item.SetEnabled(i);
-                        }
-                    }
-                }
-                for (int i = 0; i < 44; i++)
-                {
-                    if (!this.uiErrorMatrix.isChecked(i))
-                    {
-                        foreach (var item in this._maswks)
-                        {
-                            item.SetEnabled(i);
-                        }
-                    }
-                    else
-                        foreach (var item in this._maswks)
-                        {
-                            if (item.isChecked(i))
-                                item.SetEnabled(i);
-                        }
-                }
+                this._value.InitializeChannelByDefault();
+                this.SetComboBoxItems();
+                this.UpdateBinding();
+                this.InitializeEvents();
+                if (this.StopWork != null)
+                    this.StopWork();
+                //var msg = MessageBox.Show("Провести очистку сейчас?", "Очистка", MessageBoxButton.YesNo);
+                //if (msg.ToString().Equals(System.Windows.Forms.DialogResult.Yes.ToString()))
+                //{
+                //    WriteAll();
+                //}
+                return;
             }
-            else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_4DISCRET)
-            {
-                for (int i = 0; i < 44; i++)
-                {
-                    if (this.uiErrorMatrix.isChecked(i))
-                    {
-                        foreach (var item in this._maswks)
-                        {
-                            if (!item.isChecked(i))
-                                item.SetDisable(i);
-                            else
-                                item.SetEnabled(i);
-                        }
-                    }
-                }
-                for (int i = 0; i < 44; i++)
-                {
-                    if (!this.uiErrorMatrix.isChecked(i))
-                    {
-                        foreach (var item in this._maswks)
-                        {
-                            item.SetEnabled(i);
-                        }
-                    }
-                    else
-                        foreach (var item in this._maswks)
-                        {
-                            if (item.isChecked(i))
-                                item.SetEnabled(i);
-                        }
-                }
-            }
-            else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICONGS_LIDA_2DISCRET)
-            {
-                for (int i = 0; i < 22; i++)
-                {
-                    if (this.uiErrorMatrix.isChecked(i))
-                    {
-                        foreach (var item in this._maswks)
-                        {
-                            if (!item.isChecked(i))
-                                item.SetDisable(i);
-                            else
-                                item.SetEnabled(i);
-                        }
-                    }
-                }
-                for (int i = 0; i < 22; i++)
-                {
-                    if (!this.uiErrorMatrix.isChecked(i))
-                    {
-                        foreach (var item in this._maswks)
-                        {
-                            item.SetEnabled(i);
-                        }
-                    }
-                    else
-                        foreach (var item in this._maswks)
-                        {
-                            if (item.isChecked(i))
-                                item.SetEnabled(i);
-                        }
-                }
-            }
-            else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
-            {
-                for (int i = 0; i < 44; i++)
-                {
-                    if (this.uiErrorMatrix.isChecked(i))
-                    {
-                        foreach (var item in this._maswks)
-                        {
-                            if (!item.isChecked(i))
-                                item.SetDisable(i);
-                        }
-                    }
-                }
-            }
-            if (this.StopWork != null)
-                this.StopWork();
         }
 
         private void ClearAll()

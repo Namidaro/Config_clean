@@ -163,19 +163,27 @@ namespace UniconGS.UI.Configuration
 
         public void SetData(object value)
         {
-            var tmp = (value as Array).OfType<ushort>().ToList();
-            int counter = 0;
-            for (int i = 0; i < this.Channels.Count; i++)
+            try
             {
-                this.Channels[i] = new Channel(tmp.GetRange(i * 6, 2).ToArray());
-                this.ChannelMasks[i] = new Mask(tmp.GetRange(i * 6 + 2, 4).ToArray());
-                counter = i * 6 + 2 + 4;
+                var tmp = (value as Array).OfType<ushort>().ToList();
+                int counter = 0;
+                for (int i = 0; i < this.Channels.Count; i++)
+                {
+                    this.Channels[i] = new Channel(tmp.GetRange(i * 6, 2).ToArray());
+                    this.ChannelMasks[i] = new Mask(tmp.GetRange(i * 6 + 2, 4).ToArray());
+                    counter = i * 6 + 2 + 4;
+                }
+                this.SecurityMask = new Mask(tmp.GetRange(counter, 4).ToArray());
+                this.ManagmentMask = new Mask(tmp.GetRange(counter + 4, 4).ToArray());
+                this.PowerMask = new Mask(tmp.GetRange(counter + 8, 4).ToArray());
+                this.AutomationTime = tmp[tmp.Count - 1];
+                this.SetErrorMask();
             }
-            this.SecurityMask = new Mask(tmp.GetRange(counter, 4).ToArray());
-            this.ManagmentMask = new Mask(tmp.GetRange(counter + 4, 4).ToArray());
-            this.PowerMask = new Mask(tmp.GetRange(counter + 8, 4).ToArray());
-            this.AutomationTime = tmp[tmp.Count - 1];
-            this.SetErrorMask();
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Неверная конфигурация устройства, рекомендуется провести очистку.", "Внимание");
+                throw;
+            }
         }
 
 

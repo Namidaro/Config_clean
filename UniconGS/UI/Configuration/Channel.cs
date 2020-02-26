@@ -80,15 +80,19 @@ namespace UniconGS.UI.Configuration
                     //Из слова сначала надо выделить байт.
                     //Либо сделать GraphicNumber типа слова и работать с ним
                     //как со словом.(рекомендуется)
-                    this.GraphicValue = value[0];
                     var tmp = BitConverter.GetBytes(value[1]);
+                    if (value[0] > 9 || tmp[0] > 9 || tmp[1] > 44)
+                        throw new Exception();
+
+                        this.GraphicValue = value[0];
                     this.ReleValue = tmp[0];
                     this.DiscretValue = tmp[1];
                 }
             }
             catch (Exception f)
             {
-                MessageBox.Show("Память заполнена FFFF.", "Внимание!");
+                //MessageBox.Show("Память заполнена FFFF.", "Внимание!");
+                throw;
             }
         }
 

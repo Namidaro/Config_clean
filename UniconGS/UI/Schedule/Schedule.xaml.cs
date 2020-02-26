@@ -352,35 +352,35 @@ namespace UniconGS.UI.Schedule
         public async void uiExport_Click(object sender, RoutedEventArgs e)
         {
             await WriteAll();
-            if (this.ShowMessage != null)
+            //if (this.ShowMessage != null)
             {
 
-                if (Name == "uiLightingSchedule")
-                {
+                //if (Name == "uiLightingSchedule")
+                //{
 
-                    this.ShowMessage("Запись графика освещения в устройство прошла успешно.",
-                        "Запись графика в устройство", MessageBoxImage.Information);
-                }
+                //    this.ShowMessage("Запись графика освещения в устройство прошла успешно.",
+                //        "Запись графика в устройство", MessageBoxImage.Information);
+                //}
 
-                if (Name == "uiBacklightSchedule")
-                {
+                //if (Name == "uiBacklightSchedule")
+                //{
 
-                    this.ShowMessage("Запись графика подсветки в устройство прошла успешно.",
-                        "Запись графика в устройство", MessageBoxImage.Information);
-                }
-                if (Name == "uiIlluminationSchedule")
-                {
+                //    this.ShowMessage("Запись графика подсветки в устройство прошла успешно.",
+                //        "Запись графика в устройство", MessageBoxImage.Information);
+                //}
+                //if (Name == "uiIlluminationSchedule")
+                //{
 
-                    this.ShowMessage("Запись графика иллюминации в устройство прошла успешно.",
-                        "Запись графика в устройство", MessageBoxImage.Information);
-                }
+                //    this.ShowMessage("Запись графика иллюминации в устройство прошла успешно.",
+                //        "Запись графика в устройство", MessageBoxImage.Information);
+                //}
 
-                if (Name == "uiEnergySchedule")
-                {
+                //if (Name == "uiEnergySchedule")
+                //{
 
-                    this.ShowMessage("Запись графика энергосбережения в устройство прошла успешно.",
-                        "Запись графика в устройство", MessageBoxImage.Information);
-                }
+                //    this.ShowMessage("Запись графика энергосбережения в устройство прошла успешно.",
+                //        "Запись графика в устройство", MessageBoxImage.Information);
+                //}
 
 
             }
