@@ -237,7 +237,8 @@
                             Height="25"
                             Margin="2"
                             VerticalAlignment="Center"
-                            SelectedIndex="{Binding .[0].GraphicValue, Mode=TwoWay}" />
+                            SelectedIndex="{Binding .[0].GraphicValue, Mode=TwoWay}"
+                            />
                         <ComboBox
                             x:Name="uiOutKU1"
                             Grid.Row="1"

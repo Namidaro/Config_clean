@@ -16,7 +16,7 @@ namespace UniconGS.UI.Configuration
                 {
                     return new List<string>
                     {
-                        "Нет",
+                    "Нет",
                     "График освещения",
                     "График подсветки",
                     "График иллюминации",
@@ -57,7 +57,7 @@ namespace UniconGS.UI.Configuration
                         //"Реле №4",
                         //"Реле №5",
                         //"Реле №6",
-                        //   "Реле №7",
+                        //"Реле №7",
                         //"Реле №8"
                     };
                 }

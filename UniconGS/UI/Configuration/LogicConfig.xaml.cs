@@ -109,23 +109,21 @@ namespace UniconGS.UI.Configuration
             this.uiLogicExport.IsEnabled = true;
             this.uiLogicImport.IsEnabled = true;
             this.uiVerifyConfig.IsEnabled = true;
-
         }
 
         public bool ValidateAutomationTime()
         {
-            var result = true;
             try
             {
                 var value = int.Parse(this.uiAutomationTime.Text);
-                if (value < 60 | value > 1000)
+                if (value < 60 | value > 1800)
                     throw new Exception();
             }
             catch (Exception)
             {
-                //result = false;
+                return false;
             }
-            return result;
+            return true;
         }
 
 
@@ -571,12 +569,11 @@ namespace UniconGS.UI.Configuration
                 ExportComplete(res);
                 uiLogicConfigOpen.IsEnabled =
                     uiLogicConfigSave.IsEnabled = uiLogicExport.IsEnabled = uiLogicImport.IsEnabled = true;
-                //DataTransfer.SetTopInQueue(this, Accsess.Write, false);
             }
             else
             {
                 this.ShowMessage(
-                    "Не верное значение времени перехода в автоматический режим. Значение должно быть в пределах [5;1800]",
+                    "Не верное значение времени перехода в автоматический режим. Значение должно быть в пределах [60;1800]",
                     "Запись конфигурации логики в устройство", MessageBoxImage.Warning);
 
             }
@@ -616,7 +613,7 @@ namespace UniconGS.UI.Configuration
             else
             {
                 this.ShowMessage(
-                    "Не верное значение времени перехода в автоматический режим. Значение должно быть в пределах [5;1800]",
+                    "Не верное значение времени перехода в автоматический режим. Значение должно быть в пределах [60;1800]",
                     "Запись конфигурации логики в устройство", MessageBoxImage.Warning);
             }
             if (MainWindow.isAutonomus == true)

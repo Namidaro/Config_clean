@@ -84,7 +84,7 @@ namespace UniconGS.UI.Configuration
                     if (value[0] > 9 || tmp[0] > 9 || tmp[1] > 44)
                         throw new Exception();
 
-                        this.GraphicValue = value[0];
+                    this.GraphicValue = value[0];
                     this.ReleValue = tmp[0];
                     this.DiscretValue = tmp[1];
                 }
