@@ -63,7 +63,7 @@ namespace UniconGS.UI.Configuration
             }
             else if (DeviceSelection.SelectedDevice == (int)DeviceSelectionEnum.DEVICE_PICON2)
             {
-                Mask.Height = 125.333;
+                Mask.Height = 125.333;  
             }
 
 
@@ -116,7 +116,7 @@ namespace UniconGS.UI.Configuration
             try
             {
                 var value = int.Parse(this.uiAutomationTime.Text);
-                if (value < 60 | value > 1800)
+                if (value < 30 | value > 1800)
                     throw new Exception();
             }
             catch (Exception)
@@ -573,7 +573,7 @@ namespace UniconGS.UI.Configuration
             else
             {
                 this.ShowMessage(
-                    "Не верное значение времени перехода в автоматический режим. Значение должно быть в пределах [60;1800]",
+                    "Не верное значение времени перехода в автоматический режим. Значение должно быть в пределах [30;1800]",
                     "Запись конфигурации логики в устройство", MessageBoxImage.Warning);
 
             }
@@ -613,7 +613,7 @@ namespace UniconGS.UI.Configuration
             else
             {
                 this.ShowMessage(
-                    "Не верное значение времени перехода в автоматический режим. Значение должно быть в пределах [60;1800]",
+                    "Не верное значение времени перехода в автоматический режим. Значение должно быть в пределах [30;1800]",
                     "Запись конфигурации логики в устройство", MessageBoxImage.Warning);
             }
             if (MainWindow.isAutonomus == true)
