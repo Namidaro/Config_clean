@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,12 +27,26 @@ namespace UniconGS.UI.Journal
 
         private void uiOk_Click(object sender, RoutedEventArgs e)
         {
+            Execute();
+        }
+
+        private void Execute()
+        {
             if (this.uiPSW.Password == "bemn")
                 DialogResult = true;
             else
                 DialogResult = false;
 
             this.Close();
+
+        }
+
+        private void uiPSW_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Return)
+            {
+                Execute();
+            }
         }
     }
 }

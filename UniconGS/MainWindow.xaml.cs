@@ -59,6 +59,7 @@ namespace UniconGS
         private Thread _work;
         //private int _updateRate = 1;
         public static bool isAutonomus = false;
+        public static bool isGSM = false;
         private static SemaphoreSlim _semaphoreSlim;
         private bool _b;
         public bool ConnectionLost = false;
@@ -610,6 +611,8 @@ namespace UniconGS
                     RTUConnectionGlobal.Initialize(ModbusIpMaster.CreateIp(client), ResultGSM.ModbusReadTimeout, ResultGSM.ModbusWriteTimeout, ResultGSM.ModbusRetries, ResultGSM.ModbusWaitUntilRetry);
 
 
+
+                    isGSM = true;
 
 
                 }

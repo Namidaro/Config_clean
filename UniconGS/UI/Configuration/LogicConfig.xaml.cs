@@ -335,15 +335,17 @@ namespace UniconGS.UI.Configuration
 
         public async Task UpdateState()
         {
-
-            uiLogicConfigOpen.IsEnabled =
-                uiLogicConfigSave.IsEnabled = uiLogicExport.IsEnabled = uiLogicImport.IsEnabled = false;
-            ushort[] value;
+            try
             {
-                value = await RTUConnectionGlobal.GetDataByAddress(1, 0x8200, 61);
+                uiLogicConfigOpen.IsEnabled =
+                    uiLogicConfigSave.IsEnabled = uiLogicExport.IsEnabled = uiLogicImport.IsEnabled = false;
+                ushort[] value;
+                {
+                    value = await RTUConnectionGlobal.GetDataByAddress(1, 0x8200, 61);
+                }
+                ImportComplete(value);
             }
-
-            ImportComplete(value);
+            catch { }
             uiLogicConfigOpen.IsEnabled =
                 uiLogicConfigSave.IsEnabled = uiLogicExport.IsEnabled = uiLogicImport.IsEnabled = true;
         }
@@ -543,8 +545,11 @@ namespace UniconGS.UI.Configuration
         }
         public async void uiLogicExport_Click(object sender, RoutedEventArgs e)
         {
-
-            await WriteAll();
+            try
+            {
+                await WriteAll();
+            }
+            catch { };
             //if (this.ShowMessage != null)
             //{
             //    this.ShowMessage("Запись конфигурации логики в устройство прошла успешно.",

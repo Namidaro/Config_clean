@@ -95,7 +95,7 @@ namespace UniconGS
                     {
                         ConnectionLostAction?.Invoke();
                     }
-                    throw e;
+                    throw;
                 }
                 finally
                 {

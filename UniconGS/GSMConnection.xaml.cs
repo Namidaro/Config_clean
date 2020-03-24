@@ -82,25 +82,25 @@ namespace UniconGS
             {
                 if (!Validator.ValidateTextBox(uiReadTimeout, 1, 10000))
                 {
-                    MessageBox.Show("Не верно задано время ожидания чтения", "Ошибка", MessageBoxButton.OK,
+                    MessageBox.Show("Не верно задано время ожидания чтения [0:10000]", "Ошибка", MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     throw new ArgumentException();
                 }
                 if (!Validator.ValidateTextBox(uiWriteTimeout, 1, 10000))
                 {
-                    MessageBox.Show("Не верно задано время ожидания записи", "Ошибка", MessageBoxButton.OK,
+                    MessageBox.Show("Не верно задано время ожидания записи [0:10000]", "Ошибка", MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     throw new ArgumentException();
                 }
                 if (!Validator.ValidateTextBox(uiRetries, 0, 5))
                 {
-                    MessageBox.Show("Не верно задано значение повторов", "Ошибка", MessageBoxButton.OK,
+                    MessageBox.Show("Не верно задано значение повторов [0:5]", "Ошибка", MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     throw new ArgumentException();
                 }
-                if (!Validator.ValidateTextBox(uiWaitUntilRetry, 0, 1000))
+                if (!Validator.ValidateTextBox(uiWaitUntilRetry, 0, 10000))
                 {
-                    MessageBox.Show("Не верно задано значение задержки повторов", "Ошибка", MessageBoxButton.OK,
+                    MessageBox.Show("Не верно задано значение задержки повторов [0:10000]", "Ошибка", MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     throw new ArgumentException();
                 }
@@ -121,7 +121,7 @@ namespace UniconGS
             }
             catch (ArgumentException)
             {
-                MessageBox.Show("Введено не верное значение", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show("Введено не верное значение", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
            
 

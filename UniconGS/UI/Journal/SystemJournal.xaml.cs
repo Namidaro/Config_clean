@@ -541,12 +541,20 @@ namespace UniconGS.UI.Journal
 
         private void uiClear_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if(!MainWindow.isGSM)
             {
-                ClearJournal();
+                try
+                {
+                    ClearJournal();
+                }
+                catch (Exception) { }
+                //ClearCompleted.Invoke();
             }
-            catch (Exception) { }
-            //ClearCompleted.Invoke();
+            else
+            {
+                MessageBox.Show("Функция отключена", "Ошибка");
+            }
+
         }
         private async void ClearJournal()
         {
