@@ -610,10 +610,7 @@ namespace UniconGS
                     this.uiConnect.IsEnabled = false;
                     RTUConnectionGlobal.Initialize(ModbusIpMaster.CreateIp(client), ResultGSM.ModbusReadTimeout, ResultGSM.ModbusWriteTimeout, ResultGSM.ModbusRetries, ResultGSM.ModbusWaitUntilRetry);
 
-
-
                     isGSM = true;
-
 
                 }
 

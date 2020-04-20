@@ -552,7 +552,7 @@ namespace UniconGS.UI.Journal
             }
             else
             {
-                MessageBox.Show("Функция отключена", "Ошибка");
+                MessageBox.Show("Очистка журнала по GSM невозможна.", "Ошибка");
             }
 
         }
